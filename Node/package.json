@@ -1,0 +1,19 @@
+{
+  "name": "sean",
+  "version": "0.0.0",
+  "description": "Sky store app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Team Sean",
+  "license": "ISC",
+  "devDependencies": {
+    "sky-toolkit": "^0.3.7"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "sequelize": "^3.23.6",
+    "sky-toolkit": "^0.3.7"
+  }
+}
