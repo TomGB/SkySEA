@@ -9,6 +9,13 @@
   "author": "Team Sean",
   "license": "ISC",
   "devDependencies": {
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
     "sky-toolkit": "^0.3.7"
   },
   "dependencies": {

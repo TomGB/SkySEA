@@ -1,0 +1,22 @@
+{
+  "name": "sean",
+  "description": "Sky store app",
+  "main": "app.js",
+  "authors": [
+    "Team Sean"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/TomGB/SkySEA",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-mocks": "^1.5.7"
+  }
+}
