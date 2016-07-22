@@ -18,7 +18,9 @@ module.exports = {
               model: 'user',
               key: 'id'
             }
-          }
+          },
+            createdAt: Sequelize.TIMESTAMP,
+            updatedAt: Sequelize.TIMESTAMP,
         });
   },
 
