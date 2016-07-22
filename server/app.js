@@ -11,6 +11,14 @@ app.listen(port, function() {
   console.log('App listening on port: ' + port);
 });
 
+app.get('/api/cases', function (req, res) {
+    res.json({cases:[
+        {name:'starwars'},
+        {name: 'frozen'},
+        {name: 'silicon valley'}
+    ]});
+});
+
 var sequelize = new Sequelize('mysql://root:@localhost:3000/seanDB');
 
 sequelize
