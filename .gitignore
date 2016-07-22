@@ -10,3 +10,7 @@ SkyAccessoriesPageEdit/
 server/bower_components
 server/node_modules
 server/npm-debug.log
+Node/node_modules
+Node/config/app.js
+server/public/images/phonecases/*
+
