@@ -22,12 +22,20 @@ module.exports = function (grunt) {
     },
     copy :{
       angular: {
-        files: [{
-          expand: true,
-          cwd:'client/',
-          src: ['app/**/*.html'],
-          dest:'public/'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd:'client/',
+            src: ['app/**/*.html'],
+            dest:'public/'
+          },
+          {
+            expand: true,
+            flatten:true,
+            cwd:'client/sass',
+            src: ['*'],
+            dest: 'public/css/'
+          }]
       }
     },
     watch: {
@@ -35,10 +43,10 @@ module.exports = function (grunt) {
         files: ['client/app/**/*.js'],
         tasks: ['default'],
         options: {
-          spawn: false,
-        },
-      },
-    },
+          spawn: false
+        }
+      }
+    }
   });
 
   // Next one would load plugins
