@@ -19,7 +19,7 @@ module.exports = {
           lastName: Sequelize.STRING,
           userRole: {
             type: Sequelize.ENUM,
-            values: ['customer', 'worker', 'admin', 'tech_support', 'manager'],
+            values: ['customer', 'admin', 'tech_support', 'manager'],
             defaultValue: 'customer'
           }
         });

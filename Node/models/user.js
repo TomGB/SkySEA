@@ -8,9 +8,9 @@ module.exports = function(sequelize, DataTypes) {
     address2: DataTypes.STRING,
     address3: DataTypes.STRING,
     postcode: DataTypes.STRING,
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING,
-    userrole: DataTypes.STRING
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    userRole: DataTypes.STRING
 
   }, {
     classMethods: {

@@ -3,8 +3,8 @@
 module.exports = function(sequelize, DataTypes) {
   var Order = sequelize.define("Order", {
     status: DataTypes.STRING,
-    orderdate: DataTypes.DATE,
-    dispatchdate: DataTypes.DATE,
+    orderDate: DataTypes.DATE,
+    dispatchDate: DataTypes.DATE,
   }, {
     classMethods: {
       associate: function(models) {
