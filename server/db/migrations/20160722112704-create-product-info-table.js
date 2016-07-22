@@ -10,8 +10,6 @@ module.exports = {
         },
         key: Sequelize.STRING,
         value: Sequelize.STRING,
-          createdAt: Sequelize.TIMESTAMP,
-          updatedAt: Sequelize.TIMESTAMP,
       });
   },
 

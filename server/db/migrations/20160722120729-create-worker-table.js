@@ -12,8 +12,6 @@ module.exports = {
         lastname: Sequelize.STRING,
         email: Sequelize.STRING,
         password: Sequelize.STRING,
-        createdAt: Sequelize.TIMESTAMP,
-        updatedAt: Sequelize.TIMESTAMP,
       });
   },
 

@@ -26,8 +26,6 @@ module.exports = {
               key: 'id'
             }
           },
-            createdAt: Sequelize.TIMESTAMP,
-            updatedAt: Sequelize.TIMESTAMP,
         });
   },
 
