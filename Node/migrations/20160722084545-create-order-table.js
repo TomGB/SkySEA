@@ -8,6 +8,16 @@ module.exports = {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
+          },
+          status: Sequelize.STRING,
+          orderDate: Sequelize.DATE,
+          dispatchDate: Sequelize.DATE,
+          workerID: {
+            type: Sequelize.INTEGER,
+            references: {
+              model: 'user',
+              key: 'id'
+            }
           }
         });
   },
