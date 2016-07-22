@@ -8,7 +8,9 @@ module.exports = {
           autoIncrement: true,
           primaryKey: true
         },
-        name: Sequelize.STRING
+        name: Sequelize.STRING,
+          createdAt: Sequelize.TIMESTAMP,
+          updatedAt: Sequelize.TIMESTAMP,
       });
   },
 
