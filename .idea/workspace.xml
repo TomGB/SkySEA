@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53c4b5bd-dd3b-4fe7-a399-ea40e6fac79c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/SkyApp.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <list id="4e0a5bc3-75a2-452c-ba11-bf0e68c23f4e" name="To Ignore" comment="">
@@ -17974,7 +17968,7 @@
       <updated>1468503775826</updated>
       <workItem from="1468503777155" duration="268000" />
       <workItem from="1469094939871" duration="10695000" />
-      <workItem from="1469179814333" duration="5497000" />
+      <workItem from="1469179814333" duration="5527000" />
     </task>
     <task id="LOCAL-00001" summary="boilerplate">
       <created>1468503933560</created>
@@ -18018,7 +18012,14 @@
       <option name="project" value="LOCAL" />
       <updated>1469190931647</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="deleting .idea files">
+      <created>1469191658167</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1469191658167</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -18036,7 +18037,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16460000" />
+    <option name="totallyTimeSpent" value="16490000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -18089,7 +18090,8 @@
     <MESSAGE value="routing and minification" />
     <MESSAGE value="routing and minification and sky toolkit angular boilerplate" />
     <MESSAGE value="fixed paths for angular in karma.conf" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed paths for angular in karma.conf" />
+    <MESSAGE value="deleting .idea files" />
+    <option name="LAST_COMMIT_MESSAGE" value="deleting .idea files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
