@@ -9,7 +9,9 @@ module.exports = {
           primaryKey: true
         },
         key: Sequelize.STRING,
-        value: Sequelize.STRING
+        value: Sequelize.STRING,
+          createdAt: Sequelize.TIMESTAMP,
+          updatedAt: Sequelize.TIMESTAMP,
       });
   },
 

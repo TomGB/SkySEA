@@ -17,6 +17,8 @@ module.exports = {
           postcode: Sequelize.STRING,
           firstName: Sequelize.STRING,
           lastName: Sequelize.STRING,
+          createdAt: Sequelize.TIMESTAMP,
+          updatedAt: Sequelize.TIMESTAMP,
           userRole: {
             type: Sequelize.ENUM,
             values: ['customer', 'admin', 'tech_support', 'manager'],
