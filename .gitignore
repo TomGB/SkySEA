@@ -7,3 +7,6 @@ IONIC/plugins/
 ArchitectureDiagram/
 SkyAccessoriesPageEdit/
 .idea/
+server/bower_components
+server/node_modules
+server/npm-debug.log
