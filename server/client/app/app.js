@@ -1,4 +1,16 @@
 /**
  * Created by amu35 on 21/07/2016.
  */
-var app = angular.module('accessoriesStore',['']);
+(function () {
+  var app = angular.module('accessoriesStore',['ngRoute']);
+
+  app.config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider) {
+    $routeProvider
+      .when('/productList', {
+        templateUrl: 'app/productList/productList.html',
+        controller: 'productListCtrl'
+      })
+      .otherwise({redirectTo: '/productList'});
+
+  }]);
+})();

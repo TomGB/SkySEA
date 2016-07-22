@@ -7,7 +7,12 @@ module.exports = function (grunt) {
   grunt.initConfig({
     concat: {
       angular: {
-        files: {'client/app-concat.js': ['client/app/**/*.js', '!client/**/*Test.js'] }
+        files: {'client/app-concat.js': [
+          'bower_components/angular/angular.min.js',
+          'bower_components/angular-route/angular-route.min.js',
+          'client/app/**/*.js',
+          '!client/**/*Test.js'
+        ]}
       }
     },
     uglify : {
@@ -17,19 +22,34 @@ module.exports = function (grunt) {
     },
     copy :{
       angular: {
-        files: {'public/templates/': 'client/app/**/*.html'}
+        files: [{
+          expand: true,
+          cwd:'client/',
+          src: ['app/**/*.html'],
+          dest:'public/'
+        }]
       }
-    }
+    },
+    watch: {
+      scripts: {
+        files: ['client/app/**/*.js'],
+        tasks: ['default'],
+        options: {
+          spawn: false,
+        },
+      },
+    },
   });
 
   // Next one would load plugins
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   // Here is where we would define our task
-  grunt.registerTask('buildClient', ['concat:angular', 'uglify:angular','copy:angular']);
+  grunt.registerTask('buildClient', ['concat:angular', 'uglify:angular','copy']);
 
   grunt.registerTask('default', ['buildClient']);
 };

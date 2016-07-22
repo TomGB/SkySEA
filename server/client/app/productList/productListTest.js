@@ -1,10 +1,8 @@
 /**
  * Created by amu35 on 21/07/2016.
  */
-describe('testctrl',function () {
-  beforeEach(module('app'));
-
-
+describe('productListCtrl',function () {
+  beforeEach(module('accessoriesStore'));
 
   beforeEach(inject(function(_$controller_){
     // The injector unwraps the underscores (_) from around the parameter names when matching
@@ -15,7 +13,7 @@ describe('testctrl',function () {
   describe('$scope.helloWorld', function() {
     it('equal hello world', function() {
       var $scope = {};
-      var controller = $controller('testctrl', { $scope: $scope });
+      var controller = $controller('productListCtrl', { $scope: $scope });
 
       expect($scope.helloWorld).toEqual('Hello World');
     });

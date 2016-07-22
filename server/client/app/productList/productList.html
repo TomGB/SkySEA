@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-controller="productListCtrl">
+  {{helloWorld}}
 
-</body>
-</html>
+<ul>
+  <li ng-repeat="case in cases">
+    {{case.name}}
+  </li>
+</ul>
+</div>

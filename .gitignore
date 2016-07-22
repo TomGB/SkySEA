@@ -7,4 +7,8 @@ IONIC/plugins/
 ArchitectureDiagram/
 SkyAccessoriesPageEdit/
 .idea/
-Node/node_modules/
+server/node_modules/
+server/bower_components
+server/public/app/*
+server/public/css/*
+server/public/js/*
