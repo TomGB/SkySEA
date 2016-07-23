@@ -1,9 +1,28 @@
-<div ng-controller="productListCtrl">
-  {{helloWorld}}
+<div class="o-container" ng-controller="productListCtrl">
 
-<ul>
-  <li ng-repeat="case in cases">
-    {{case.name}}
-  </li>
-</ul>
+  <h1 class="c-heading-alpha">Available phone cases</h1>
+  <label class="c-form-label u-width-1/6" for="f-username">
+    Search
+  </label>
+  <input type="text" class="c-form-input u-width-1/3" placeholder="Search" name="f-username" id="f-username" ng-model="search.name">
+
+
+  <section class="o-layout">
+
+    <div class="o-layout__item u-width-1/2 u-width-1/4@medium"  ng-repeat="case in cases | filter: search">
+      <article class="c-tile">
+        <div class="c-tile__content">
+          <div class="c-tile__media">
+            <img class="c-tile__poster" ng-src="images/phonecases/{{case.imgUrl}}" />
+          </div>
+          <div class="c-tile__body">
+            <div class="c-tile__title">{{case.name}}</div>
+            Product information
+            <button class="c-btn  c-btn--primary">Order Now</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+  </section>
 </div>
