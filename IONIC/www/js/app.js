@@ -61,12 +61,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       }
     })
 
-    .state('app.cart', {
-      url: '/cart',
+    .state('app.basket', {
+      url: '/basket',
       views: {
         'menuContent': {
-          templateUrl: 'templates/cart.html',
-          controller: 'CartCtrl'
+          templateUrl: 'templates/basket.html',
+          controller: 'BasketCtrl'
         }
       }
     });

@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .run(function($rootScope){
-  $rootScope.cartItems = [];
+  $rootScope.basketProducts = [];
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -47,7 +47,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CatalogueCtrl', function($scope, $rootScope) {
+.controller('CatalogueCtrl', function($scope, $rootScope, $ionicPopup, $state) {
   $scope.cases = [
     {
       id: 1,
@@ -75,9 +75,40 @@ angular.module('starter.controllers', [])
     }
   ];
 
-  $scope.addToCart = function(item) {
-    alert(item.name + " added to shopping cart");
-    $rootScope.cartItems.push(item);
+  $scope.addToBasket = function(item) {
+    var found = false;
+    var index = 0;
+    $rootScope.basketProducts.forEach(function(elem, ind, arr){
+      if (elem.item.id == item.id){
+        found = true;
+        index = ind;
+      }
+    });
+
+    if (!found){
+      // Item is not already in basket
+      $rootScope.basketProducts.push({
+        item: item,
+        quantity: 1
+      });
+    } else {
+      // Item in basket already
+      var productObj = $rootScope.basketProducts[index];
+      productObj.quantity += 1;
+    }
+
+    var myPopup = $ionicPopup.show({
+      title: item.name + " added to basket",
+      buttons: [
+        {text: 'Continue Shopping'},
+        {
+          text: 'Go to basket',
+          onTap: function(e){
+            $state.go('app.basket');
+          }
+        }
+      ]
+    })
   }
 })
 
@@ -94,6 +125,32 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('CartCtrl', function ($scope, $rootScope) {
+.controller('BasketCtrl', function ($scope, $rootScope, $ionicPopup) {
+  $scope.removeItem = function(product) {
+    var myPopup = $ionicPopup.show({
+      title: 'Removing ' + product.item.name + ' from the basket',
+      subTitle: 'Are you sure?',
+      scope: $scope,
+      buttons: [
+        {text: 'Cancel'},
+        {
+          text: 'Remove',
+          type: 'button-assertive',
+          onTap: function(e){
+            var index = $rootScope.basketProducts.indexOf(product);
+            $rootScope.basketProducts.splice(index, 1);
+          }
+        }
+      ]
 
+    });
+  };
+
+  $scope.getTotal = function(){
+    var total = 0;
+    $rootScope.basketProducts.forEach(function(elem, ind, arr){
+      total += elem.item.price;
+    });
+    return total;
+  };
 });
