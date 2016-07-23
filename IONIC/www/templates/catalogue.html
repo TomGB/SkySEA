@@ -1,20 +1,20 @@
 <ion-view view-title="Catalogue">
   <ion-content>
-      <div class="list card" ng-repeat="case in cases">
+      <div class="list card" ng-repeat="product in products">
 
           <div class="item">
-              {{case.name}}
+              {{product.name}}
           </div>
 
           <div class="item item-image">
-              <img ng-src="{{case.imgUrl}}"/>
+              <img ng-src="{{product.imgUrl}}"/>
           </div>
 
           <div class="item row">
               <div class="col-90 text-center">
-                  {{case.price | currency:"£"}}
+                  {{product.price | currency:"£"}}
               </div>
-              <div class="col-10" ng-click="addToBasket(case)">
+              <div class="col-10" ng-click="addToBasket(product)">
                 <i class="icon ion-plus-round balanced"></i>
               </div>
           </div>

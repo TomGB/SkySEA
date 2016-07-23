@@ -47,8 +47,8 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CatalogueCtrl', function($scope, $rootScope, $ionicPopup, $state) {
-  $scope.cases = [
+.controller('CatalogueCtrl', function($scope, $rootScope, $ionicPopup, $state, basketService) {
+  $rootScope.products = [
     {
       id: 1,
       name: 'iPhone 6 - Game of Thrones',
@@ -76,48 +76,41 @@ angular.module('starter.controllers', [])
   ];
 
   $scope.addToBasket = function(item) {
-    var found = false;
-    var index = 0;
-    $rootScope.basketProducts.forEach(function(elem, ind, arr){
-      if (elem.item.id == item.id){
-        found = true;
-        index = ind;
-      }
-    });
+    basketService.confirmAddToBasket(item);
+  }
+})
 
-    if (!found){
-      // Item is not already in basket
-      $rootScope.basketProducts.push({
-        item: item,
-        quantity: 1
-      });
-    } else {
-      // Item in basket already
-      var productObj = $rootScope.basketProducts[index];
-      productObj.quantity += 1;
-    }
+.controller('ScanCtrl', function ($scope, $rootScope, $cordovaBarcodeScanner, $ionicPopup, basketService) {
+  $scope.qrContent = [];
 
+  presentPopup = function(item) {
     var myPopup = $ionicPopup.show({
-      title: item.name + " added to basket",
+      title: 'Add ' + item.name + ' to basket?',
       buttons: [
-        {text: 'Continue Shopping'},
         {
-          text: 'Go to basket',
+          text: 'Cancel',
+          type: 'button-assertive'
+        },
+        {
+          text: 'Add',
+          type: 'button-balanced',
           onTap: function(e){
-            $state.go('app.basket');
+            basketService.addToBasket(item);
+            basketService.askGoToBasket(item);
           }
         }
       ]
     })
   }
-})
-
-.controller('ScanCtrl', function ($scope, $cordovaBarcodeScanner) {
-  $scope.qrContent = [];
 
   $scope.scan = function(){
     $cordovaBarcodeScanner.scan().then(function(imageData){
-      $scope.qrContent.push(imageData.text);
+      $rootScope.products.forEach(function(elem, ind, arr){
+        if(elem.id == imageData.text){
+          presentPopup(elem);
+        }
+      })
+
     }), function(error) {
       console.log("Error: " + error);
       alert("Error scanning QR code, please try again later");
@@ -153,4 +146,68 @@ angular.module('starter.controllers', [])
     });
     return total;
   };
-});
+})
+
+.factory("basketService", function($rootScope, $state, $ionicPopup){
+  var obj = {};
+  obj.addToBasket = function(item){
+    var found = false;
+    var index = 0;
+    $rootScope.basketProducts.forEach(function(elem, ind, arr){
+      if (elem.item.id == item.id){
+        found = true;
+        index = ind;
+      }
+    });
+
+    if (!found){
+      // Item is not already in basket
+      $rootScope.basketProducts.push({
+        item: item,
+        quantity: 1
+      });
+    } else {
+      // Item in basket already
+      var productObj = $rootScope.basketProducts[index];
+      productObj.quantity += 1;
+    }
+  };
+
+  obj.askGoToBasket = function(item){
+    var buttons = [
+      {text: 'Continue Shopping'},
+      {
+        text: 'Go to basket',
+        onTap: function(e){
+          $state.go('app.basket');
+        }
+      }
+    ];
+
+    var myPopup = $ionicPopup.show({
+      title: item.name + " added to basket",
+      buttons: buttons
+    });
+  };
+
+  obj.confirmAddToBasket = function(item){
+    var myPopup = $ionicPopup.show({
+      title: 'Add ' + item.name + ' to basket?',
+      buttons: [
+        {
+          text: 'Cancel',
+          type: 'button-assertive'
+        },
+        {
+          text: 'Add',
+          type: 'button-balanced',
+          onTap: function(e){
+            obj.addToBasket(item);
+            obj.askGoToBasket(item);
+          }
+        }
+      ]
+    })
+  };
+  return obj;
+})
