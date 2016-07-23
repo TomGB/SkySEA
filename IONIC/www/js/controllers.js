@@ -1,5 +1,9 @@
 angular.module('starter.controllers', [])
 
+.run(function($rootScope){
+  $rootScope.cartItems = [];
+})
+
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -39,9 +43,11 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+
 })
 
-.controller('CatalogueCtrl', function($scope) {
+.controller('CatalogueCtrl', function($scope, $rootScope) {
   $scope.cases = [
     {
       id: 1,
@@ -68,6 +74,11 @@ angular.module('starter.controllers', [])
       imgUrl: 'img/phonecases/Nexus6-GOT.jpg'
     }
   ];
+
+  $scope.addToCart = function(item) {
+    alert(item.name + " added to shopping cart");
+    $rootScope.cartItems.push(item);
+  }
 })
 
 .controller('ScanCtrl', function ($scope, $cordovaBarcodeScanner) {
@@ -81,4 +92,8 @@ angular.module('starter.controllers', [])
       alert("Error scanning QR code, please try again later");
     }
   }
+})
+
+.controller('CartCtrl', function ($scope, $rootScope) {
+
 });

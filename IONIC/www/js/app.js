@@ -26,22 +26,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
   $stateProvider
 
     .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
+      url: '/app',
+      abstract: true,
+      templateUrl: 'templates/menu.html',
+      controller: 'AppCtrl'
+    })
 
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
+    .state('app.search', {
+      url: '/search',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/search.html'
+        }
       }
-    }
-  })
+    })
 
-  .state('app.scan', {
+    .state('app.scan', {
       url: '/scan',
       views: {
         'menuContent': {
@@ -50,6 +50,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
         }
       }
     })
+
     .state('app.catalogue', {
       url: '/playlists', // Tried to change to catalogue but gives error
       views: {
@@ -60,15 +61,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       }
     })
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+    .state('app.cart', {
+      url: '/cart',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/cart.html',
+          controller: 'CartCtrl'
+        }
       }
-    }
-  });
+    });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists'); // Tried to change to catalogue but gives error
 });

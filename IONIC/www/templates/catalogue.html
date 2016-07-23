@@ -10,8 +10,13 @@
               <img ng-src="{{case.imgUrl}}"/>
           </div>
 
-          <div class="item text-center">
-              {{case.price | currency:"£"}}
+          <div class="item row">
+              <div class="col-90 text-center">
+                  {{case.price | currency:"£"}}
+              </div>
+              <div class="col-10" ng-click="addToCart(case)">
+                <i class="icon ion-plus-round balanced"></i>
+              </div>
           </div>
       </div>
   </ion-content>

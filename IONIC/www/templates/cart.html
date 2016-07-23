@@ -1,0 +1,13 @@
+<ion-view view-title="Shopping Cart">
+  <ion-content>
+    <div ng-show="cartItems.length == 0" class="item-text-wrap">
+      You have not added any products to your shopping cart yet
+    </div>
+
+    <ion-list ng-show="cartItems.length > 0">
+      <ion-item ng-repeat="item in cartItems">
+        {{item.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
