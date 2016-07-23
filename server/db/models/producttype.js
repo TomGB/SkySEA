@@ -8,7 +8,9 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         ProductType.hasMany(models.Product);
       }
-    }
+    },
+    tableName: 'producttype'
+
   });
 
   return ProductType;

@@ -22,7 +22,9 @@ module.exports = function(sequelize, DataTypes) {
         });
         Order.hasMany(models.ProductOrder);
       }
-    }
+    },
+    tableName: 'order'
+
   });
 
   return Order;

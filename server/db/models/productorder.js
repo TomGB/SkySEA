@@ -19,7 +19,9 @@ module.exports = function(sequelize, DataTypes) {
           }
         });
       }
-    }
+    },
+    tableName: 'productorder'
+
   });
 
   return ProductOrder;

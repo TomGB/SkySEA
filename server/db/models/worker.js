@@ -12,7 +12,9 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Worker.hasMany(models.Order)
       }
-    }
+    },
+    tableName: 'worker'
+
   });
 
   return Worker;
