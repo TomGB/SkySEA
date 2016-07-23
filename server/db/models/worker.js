@@ -2,8 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Worker = sequelize.define("Worker", {
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING,
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
     email:  DataTypes.STRING,
     password:  DataTypes.STRING
 

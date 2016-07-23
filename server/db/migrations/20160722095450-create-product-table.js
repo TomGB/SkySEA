@@ -12,13 +12,14 @@ module.exports = {
           name: Sequelize.STRING,
           price:
           {
-            type: Sequelize.FLOAT,
+            type: Sequelize.DECIMAL,
             allowNull: false,
             default: 0.0
           },
-          imgUrl: Sequelize.STRING,
+          imageUrl: Sequelize.STRING,
           totalStock: Sequelize.INTEGER,
-          availStock: Sequelize.INTEGER,
+          availableStock: Sequelize.INTEGER,
+          description: Sequelize.TEXT,
           productTypeID: {
             type: Sequelize.INTEGER,
             references: {
