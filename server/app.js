@@ -1,5 +1,6 @@
 var express = require('express');
 var Sequelize = require('sequelize');
+var models = require('./db/models');
 var app = express();
 
 var port = process.env.PORT || 3000;
@@ -11,15 +12,7 @@ app.listen(port, function() {
   console.log('App listening on port: ' + port);
 });
 
-app.get('/api/cases', function (req, res) {
-    res.json({cases:[
-        {name:'starwars'},
-        {name: 'frozen'},
-        {name: 'silicon valley'}
-    ]});
-});
-
-var sequelize = new Sequelize('mysql://root:@localhost:3000/seanDB');
+var sequelize = new Sequelize('mysql://root:@localhost/seanDB');
 
 sequelize
     .authenticate()
@@ -29,3 +22,9 @@ sequelize
     .catch(function (err) {
       console.log('Unable to connect to the database:', err);
     });
+
+app.get('/api/cases', function (req, res) {
+    models.Product.findAll({attributes:['id','name','imgUrl']}).then(function (result) {
+        res.json({cases:result});
+    });
+});

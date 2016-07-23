@@ -14,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
           }
         });
       }
-    }
+    },
+    tableName:'productinfo'
   });
 
   return ProductInfo;
