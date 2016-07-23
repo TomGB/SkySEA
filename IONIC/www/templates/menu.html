@@ -8,10 +8,10 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
-      <!--<ion-nav-buttons side="right">-->
-        <!--<button class="button button-icon button-clear ion-android-cart" href="#/app/cart">-->
-        <!--</button>-->
-      <!--</ion-nav-buttons>-->
+      <ion-nav-buttons side="right">
+        <button ng-controller="ScanCtrl" class="button button-icon button-clear ion-qr-scanner" ng-click="scan()">
+        </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
@@ -24,9 +24,6 @@
       <ion-list>
         <ion-item menu-close href="#/app/catalogue">
           Catalogue
-        </ion-item>
-        <ion-item menu-close href="#/app/scan">
-          QR Codes
         </ion-item>
         <ion-item menu-close href="#/app/basket">
           Shopping Basket

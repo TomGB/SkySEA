@@ -41,16 +41,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       }
     })
 
-    .state('app.scan', {
-      url: '/scan',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/scan.html',
-          controller: 'ScanCtrl'
-        }
-      }
-    })
-
     .state('app.catalogue', {
       url: '/playlists', // Tried to change to catalogue but gives error
       views: {

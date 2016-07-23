@@ -125,7 +125,10 @@ angular.module('starter.controllers', [])
       subTitle: 'Are you sure?',
       scope: $scope,
       buttons: [
-        {text: 'Cancel'},
+        {
+          text: 'Cancel',
+          type: 'button-stable'
+        },
         {
           text: 'Remove',
           type: 'button-assertive',
@@ -174,19 +177,21 @@ angular.module('starter.controllers', [])
   };
 
   obj.askGoToBasket = function(item){
-    var buttons = [
-      {text: 'Continue Shopping'},
-      {
-        text: 'Go to basket',
-        onTap: function(e){
-          $state.go('app.basket');
-        }
-      }
-    ];
-
     var myPopup = $ionicPopup.show({
       title: item.name + " added to basket",
-      buttons: buttons
+      buttons: [
+        {
+          text: 'Continue Shopping',
+          type: 'button-stable'
+        },
+        {
+          text: 'Go to basket',
+          type: 'button-positive',
+          onTap: function(e){
+            $state.go('app.basket');
+          }
+        }
+      ]
     });
   };
 
