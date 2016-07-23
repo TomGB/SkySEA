@@ -50,12 +50,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.catalogue', {
+      url: '/playlists', // Tried to change to catalogue but gives error
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/catalogue.html',
+          controller: 'CatalogueCtrl'
         }
       }
     })
@@ -70,5 +70,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/playlists'); // Tried to change to catalogue but gives error
 });

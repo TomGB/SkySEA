@@ -1,0 +1,18 @@
+<ion-view view-title="Catalogue">
+  <ion-content>
+      <div class="list card" ng-repeat="case in cases">
+
+          <div class="item">
+              {{case.name}}
+          </div>
+
+          <div class="item item-image">
+              <img ng-src="{{case.imgUrl}}"/>
+          </div>
+
+          <div class="item text-center">
+              {{case.price | currency:"£"}}
+          </div>
+      </div>
+  </ion-content>
+</ion-view>
