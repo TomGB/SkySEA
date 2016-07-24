@@ -14,6 +14,10 @@
         templateUrl: 'app/auth/login.html',
         contoller: 'loginCtrl'
       })
+      .when('/productList/:productId', {
+        templateUrl: 'app/product/product.html',
+        controller: 'productCtrl'
+      })
       .otherwise({redirectTo: '/productList'});
 
   }]);
