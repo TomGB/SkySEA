@@ -15,7 +15,7 @@ module.exports = {
           workerID: {
             type: Sequelize.INTEGER,
             references: {
-              model: 'user',
+              model: 'users',
               key: 'id'
             }
           },

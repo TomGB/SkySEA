@@ -25,7 +25,11 @@
     "sky-toolkit": "^0.3.7"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
+    "bcrypt-nodejs": "0.0.3",
     "express": "^4.14.0",
+    "mysql": "^2.11.1",
+    "passport": "^0.3.2",
     "sequelize": "^3.23.6",
     "sequelize-cli": "^2.4.0",
     "sky-toolkit": "^0.3.7"

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-      return queryInterface.createTable('worker', {
+      return queryInterface.createTable('workers', {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
@@ -16,12 +16,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-    */
       return queryInterface.dropTable('worker');
   }
 };

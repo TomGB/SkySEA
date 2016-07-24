@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-      return queryInterface.createTable('productOrder', {
+      return queryInterface.createTable('productOrders', {
         orderID: {
           type: Sequelize.INTEGER,
           references: {

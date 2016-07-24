@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-      return queryInterface.createTable('product',
+      return queryInterface.createTable('products',
         {
           id: {
             type: Sequelize.INTEGER,
@@ -12,13 +12,14 @@ module.exports = {
           name: Sequelize.STRING,
           price:
           {
-            type: Sequelize.FLOAT,
+            type: Sequelize.DECIMAL,
             allowNull: false,
             default: 0.0
           },
-          imgUrl: Sequelize.STRING,
+          imageUrl: Sequelize.STRING,
           totalStock: Sequelize.INTEGER,
-          availStock: Sequelize.INTEGER,
+          availableStock: Sequelize.INTEGER,
+          description: Sequelize.TEXT,
           productTypeID: {
             type: Sequelize.INTEGER,
             references: {
@@ -30,12 +31,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.dropTable('users');
-    */
+    return queryInterface.dropTable('users');
   }
 };

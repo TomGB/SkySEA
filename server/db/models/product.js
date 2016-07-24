@@ -4,10 +4,11 @@ module.exports = function(sequelize, DataTypes) {
   var Product = sequelize.define("Product", {
     name: DataTypes.STRING,
     price: DataTypes.DECIMAL,
-    imgUrl: DataTypes.STRING,
+    imageUrl: DataTypes.STRING,
     totalStock: DataTypes.INTEGER,
-    availStock: DataTypes.INTEGER,
-    productTypeID: DataTypes.STRING
+    productTypeID: DataTypes.STRING,
+    availableStock: DataTypes.INTEGER,
+    description: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
@@ -20,9 +21,7 @@ module.exports = function(sequelize, DataTypes) {
         Product.hasMany(models.ProductInfo);
         Product.hasMany(models.ProductOrder);
       }
-    },
-    tableName:'product'
+    }
   });
-
   return Product;
 };
