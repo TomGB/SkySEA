@@ -1,0 +1,23 @@
+<ion-view view-title="Catalogue">
+  <ion-content>
+      <div class="list card" ng-repeat="product in products">
+
+          <div class="item">
+              {{product.name}}
+          </div>
+
+          <div class="item item-image">
+              <img ng-src="{{product.imgUrl}}"/>
+          </div>
+
+          <div class="item row">
+              <div class="col-90 text-center">
+                  {{product.price | currency:"£"}}
+              </div>
+              <div class="col-10" ng-click="addToBasket(product)">
+                <i class="icon ion-plus-round balanced"></i>
+              </div>
+          </div>
+      </div>
+  </ion-content>
+</ion-view>

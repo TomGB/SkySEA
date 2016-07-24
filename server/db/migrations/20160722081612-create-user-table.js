@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-      return queryInterface.createTable('user',
+      return queryInterface.createTable('users',
         { id:
           {
             type: Sequelize.INTEGER,
@@ -17,6 +17,8 @@ module.exports = {
           postcode: Sequelize.STRING,
           firstName: Sequelize.STRING,
           lastName: Sequelize.STRING,
+          updatedAt: Sequelize.DATE,
+          createdAt: Sequelize.DATE, 
           userRole: {
             type: Sequelize.ENUM,
             values: ['customer', 'admin', 'tech_support', 'manager'],
