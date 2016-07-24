@@ -13,7 +13,7 @@ grunt command line
 in server/
 
 build:
-`$ grunt`\n
+`$ grunt`
 
 build on change to code:
 `$ grunt watch`
