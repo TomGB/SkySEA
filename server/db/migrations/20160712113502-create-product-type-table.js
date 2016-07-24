@@ -13,6 +13,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-      return queryInterface.dropTable('productType');
+      return queryInterface.dropTable('productTypes');
   }
 };
