@@ -25,7 +25,7 @@ sequelize
     });
 
 app.get('/api/cases', function (req, res) {
-    models.Product.findAll({attributes:['id','name','imgUrl']}).then(function (result) {
+    models.Product.findAll({attributes:['id','name','imageUrl']}).then(function (result) {
         res.json({cases:result});
     });
 });
