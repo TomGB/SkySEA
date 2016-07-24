@@ -11,7 +11,7 @@
         controller: 'productListCtrl'
       })
       .when('/login', {
-        templateUrl: 'app/auth/login',
+        templateUrl: 'app/auth/login.html',
         contoller: 'loginCtrl'
       })
       .otherwise({redirectTo: '/productList'});
