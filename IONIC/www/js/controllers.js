@@ -81,8 +81,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ScanCtrl', function ($scope, $rootScope, $cordovaBarcodeScanner, $ionicPopup, basketService) {
-  $scope.qrContent = [];
-
   presentPopup = function(item) {
     var myPopup = $ionicPopup.show({
       title: 'Add ' + item.name + ' to basket?',
@@ -118,7 +116,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('BasketCtrl', function ($scope, $rootScope, $ionicPopup) {
+.controller('BasketCtrl', function ($scope, $rootScope, $ionicPopup, basketService) {
   $scope.removeItem = function(product) {
     var myPopup = $ionicPopup.show({
       title: 'Removing ' + product.item.name + ' from the basket',
@@ -143,12 +141,39 @@ angular.module('starter.controllers', [])
   };
 
   $scope.getTotal = function(){
-    var total = 0;
-    $rootScope.basketProducts.forEach(function(elem, ind, arr){
-      total += elem.item.price;
-    });
-    return total;
+    return basketService.getTotal();
   };
+})
+
+.controller('CheckoutCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicHistory, basketService){
+  $scope.options = ["Credit/Debit Card", "Product Order"];
+  $scope.getTotal = function(){
+    return basketService.getTotal();
+  };
+
+  $scope.card = {
+    number: '',
+    expiryDate: '',
+    cvv: ''
+  };
+  $scope.po = {
+    number: ''
+  };
+  $scope.submit = function(){
+    $rootScope.basketProducts = [];
+    var myPopup = $ionicPopup.show({
+      title: 'Payment Successful',
+      buttons: [{
+        text: 'Return to Catalogue',
+        type: 'button-assertive',
+        onTap: function(e){
+          $ionicHistory.nextViewOptions({disableBack: true});
+          $state.go('app.catalogue');
+        }
+      }]
+    })
+  }
+
 })
 
 .factory("basketService", function($rootScope, $state, $ionicPopup){
@@ -214,5 +239,13 @@ angular.module('starter.controllers', [])
       ]
     })
   };
+
+  obj.getTotal = function(){
+    var total = 0;
+    $rootScope.basketProducts.forEach(function(elem, ind, arr){
+      total += elem.item.price * elem.quantity;
+    });
+    return total;
+  };
   return obj;
-})
+});
