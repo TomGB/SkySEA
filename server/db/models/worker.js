@@ -11,9 +11,16 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Worker.hasMany(models.Order)
+      },
+      generateHash: function(password){
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+      }
+    },
+    instanceMethods: {
+      validPassword: function(password){
+        return bcrypt.compareSync(password, this.password);
       }
     }
   });
-
   return Worker;
 };

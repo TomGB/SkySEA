@@ -10,9 +10,20 @@
         templateUrl: 'app/productList/productList.html',
         controller: 'productListCtrl'
       })
+      .when('/login', {
+        templateUrl: 'app/auth/login',
+        contoller: 'loginCtrl'
+      })
       .otherwise({redirectTo: '/productList'});
 
   }]);
+})();
+
+(function () {
+  angular.module('accessoriesStore').controller('loginCtrl',['$scope', '$http',function ($scope,$http) {
+    //Do something
+  }
+  ]);
 })();
 
 /**
@@ -22,7 +33,7 @@
   angular.module('accessoriesStore').controller('productListCtrl',['$scope', '$http',function ($scope,$http) {
 
     $scope.helloWorld = 'Hello World';
-    
+
     $http.get('http://localhost:3000/api/cases').then(function (response) {
         $scope.cases = response.data.cases;
     });
