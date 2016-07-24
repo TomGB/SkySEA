@@ -3,15 +3,19 @@
 # Dependencies for running the web app:
 bower
 `$ npm install -g bower`
+
 grunt command line
 `$ npm install -g grunt-cli`
 
 # Setting up the database:
 
 # Building the web app:
-in server/:
-`$ grunt`
-build on change to code
+in server/
+
+build:
+`$ grunt`\n
+
+build on change to code:
 `$ grunt watch`
 
 # Running the web app
