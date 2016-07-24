@@ -26,7 +26,7 @@ module.exports = {
               model: 'productTypes',
               key: 'id'
             }
-          },
+          }
         });
   },
 
