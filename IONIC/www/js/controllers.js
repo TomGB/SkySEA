@@ -4,7 +4,8 @@ angular.module('starter.controllers', [])
   basketService.basketProducts = [];
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, basketService) {
+.controller('AppCtrl', ['$scope', '$ionicModal', '$timeout', 'basketService',
+  function($scope, $ionicModal, $timeout, basketService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -46,10 +47,11 @@ angular.module('starter.controllers', [])
 
   $scope.basketService = basketService;
 
-})
+}])
 
-.controller('CatalogueCtrl', function($scope, $rootScope, basketService, uiService) {
-  $rootScope.products = [
+.controller('CatalogueCtrl', ['$scope', 'uiService', 'productService',
+  function($scope, uiService, productService) {
+  productService.products = [
     {
       id: 1,
       name: 'iPhone 6 - Game of Thrones',
@@ -79,14 +81,17 @@ angular.module('starter.controllers', [])
   $scope.addToBasket = function(item) {
     uiService.confirmAddToBasket(item);
   }
-})
 
-.controller('ScanCtrl', function ($scope, $cordovaBarcodeScanner, $ionicPopup, basketService, uiService) {
+  $scope.productService = productService;
+}])
+
+.controller('ScanCtrl', ['$scope', '$cordovaBarcodeScanner' ,'$ionicPopup' , 'uiService',
+  function ($scope, $cordovaBarcodeScanner, $ionicPopup, uiService) {
   $scope.scan = function(){
     $cordovaBarcodeScanner.scan().then(function(imageData){
       $rootScope.products.forEach(function(elem, ind, arr){
         if(elem.id == imageData.text){
-          basketService.confirmAddToBasket(elem);
+          uiService.confirmAddToBasket(elem);
         }
       })
 
@@ -95,9 +100,10 @@ angular.module('starter.controllers', [])
       alert("Error scanning QR code, please try again later");
     }
   }
-})
+}])
 
-.controller('BasketCtrl', function ($scope, $ionicPopup, basketService) {
+.controller('BasketCtrl', ['$scope', '$ionicPopup', 'basketService',
+  function ($scope, $ionicPopup, basketService) {
   $scope.removeItem = function(item) {
     var myPopup = $ionicPopup.show({
       title: 'Removing ' + item.item.name + ' from the basket',
@@ -125,9 +131,10 @@ angular.module('starter.controllers', [])
   };
 
   $scope.basketService = basketService;
-})
+}])
 
-.controller('CheckoutCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicHistory, basketService){
+.controller('CheckoutCtrl', ['$scope', '$ionicPopup', '$state', '$ionicHistory', 'basketService',
+  function($scope, $ionicPopup, $state, $ionicHistory, basketService){
   $scope.options = ["Credit/Debit Card", "Product Order"];
   $scope.getTotal = function(){
     return basketService.getTotal();
@@ -156,4 +163,4 @@ angular.module('starter.controllers', [])
     })
   }
 
-});
+}]);

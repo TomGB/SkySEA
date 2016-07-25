@@ -344,22 +344,46 @@ a.defaultPrevented||n()})},updateParams:function(a){if(this.current&&this.curren
         templateUrl: 'app/productList/productList.html',
         controller: 'productListCtrl'
       })
+      .when('/login', {
+        templateUrl: 'app/auth/login.html',
+        contoller: 'loginCtrl'
+      })
+      .when('/productList/:productId', {
+        templateUrl: 'app/product/product.html',
+        controller: 'productCtrl'
+      })
       .otherwise({redirectTo: '/productList'});
 
   }]);
 })();
 
 /**
+ * Created by amu35 on 24/07/2016.
+ */
+
+(function() {
+    angular.module('accessoriesStore')
+        .controller('productCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+            $http.get('/api/cases/' + $routeParams.productId).then(function(res) {
+                $scope.product = res.data;
+            })
+        }])
+})();
+/**
  * Created by amu35 on 21/07/2016.
  */
 (function () {
-  angular.module('accessoriesStore').controller('productListCtrl',['$scope', '$http',function ($scope,$http) {
+  angular.module('accessoriesStore')
+      .controller('productListCtrl',['$scope', '$http',function ($scope,$http) {
 
-    $scope.helloWorld = 'Hello World';
-
-    $http.get('http://localhost:3000/api/cases').then(function (response) {
-        $scope.cases = response.data.cases;
-    });
+          $http.get('/api/cases').then(
+              function (response) {
+                $scope.cases = response.data.cases;
+              },
+              function (response) {
+                  $scope.error = "could not load cases";
+              }
+          );
   }
   ]);
 })();
