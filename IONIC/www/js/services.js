@@ -94,33 +94,7 @@ angular.module('starter.services', [])
 
   obj.products = [];
 
-  obj.apiIP = '10.54.36.240';
-
-  // try {
-  //   networkinterface.getIPAddress(function(ip){         // On mobile
-  //     console.log("setting ip " + ip);
-  //     obj.apiIP = ip;
-  //     $http({
-  //       method: 'GET',
-  //       url: 'http://' + obj.apiIP + ':3000/api/cases'
-  //     }).then(function (res) {
-  //       obj.products = res.data.cases;
-  //     }, function(res){
-  //       console.log('Error: ' + res);
-  //     });
-  //   });
-  // }catch (err){
-  //   obj.apiIP = 'localhost';
-  //   console.log("Networkinterface not defined " + err); // In browser
-  //   $http({
-  //     method: 'GET',
-  //     url: 'http://' + obj.apiIP + ':3000/api/cases'
-  //   }).then(function (res) {
-  //     obj.products = res.data.cases;
-  //   }, function(res){
-  //     console.log('Error: ' + res);
-  //   });
-  // }
+  obj.apiIP = 'localhost';
 
   $http({
     method: 'GET',
