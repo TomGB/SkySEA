@@ -11,7 +11,8 @@ module.exports = function (grunt) {
           'bower_components/angular/angular.min.js',
           'bower_components/angular-route/angular-route.min.js',
           'client/app/**/*.js',
-          '!client/**/*Test.js'
+          '!client/**/*Test.js',
+          '../IONIC/www/js/shopModule.js',
         ]}
       }
     },
@@ -47,7 +48,7 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['client/app/**/*'],
+        files: ['client/app/**/*','../IONIC/www/js/shopModule.js'],
         tasks: ['default'],
         options: {
           spawn: false
