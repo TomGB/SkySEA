@@ -1,0 +1,20 @@
+
+<div class="o-container" ng-controller="basketCtrl">
+
+  <h3 ng-hide="basket.length">Nothing in your basket</h3>
+  <a class="c-btn c-btn--secondary" href="/#/productList">Back to products</a>
+
+  <div class="o-layout__item c-tile" ng-repeat="product in basket">
+    <div class="o-layout__item u-width-1/4@small" style="padding-left: 0">
+      <img ng-src="/images/phonecases/{{product.item.imageUrl}}">
+    </div>
+
+    <div class="o-layout__item u-width-3/5@small">
+      <h1 class="c-heading-delta">{{product.item.name}}</h1>
+      <span>Quantity:<input type="number" ng-model="product.quantity" ng-blur="removeIfZero(product)"></span>
+      <button class="c-btn c-btn--secondary" ng-click="removeItem(product)">Remove from basket</button>
+    </div>
+
+  </div>
+</div>
+
