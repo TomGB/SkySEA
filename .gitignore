@@ -7,3 +7,14 @@ IONIC/plugins/
 ArchitectureDiagram/
 SkyAccessoriesPageEdit/
 .idea/
+server/bower_components
+server/node_modules/
+server/npm-debug.log
+server/public/images/phonecases/*
+server/public/app/*
+server/public/css/*
+server/public/js/*
+npm-debug.log
+node_modules/
+workspace.xml
+/server/client/app-concat.js

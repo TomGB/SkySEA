@@ -1,0 +1,36 @@
+<ion-view view-title="Shopping Basket">
+  <ion-content>
+    <div ng-show="basketService.basketProducts.length == 0" class="item-text-wrap">
+      Your shopping basket is empty
+    </div>
+
+    <div ng-show="basketService.basketProducts.length > 0">
+      <ion-list>
+        <ion-item ng-repeat="product in basketService.basketProducts" class="item-button-right">
+          {{product.item.name}}
+          <br/>
+          Qty: {{product.quantity}}
+
+          <span class="item-note">
+            {{product.item.price * product.quantity | currency:"£"}}
+          </span>
+
+          <button class="button button-assertive" ng-click="removeItem(product)">
+            <i class="icon ion-close-round"></i>
+          </button>
+
+        </ion-item>
+      </ion-list>
+
+      <h4 class="text-center">
+        Total: {{getTotal() | currency:"£"}}
+      </h4>
+
+      <a class="button button-full button-positive" href="#/app/checkout">
+        Checkout
+      </a>
+
+    </div>
+
+  </ion-content>
+</ion-view>
