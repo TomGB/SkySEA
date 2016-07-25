@@ -59,6 +59,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
           controller: 'BasketCtrl'
         }
       }
+    })
+
+    .state('app.checkout', {
+      url: '/checkout',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/checkout.html',
+          controller: 'CheckoutCtrl'
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists'); // Tried to change to catalogue but gives error
