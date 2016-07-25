@@ -1,10 +1,10 @@
 angular.module('starter.controllers', [])
 
-.run(function($rootScope){
-  $rootScope.basketProducts = [];
+.run(function(basketService){
+  basketService.basketProducts = [];
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, basketService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -44,10 +44,11 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 
+  $scope.basketService = basketService;
 
 })
 
-.controller('CatalogueCtrl', function($scope, $rootScope, $ionicPopup, $state, basketService) {
+.controller('CatalogueCtrl', function($scope, $rootScope, basketService, uiService) {
   $rootScope.products = [
     {
       id: 1,
@@ -76,36 +77,16 @@ angular.module('starter.controllers', [])
   ];
 
   $scope.addToBasket = function(item) {
-    basketService.confirmAddToBasket(item);
+    uiService.confirmAddToBasket(item);
   }
 })
 
-.controller('ScanCtrl', function ($scope, $rootScope, $cordovaBarcodeScanner, $ionicPopup, basketService) {
-  presentPopup = function(item) {
-    var myPopup = $ionicPopup.show({
-      title: 'Add ' + item.name + ' to basket?',
-      buttons: [
-        {
-          text: 'Cancel',
-          type: 'button-assertive'
-        },
-        {
-          text: 'Add',
-          type: 'button-balanced',
-          onTap: function(e){
-            basketService.addToBasket(item);
-            basketService.askGoToBasket(item);
-          }
-        }
-      ]
-    })
-  }
-
+.controller('ScanCtrl', function ($scope, $cordovaBarcodeScanner, $ionicPopup, basketService, uiService) {
   $scope.scan = function(){
     $cordovaBarcodeScanner.scan().then(function(imageData){
       $rootScope.products.forEach(function(elem, ind, arr){
         if(elem.id == imageData.text){
-          presentPopup(elem);
+          basketService.confirmAddToBasket(elem);
         }
       })
 
@@ -116,10 +97,10 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('BasketCtrl', function ($scope, $rootScope, $ionicPopup, basketService) {
-  $scope.removeItem = function(product) {
+.controller('BasketCtrl', function ($scope, $ionicPopup, basketService) {
+  $scope.removeItem = function(item) {
     var myPopup = $ionicPopup.show({
-      title: 'Removing ' + product.item.name + ' from the basket',
+      title: 'Removing ' + item.item.name + ' from the basket',
       subTitle: 'Are you sure?',
       scope: $scope,
       buttons: [
@@ -131,8 +112,7 @@ angular.module('starter.controllers', [])
           text: 'Remove',
           type: 'button-assertive',
           onTap: function(e){
-            var index = $rootScope.basketProducts.indexOf(product);
-            $rootScope.basketProducts.splice(index, 1);
+            basketService.removeItem(item);
           }
         }
       ]
@@ -143,6 +123,8 @@ angular.module('starter.controllers', [])
   $scope.getTotal = function(){
     return basketService.getTotal();
   };
+
+  $scope.basketService = basketService;
 })
 
 .controller('CheckoutCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicHistory, basketService){
@@ -160,7 +142,7 @@ angular.module('starter.controllers', [])
     number: ''
   };
   $scope.submit = function(){
-    $rootScope.basketProducts = [];
+    basketService.basketProducts = [];
     var myPopup = $ionicPopup.show({
       title: 'Payment Successful',
       buttons: [{
@@ -174,78 +156,4 @@ angular.module('starter.controllers', [])
     })
   }
 
-})
-
-.factory("basketService", function($rootScope, $state, $ionicPopup){
-  var obj = {};
-  obj.addToBasket = function(item){
-    var found = false;
-    var index = 0;
-    $rootScope.basketProducts.forEach(function(elem, ind, arr){
-      if (elem.item.id == item.id){
-        found = true;
-        index = ind;
-      }
-    });
-
-    if (!found){
-      // Item is not already in basket
-      $rootScope.basketProducts.push({
-        item: item,
-        quantity: 1
-      });
-    } else {
-      // Item in basket already
-      var productObj = $rootScope.basketProducts[index];
-      productObj.quantity += 1;
-    }
-  };
-
-  obj.askGoToBasket = function(item){
-    var myPopup = $ionicPopup.show({
-      title: item.name + " added to basket",
-      buttons: [
-        {
-          text: 'Continue Shopping',
-          type: 'button-stable'
-        },
-        {
-          text: 'Go to basket',
-          type: 'button-positive',
-          onTap: function(e){
-            $state.go('app.basket');
-          }
-        }
-      ]
-    });
-  };
-
-  obj.confirmAddToBasket = function(item){
-    var myPopup = $ionicPopup.show({
-      title: 'Add ' + item.name + ' to basket?',
-      buttons: [
-        {
-          text: 'Cancel',
-          type: 'button-assertive'
-        },
-        {
-          text: 'Add',
-          type: 'button-balanced',
-          onTap: function(e){
-            obj.addToBasket(item);
-            obj.askGoToBasket(item);
-          }
-        }
-      ]
-    })
-  };
-
-  obj.getTotal = function(){
-    var total = 0;
-    $rootScope.basketProducts.forEach(function(elem, ind, arr){
-      total += elem.item.price * elem.quantity;
-    });
-    return total;
-  };
-  return obj;
 });
