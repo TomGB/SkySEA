@@ -1,12 +1,12 @@
 <ion-view view-title="Shopping Basket">
   <ion-content>
-    <div ng-show="basketProducts.length == 0" class="item-text-wrap">
+    <div ng-show="basketService.basketProducts.length == 0" class="item-text-wrap">
       Your shopping basket is empty
     </div>
 
-    <div ng-show="basketProducts.length > 0">
+    <div ng-show="basketService.basketProducts.length > 0">
       <ion-list>
-        <ion-item ng-repeat="product in basketProducts" class="item-button-right">
+        <ion-item ng-repeat="product in basketService.basketProducts" class="item-button-right">
           {{product.item.name}}
           <br/>
           Qty: {{product.quantity}}
