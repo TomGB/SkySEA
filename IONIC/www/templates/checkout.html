@@ -1,0 +1,42 @@
+<ion-view view-title="Checkout">
+  <ion-content>
+    <div class="list">
+      <h4 class="text-center">
+        Total: {{getTotal() | currency:"£"}}
+      </h4>
+
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Pay by
+        </div>
+
+        <select ng-options="item for item in options" ng-model="selectedPayment"></select>
+      </label>
+
+    </div>
+    <div ng-show="selectedPayment == options[0]"> <!-- Card -->
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="Card Number" ng-model="card.number"/>
+        </label>
+        <label class="item item-input">
+          <input type="month" placeholder="Expiry Date" ng-model="card.expiryDate"/>
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Security Code" ng-model="card.cvv"/>
+        </label>
+        <button class="button button-positive button-full" ng-click="submit()">Submit Payment</button>
+      </div>
+    </div>
+
+    <div ng-show="selectedPayment == options[1]"> <!-- Product Owner -->
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="Product Order Number" ng-model="po.number"/>
+        </label>
+        <button class="button button-positive button-full" ng-click="submitPO()">Submit Payment</button>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
