@@ -18,12 +18,14 @@ app.route('/')
     .put(function (req,res) {
         
     });
+
 app.route('/:prodId').get(function (req,res) {
     var productId = req.params.prodId;
 
-    models.Product.findOne({attributes:['id','name','imageUrl', 'availableStock', 'price','description'],where:{id: productId}}).then(function(product) {
-        res.json(product);
-    })
+    models.Product.findOne({attributes:['id','name','imageUrl', 'availableStock', 'price','description'],where:{id: productId}})
+        .then(function(product) {
+            res.json(product);
+        })
 });
 
 module.exports = app;
