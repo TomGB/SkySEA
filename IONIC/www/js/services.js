@@ -92,32 +92,44 @@ angular.module('starter.services', [])
 .factory('productService', [function(){
   var obj = {};
 
-  obj.products = [
-    {
-      id: 1,
-      name: 'iPhone 6 - Game of Thrones',
-      price: 4.99,
-      imgUrl: 'img/phonecases/IPhone6-GOT.jpg'
-    },
-    {
-      id: 2,
-      name: 'HTC 10 - Game of Thrones',
-      price: 4.99,
-      imgUrl: 'img/phonecases/HTC10-GOT.jpg'
-    },
-    {
-      id: 3,
-      name: 'LG G5 - Game of Thrones',
-      price: 4.99,
-      imgUrl: 'img/phonecases/LGG5-GOT.jpg'
-    },
-    {
-      id: 4,
-      name: 'Nexus 6 - Game of Thrones',
-      price: 3.99,
-      imgUrl: 'img/phonecases/Nexus6-GOT.jpg'
-    }
-  ];
+  obj.products = [];
+
+  obj.apiIP = '10.54.36.240';
+
+  // try {
+  //   networkinterface.getIPAddress(function(ip){         // On mobile
+  //     console.log("setting ip " + ip);
+  //     obj.apiIP = ip;
+  //     $http({
+  //       method: 'GET',
+  //       url: 'http://' + obj.apiIP + ':3000/api/cases'
+  //     }).then(function (res) {
+  //       obj.products = res.data.cases;
+  //     }, function(res){
+  //       console.log('Error: ' + res);
+  //     });
+  //   });
+  // }catch (err){
+  //   obj.apiIP = 'localhost';
+  //   console.log("Networkinterface not defined " + err); // In browser
+  //   $http({
+  //     method: 'GET',
+  //     url: 'http://' + obj.apiIP + ':3000/api/cases'
+  //   }).then(function (res) {
+  //     obj.products = res.data.cases;
+  //   }, function(res){
+  //     console.log('Error: ' + res);
+  //   });
+  // }
+
+  $http({
+    method: 'GET',
+    url: 'http://' + obj.apiIP + ':3000/api/cases'
+  }).then(function (res) {
+    obj.products = res.data.cases;
+  }, function(res){
+    console.log('Error: ' + res);
+  });
 
   return obj;
 }]);

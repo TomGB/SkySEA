@@ -79,8 +79,11 @@ angular.module('starter.controllers', [])
   ];
 
   $scope.addToBasket = function(item) {
-    uiService.confirmAddToBasket(item);
-  }
+    // uiService.confirmAddToBasket(item);
+    networkinterface.getIPAddress(function(ip){
+      console.log(ip);
+    })
+  };
 
   $scope.productService = productService;
 }])

@@ -22,8 +22,4 @@ sequelize
       console.log('Unable to connect to the database:', err);
     });
 
-app.get('/api/cases', function (req, res) {
-    models.Product.findAll({attributes:['id','name','imgUrl']}).then(function (result) {
-        res.json({cases:result});
-    });
-});
+app.use('/api',require('./libs/APIrouter'));
