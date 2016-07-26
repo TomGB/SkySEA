@@ -53,10 +53,7 @@ angular.module('starter.controllers', [])
   function($scope, uiService, productService) {
 
   $scope.addToBasket = function(item) {
-    // uiService.confirmAddToBasket(item);
-    networkinterface.getIPAddress(function(ip){
-      console.log(ip);
-    })
+    uiService.confirmAddToBasket(item);
   };
 
   $scope.productService = productService;

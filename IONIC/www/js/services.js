@@ -29,7 +29,7 @@ angular.module('starter.services', [])
   };
 
   obj.removeItem = function(product) {
-    var index = basketService.basketProducts.indexOf(product);
+    var index = obj.basketProducts.indexOf(product);
     obj.basketProducts.splice(index, 1);
   };
 
