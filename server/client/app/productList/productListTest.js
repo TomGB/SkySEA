@@ -2,6 +2,9 @@
  * Created by amu35 on 21/07/2016.
  */
 describe('productListCtrl',function () {
+
+  var $httpBackend,$rootScope, launchController;
+
   beforeEach(module('accessoriesStore'));
 
   beforeEach(inject(function(_$controller_){
@@ -9,13 +12,27 @@ describe('productListCtrl',function () {
     $controller = _$controller_;
   }));
 
+  beforeEach(inject(function ($injector) {
+    $httpBackend = $injector.get('$httpBackend');
+    $rootScope = $injector.get('$rootScope');
+    launchController =   function () {
+      $controller('productListCtrl', { $scope: $rootScope });
+    }
+  }));
 
-  describe('$scope.helloWorld', function() {
-    it('equal hello world', function() {
-      var $scope = {};
-      var controller = $controller('productListCtrl', { $scope: $scope });
 
-      expect($scope.helloWorld).toEqual('Hello World');
-    });
+  it('should be populated from the http response', function() {
+    $httpBackend.expectGET('/api/cases').respond({cases:[{name:'testCase'}]});
+    launchController();
+    $httpBackend.flush();
+    expect($rootScope.cases[0].name).toEqual('testCase');
   });
+
+  it('should return an error when the request is invalid', function () {
+    $httpBackend.expectGET('/api/cases').respond(404,{});
+    launchController();
+    $httpBackend.flush();
+    expect($rootScope.error).toEqual("could not load cases");
+  })
+  
 });
