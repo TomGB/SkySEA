@@ -3,13 +3,40 @@
     <form name="signupForm" ng-submit="doSignup()">
       <div class="list">
         <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="signupData.username" required>
+          <input type="text" ng-model="signupData.username" placeholder="Username" required>
         </label>
         <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="signupData.password" required>
+          <input type="password" ng-model="signupData.password" placeholder="Password" required>
         </label>
+        <label class="item item-input">
+          <input type="password" ng-model="signupData.passwordConfirmation" placeholder="Password Confirmation"
+                 required password-match="signupData.password">
+        </label>
+
+        <div class="item item-divider"></div>
+
+        <label class="item item-input">
+          <input type="text" ng-model="signupData.firstName" placeholder="First Name" required>
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="signupData.lastName" placeholder="Last Name" required>
+        </label>
+
+        <div class="item item-divider"></div>
+
+        <label class="item item-input">
+          <input type="text" ng-model="signupData.address1" placeholder="Address 1" required>
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="signupData.address2" placeholder="Address 2">
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="signupData.address3" placeholder="Address 3">
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="signupData.postCode" placeholder="Post Code" required>
+        </label>
+
         <label class="item">
           <button class="button button-block button-positive" type="submit" ng-disabled="signupForm.$invalid">Sign up</button>
         </label>

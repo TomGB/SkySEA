@@ -4,8 +4,8 @@ angular.module('starter.controllers', [])
   basketService.basketProducts = [];
 })
 
-.controller('AppCtrl', ['$scope', '$ionicModal', '$timeout', 'basketService',
-  function($scope, $ionicModal, $timeout, basketService) {
+.controller('AppCtrl', ['$scope', 'basketService',
+  function($scope, basketService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -129,16 +129,14 @@ angular.module('starter.controllers', [])
 
     $scope.doLogin = function() {
       console.log('Doing login', $scope.loginData);
-
-      // Simulate a login delay. Remove this and replace with your login
-      // code if using a login system
-      $timeout(function() {
-        $scope.closeLogin();
-      }, 1000);
     };
 }])
 
 .controller('SignupController', ['$scope', 'authService',
   function($scope, authService){
-    $scope.hello = "world";
+    $scope.signupData = {};
+
+    $scope.doSignup = function() {
+      console.log('Doing login', $scope.signupData);
+    };
 }]);

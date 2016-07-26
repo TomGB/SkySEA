@@ -80,7 +80,7 @@ app.factory('authService', ['$http', function($http){
 
   obj.userLoggedIn = function(){
     return false;
-  }
+  };
 
   return obj;
 }]);
