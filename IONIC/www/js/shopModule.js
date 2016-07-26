@@ -74,4 +74,14 @@ app.factory('productService', ['$http', function($http){
 
     return obj;
 }]);
+
+app.factory('authService', ['$http', function($http){
+  var obj = {};
+
+  obj.userLoggedIn = function(){
+    return false;
+  }
+
+  return obj;
+}]);
 })();

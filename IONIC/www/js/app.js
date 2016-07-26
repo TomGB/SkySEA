@@ -69,6 +69,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'CheckoutCtrl'
         }
       }
+    })
+
+    .state('app.login', {
+      url: '/login',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/login.html',
+          controller: 'LoginController'
+        }
+      }
+    })
+
+    .state('app.signup', {
+      url: '/signup',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/signup.html',
+          controller: 'SignupController'
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists'); // Tried to change to catalogue but gives error

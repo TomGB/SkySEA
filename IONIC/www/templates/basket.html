@@ -26,9 +26,19 @@
         Total: {{getTotal() | currency:"£"}}
       </h4>
 
-      <a class="button button-full button-positive" href="#/app/checkout">
-        Checkout
-      </a>
+      <div ng-show="!authService.userLoggedIn()">
+        <a class="button button-full button-stable" href="#/app/login">
+          Log in
+        </a>
+        <a class="button button-full button-stable" href="#/app/signup">
+          Sign up
+        </a>
+      </div>
+      <div ng-show="authService.userLoggedIn()">
+        <a class="button button-full button-positive" href="#/app/checkout">
+          Checkout
+        </a>
+      </div>
 
     </div>
 
