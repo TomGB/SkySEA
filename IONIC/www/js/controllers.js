@@ -120,7 +120,9 @@ angular.module('starter.controllers', [])
 
 .controller('CheckoutCtrl', ['$scope', '$ionicPopup', '$state', '$ionicHistory', 'basketService',
   function($scope, $ionicPopup, $state, $ionicHistory, basketService){
+
   $scope.options = ["Credit/Debit Card", "Product Order"];
+  $scope.selectedPayment = $scope.options[0];
   $scope.getTotal = function(){
     return basketService.getTotal();
   };
@@ -128,21 +130,25 @@ angular.module('starter.controllers', [])
   $scope.card = {};
   $scope.po = {};
 
-  $scope.submit = function(){
-    basketService.basketProducts = [];
-    var myPopup = $ionicPopup.show({
-      title: 'Payment Successful',
-      buttons: [{
-        text: 'Return to Catalogue',
-        type: 'button-assertive',
-        onTap: function(e){
-          $scope.card = {};
-          $scope.po = {};
-          $ionicHistory.nextViewOptions({disableBack: true});
-          $state.go('app.catalogue');
-        }
-      }]
-    })
+  $scope.submit = function(isValid){
+
+    if (isValid){
+      basketService.basketProducts = [];
+      var myPopup = $ionicPopup.show({
+        title: 'Payment Successful',
+        buttons: [{
+          text: 'Return to Catalogue',
+          type: 'button-assertive',
+          onTap: function(e){
+            $scope.card = {};
+            $scope.po = {};
+            $ionicHistory.nextViewOptions({disableBack: true});
+            $state.go('app.catalogue');
+          }
+        }]
+      });
+    }
+
   }
 
 }]);
