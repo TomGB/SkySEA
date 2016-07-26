@@ -12,7 +12,7 @@ module.exports = {
           name: Sequelize.STRING,
           price:
           {
-            type: Sequelize.DECIMAL,
+            type: Sequelize.DECIMAL(10,2),
             allowNull: false,
             default: 0.0
           },

@@ -2,12 +2,16 @@
  * Created by amu35 on 21/07/2016.
  */
 (function () {
-  var app = angular.module('accessoriesStore',['ngRoute']);
+  var app = angular.module('accessoriesStore',['ngRoute','monospaced.qrcode']);
 
   app.config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/productList', {
         templateUrl: 'app/productList/productList.html',
+        controller: 'productListCtrl'
+      })
+      .when('/printView', {
+        templateUrl: 'app/productList/printView.html',
         controller: 'productListCtrl'
       })
       .when('/login', {

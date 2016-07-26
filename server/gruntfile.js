@@ -10,8 +10,10 @@ module.exports = function (grunt) {
         files: {'client/app-concat.js': [
           'bower_components/angular/angular.min.js',
           'bower_components/angular-route/angular-route.min.js',
+          'bower_components/angular-qrcode/angular-qrcode.js',
+          'bower_components/qrcode-generator/js/qrcode.js',
           'client/app/**/*.js',
-          '!client/**/*Test.js'
+          '!client/**/*Test.js',
         ]}
       }
     },
@@ -47,7 +49,7 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['client/app/**/*'],
+        files: ['client/app/**/*','client/app/*','client/css/*'],
         tasks: ['default'],
         options: {
           spawn: false
