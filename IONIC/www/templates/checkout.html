@@ -19,13 +19,16 @@
       <div ng-if="selectedPayment == options[0]"> <!-- Card -->
         <div class="list">
           <label class="item item-input">
-            <input type="text" placeholder="Card Number" ng-model="card.number" required pattern="^\d{12,}"/>
+            <span class="input-label">Card Number</span>
+            <input type="text" ng-model="card.number" required pattern="^\d{12,}"/>
           </label>
           <label class="item item-input">
-            <input type="month" placeholder="Expiry Date" ng-model="card.expiryDate" required/>
+            <span class="input-label">Expiry Date</span>
+            <input type="month" ng-model="card.expiryDate" required/>
           </label>
           <label class="item item-input">
-            <input type="text" placeholder="Security Code" ng-model="card.cvv" required pattern="^\d{3}$"/>
+            <span class="input-label">Security Code</span>
+            <input type="text" ng-model="card.cvv" required pattern="^\d{3}$"/>
           </label>
         </div>
       </div>
@@ -33,7 +36,8 @@
       <div ng-if="selectedPayment == options[1]"> <!-- Product Owner -->
         <div class="list">
           <label class="item item-input">
-            <input type="text" placeholder="Product Order Number" ng-model="po.number" ng-required="true" pattern="\d+"/>
+            <span class="input-label">Product Order Number</span>
+            <input type="text" ng-model="po.number" ng-required="true" pattern="\d+"/>
           </label>
         </div>
       </div>
