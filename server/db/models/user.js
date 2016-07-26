@@ -4,6 +4,23 @@ module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     email: {
       type: DataTypes.STRING,
+      validate: {
+        isUnique: function (value, next) {
+          var self = this;
+          User.find({where: {email: value}})
+              .then(function (user) {
+                // reject if a different user wants to use the same email
+                if (user && self.id !== user.id) {
+                  return next('Email already in use!');
+                }
+                return next();
+              })
+              .catch(function (err) {
+                return next(err);
+              });
+        },
+        isEmail: true
+      }
     },
     password: DataTypes.STRING,
     address1: DataTypes.TEXT,
@@ -24,15 +41,11 @@ module.exports = function(sequelize, DataTypes) {
       },
       generateHash: function(password){
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-      }
-    },
-    instanceMethods: {
+      },
       validPassword: function(password){
         return bcrypt.compareSync(password, this.password);
       }
-    },
-    tableName: 'user'
-
+    }
   });
   return User;
 };

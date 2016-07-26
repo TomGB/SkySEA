@@ -12,12 +12,16 @@
       })
       .when('/login', {
         templateUrl: 'app/auth/login.html',
-        contoller: 'loginCtrl'
+        controller: 'loginCtrl'
       })
       .when('/productList/:productId', {
         templateUrl: 'app/product/product.html',
         controller: 'productCtrl'
       })
+        .when('/dashboard', {
+          templateUrl: 'app/auth/dash.html',
+          controller: 'loginCtrl'
+        })
       .when('/basket',{
         templateUrl: 'app/basket/basket.html',
         controller: 'basketCtrl'

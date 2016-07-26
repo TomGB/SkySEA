@@ -1,3 +1,13 @@
-<div ng-controller="loginCtrl">
-  
+<div class="o-layout__item  u-width-1/2@medium" ng-controller="loginCtrl" style="margin-left: 23%">
+    <article class="c-tile  c-tile--square  is-current">
+        <div class="c-tile__content">
+            <div class="c-tile__body">
+                <h1 ng-show="error">Whoops! These details are incorrect</h1>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Sky_Logo_seit_Dezember_2015.png" width="50%" class="u-margin-bottom-small" style="margin-left: 25%">
+                <input type="text" class="c-form-input" placeholder="e.g. hulk42" name="email" ng-model="email" id="f-email">
+                <input type="password" class="c-form-input" placeholder="e.g. hulk42" ng-model="password" id="f-password">
+                <button class="c-btn  c-btn--secondary" ng-click="loginSubmit(email, password)">Submit</button>
+            </div>
+        </div>
+    </article>
 </div>
