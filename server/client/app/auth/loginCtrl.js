@@ -29,7 +29,7 @@
                 sessionStorage.setItem('token', response.data.token);
                 $location.url('/dashboard');
             }, function(res){
-                console.log(res);
+                $scope.error = true;
             });
         };
 
