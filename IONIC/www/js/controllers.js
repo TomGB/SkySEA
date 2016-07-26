@@ -49,8 +49,48 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('CatalogueCtrl', ['$scope', 'uiService', 'productService',
-  function($scope, uiService, productService) {
+.controller('CatalogueCtrl', ['$scope', 'uiService', 'productService', '$ionicPopup',
+  function($scope, uiService, productService, $ionicPopup) {
+
+  $scope.initData = {};
+
+  init = function () {
+    var myPopup = $ionicPopup.show({
+      template: '<input type="text" ng-model="initData.ip">',
+      title: 'Enter host IP or select localhost',
+      scope: $scope,
+      buttons: [{
+        text: 'Localhost',
+        onTap: function (e) {
+          productService.apiIP = 'localhost';
+          $scope.getCases();
+        }
+      }, 
+      {
+        text: 'Enter IP',
+        onTap: function (e) {
+          if(!$scope.initData.ip){
+            e.preventDefault();
+          }else{
+            productService.apiIP = $scope.initData.ip;
+            $scope.getCases();
+          }
+        }
+      }]
+    })
+  };
+  init();
+
+  $scope.getCases = function(){
+    productService.getCases().then(function (data) {
+      productService.products = data;
+    }, function(error){
+      console.log("Error: " + error);
+    })
+  };
+
+  // if (productService.products.length == 0)
+  //   $scope.getCases();
 
   $scope.addToBasket = function(item) {
     uiService.confirmAddToBasket(item);
