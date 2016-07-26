@@ -50,7 +50,12 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['client/app/**/*','client/app/*','client/css/*','../IONIC/www/js/shopModule.js'],
+        files: [
+          'client/app/**/*',
+          'client/app/*',
+          'client/css/*',
+          '../IONIC/www/js/shopModule.js'
+        ],
         tasks: ['default'],
         options: {
           spawn: false
