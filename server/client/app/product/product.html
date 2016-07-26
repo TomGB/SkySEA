@@ -1,27 +1,25 @@
-<section class="o-container">
-    <h3 class="c-heading-gamma">{{product.name}}</h3>
-    <div class="o-layout">
-        <div class="o-layout__item u-width-1/2@medium">
-            <article class="c-tile">
-                <div class="c-tile__content">
-                        <img class="c-bezel" ng-src="/images/phonecases/{{product.imageUrl}}"/>
+<h3 class="c-heading-gamma">{{product.name}}</h3>
+<section class="o-layout">
+    <div class="o-layout__item u-width-1/2@medium">
+        <article class="c-tile">
+            <div class="c-tile__content">
+                    <img class="c-bezel" ng-src="/images/phonecases/{{product.imageUrl}}"/>
+            </div>
+        </article>
+    </div>
+    <div class="o-layout__item  u-width-1/2@medium">
+        <article class="c-tile">
+            <div class="c-tile__content">
+                <div class="c-tile__body">
+                    <div>Description:</div>
+                    <div>{{product.description}}</div>
+                    <div>Availability:</div>
+                    <div>{{product.availableStock}} remaining.</div>
+                    <div>Price:</div>
+                    <div>&pound;{{product.price | number:2}}</div>
+                    <a class="c-btn c-btn--primary" ng-click=addToBasket(product)>Add to basket</a>
                 </div>
-            </article>
-        </div>
-        <div class="o-layout__item  u-width-1/2@medium">
-            <article class="c-tile">
-                <div class="c-tile__content">
-                    <div class="c-tile__body">
-
-                        <div>Description:</div>
-                        <div>{{product.description}}</div>
-                        <div>Availability:</div>
-                        <div>{{product.availableStock}} remaining.</div>
-                        <div>Price:</div>
-                        <div>&pound;{{product.price | number:2}}</div>
-                    </div>
-                </div>
-            </article>
-        </div>
+            </div>
+        </article>
     </div>
 </section>

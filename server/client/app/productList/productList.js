@@ -5,8 +5,7 @@
   var app = angular.module('accessoriesStore');
   app.controller('productListCtrl',['$scope', '$http','basketService',function ($scope,$http,basketService) {
 
-      $scope.basket = basketService.basketProducts;
-      
+
       $http.get('/api/cases').then(
           function (response) {
             $scope.cases = response.data.cases;
@@ -16,8 +15,7 @@
           }
       );
 
-  
       $scope.addToBasket = basketService.addToBasket;
-      
+
   }]);
 })();
