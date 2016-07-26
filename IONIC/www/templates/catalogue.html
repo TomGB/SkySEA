@@ -1,4 +1,4 @@
-<ion-view view-title="Catalogue">
+<ion-view view-title="Catalogue" ng-init="getCases()">
   <ion-content>
       <div class="list card" ng-repeat="product in productService.products">
 
@@ -7,7 +7,7 @@
           </div>
 
           <div class="item item-image">
-              <img ng-src="{{product.imgUrl}}"/>
+              <img ng-src="http://localhost:3000/images/phonecases/{{product.imageUrl}}"/>
           </div>
 
           <div class="item row">
