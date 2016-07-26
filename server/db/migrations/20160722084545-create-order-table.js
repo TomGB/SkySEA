@@ -12,13 +12,22 @@ module.exports = {
           status: Sequelize.STRING,
           orderDate: Sequelize.DATE,
           dispatchDate: Sequelize.DATE,
-          workerID: {
+          userID: {
             type: Sequelize.INTEGER,
             references: {
               model: 'users',
               key: 'id'
             }
           },
+          workerID: {
+            type: Sequelize.INTEGER,
+            references: {
+              model: 'workers',
+              key: 'id'
+            }
+          },
+          createdAt: Sequelize.DATE,
+          updatedAt: Sequelize.DATE
         });
   },
 

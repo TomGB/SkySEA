@@ -82,6 +82,8 @@ echo "==========================================================================
 echo "                                  GRUNT"
 echo "============================================================================="
 
+killall grunt
+
 grunt
 echo ""
 
@@ -89,8 +91,34 @@ echo "----------------------------"
 echo "                   complete."
 echo ""
 
+echo ""
+echo "Starting Grunt Watch..."
+echo ""
+
+pwd=$(pwd)
+osascript -e "tell application \"Terminal\" to do script \"cd $pwd; clear; grunt watch \" " > /dev/null
+echo ""
+
+echo "----------------------------"
+echo "                   complete."
+echo ""
+
+
 echo "============================================================================="
 echo "                            START NODE SERVER"
 echo "============================================================================="
+
+sudo killall node
+
+echo ""
+echo "Killing existing node servers..."
+echo ""
+
+echo "Opening website..."
+echo ""
+
+open /Applications/Google\ Chrome.app http://localhost:3000/
+
+echo ""
 
 node app.js

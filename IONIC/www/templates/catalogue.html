@@ -1,4 +1,4 @@
-<ion-view view-title="Catalogue">
+<ion-view view-title="Catalogue" ng-init="getCases()">
   <ion-content>
       <div class="list card" ng-repeat="product in productService.products">
 
@@ -7,14 +7,17 @@
           </div>
 
           <div class="item item-image">
-              <img ng-src="{{product.imgUrl}}"/>
+              <img ng-src="http://localhost:3000/images/phonecases/{{product.imageUrl}}"/>
           </div>
 
           <div class="item row">
-              <div class="col-90 text-center">
+              <div class="col col-30 text-center" ng-class="{'assertive':!product.availableStock}">
+                {{productService.getStockMessage(product)}}
+              </div>
+              <div class="col col-60 text-center">
                   {{product.price | currency:"£"}}
               </div>
-              <div class="col-10" ng-click="addToBasket(product)">
+              <div class="col col-10 text-center" ng-show="product.availableStock" ng-click="addToBasket(product)">
                 <i class="icon ion-plus-round balanced"></i>
               </div>
           </div>

@@ -4,14 +4,21 @@
   <span class="is-error">{{error}}</span>
 
   <section class="o-layout">
-    <label class="o-layout__item c-form-label u-width-1/5" for="f-username">
-      Search
-    </label>
-    <input type="text" class="c-form-input u-width-2/5" placeholder="Search" name="f-username" id="f-username" ng-model="search.name">
+    <div class="o-layout__item u-width-1/5">
+      <input type="text" class="c-form-input " placeholder="Search" name="f-username" id="f-username" ng-model="search.name">
+    </div>
 
     <div class="o-layout__item c-form-select u-width-2/5">
-      <select class="c-form-select__dropdown">
+      <select class="c-form-select__dropdown" ng-model="search.ShowName" ng-options="showName for showName in showNames">
+        <option value="">Filter by show</option>
+      </select>
+    </div>
+
+    <div class="o-layout__item c-form-select u-width-2/5">
+      <select class="c-form-select__dropdown" ng-model="search.PhoneType" ng-options="phoneType for phoneType in phoneModels">
         <option value="">Filter by phone model</option>
+        <option value="HTC 10">HTC 10</option>
+
       </select>
     </div>
   </section>

@@ -49,55 +49,40 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('CatalogueCtrl', ['$scope', 'uiService', 'productService',
-  function($scope, uiService, productService) {
-  productService.products = [
-    {
-      id: 1,
-      name: 'iPhone 6 - Game of Thrones',
-      price: 4.99,
-      imgUrl: 'img/phonecases/IPhone6-GOT.jpg'
-    },
-    {
-      id: 2,
-      name: 'HTC 10 - Game of Thrones',
-      price: 4.99,
-      imgUrl: 'img/phonecases/HTC10-GOT.jpg'
-    },
-    {
-      id: 3,
-      name: 'LG G5 - Game of Thrones',
-      price: 4.99,
-      imgUrl: 'img/phonecases/LGG5-GOT.jpg'
-    },
-    {
-      id: 4,
-      name: 'Nexus 6 - Game of Thrones',
-      price: 3.99,
-      imgUrl: 'img/phonecases/Nexus6-GOT.jpg'
-    }
-  ];
+.controller('CatalogueCtrl', ['$scope', 'uiService', 'productService', '$ionicPopup',
+  function($scope, uiService, productService, $ionicPopup) {
+
+  $scope.getCases = function(){
+    productService.getCases().then(function (data) {
+      productService.products = data;
+    }, function(error){
+      console.log("Error: " + error);
+    })
+  };
 
   $scope.addToBasket = function(item) {
     uiService.confirmAddToBasket(item);
-  }
+  };
 
   $scope.productService = productService;
 }])
 
-.controller('ScanCtrl', ['$scope', '$cordovaBarcodeScanner' ,'$ionicPopup' , 'uiService',
-  function ($scope, $cordovaBarcodeScanner, $ionicPopup, uiService) {
+.controller('ScanCtrl', ['$scope', '$cordovaBarcodeScanner' ,'$ionicPopup' , 'uiService', 'productService',
+  function ($scope, $cordovaBarcodeScanner, $ionicPopup, uiService, productService) {
   $scope.scan = function(){
     $cordovaBarcodeScanner.scan().then(function(imageData){
-      $rootScope.products.forEach(function(elem, ind, arr){
+      productService.products.forEach(function(elem, ind, arr){
         if(elem.id == imageData.text){
-          uiService.confirmAddToBasket(elem);
+          if (elem.availableStock)
+            uiService.confirmAddToBasket(elem);
+          else
+           uiService.displayMessage('Sorry, ' + elem.name + ' is currently out of stock');
         }
       })
 
     }), function(error) {
       console.log("Error: " + error);
-      alert("Error scanning QR code, please try again later");
+      uiService.displayMessage("Error scanning QR code, please try again later");
     }
   }
 }])
@@ -140,14 +125,9 @@ angular.module('starter.controllers', [])
     return basketService.getTotal();
   };
 
-  $scope.card = {
-    number: '',
-    expiryDate: '',
-    cvv: ''
-  };
-  $scope.po = {
-    number: ''
-  };
+  $scope.card = {};
+  $scope.po = {};
+
   $scope.submit = function(){
     basketService.basketProducts = [];
     var myPopup = $ionicPopup.show({
@@ -156,6 +136,8 @@ angular.module('starter.controllers', [])
         text: 'Return to Catalogue',
         type: 'button-assertive',
         onTap: function(e){
+          $scope.card = {};
+          $scope.po = {};
           $ionicHistory.nextViewOptions({disableBack: true});
           $state.go('app.catalogue');
         }

@@ -13,8 +13,7 @@ module.exports = function (grunt) {
           'bower_components/angular-jwt/dist/angular-jwt.js',
           'client/app/**/*.js',
           '!client/**/*Test.js',
-          '../IONIC/www/js/shopModule.js',
-
+          '../IONIC/www/js/shopModule.js'
         ]}
       },
       css: {

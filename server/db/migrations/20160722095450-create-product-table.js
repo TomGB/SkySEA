@@ -26,7 +26,9 @@ module.exports = {
               model: 'productTypes',
               key: 'id'
             }
-          }
+          },
+          createdAt: Sequelize.DATE,
+          updatedAt: Sequelize.DATE
         });
   },
 

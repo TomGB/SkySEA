@@ -33,7 +33,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.ENUM,
       values: ['customer', 'admin', 'tech_support', 'manager'],
       defaultValue: 'customer'
-    }
+    },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
