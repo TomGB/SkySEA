@@ -12,8 +12,7 @@ module.exports = function (grunt) {
           'bower_components/qrcode-generator/js/qrcode.js',
           'client/app/**/*.js',
           '!client/**/*Test.js',
-          '../IONIC/www/js/shopModule.js',
-
+          '../IONIC/www/js/shopModule.js'
         ]}
       },
       css: {

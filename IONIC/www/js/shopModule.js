@@ -44,6 +44,14 @@ app.service("basketService", function(){
         });
         return total;
     };
+
+    obj.getTotalItems = function(){
+        var total = 0;
+        obj.basketProducts.forEach(function(elem, ind, arr){
+            total += elem.quantity;
+        });
+        return total;
+    };
     return obj;
 })
 })();
