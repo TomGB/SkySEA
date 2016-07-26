@@ -63,6 +63,15 @@ app.factory('productService', ['$http', function($http){
         });
     };
 
+    obj.getStockMessage = function(product){
+      if (product.availableStock >= 10)
+        return "In Stock";
+      else if (product.availableStock < 10 && product.availableStock > 0)
+        return product.availableStock + " Left";
+      else
+        return "Out of Stock";
+    };
+
     return obj;
 }]);
 })();

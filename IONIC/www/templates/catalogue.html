@@ -11,18 +11,13 @@
           </div>
 
           <div class="item row">
-              <div class="col-30 text-center">
-                <div ng-if="product.availableStock">
-                  {{product.availableStock}} 0 available
-                </div>
-                <div ng-if="!product.availableStock" class="assertive">
-                  Out of Stock
-                </div>
+              <div class="col col-30 text-center" ng-class="{'assertive':!product.availableStock}">
+                {{productService.getStockMessage(product)}}
               </div>
-              <div class="col-60 text-center">
+              <div class="col col-60 text-center">
                   {{product.price | currency:"£"}}
               </div>
-              <div class="col-10" ng-show="product.availableStock" ng-click="addToBasket(product)">
+              <div class="col col-10 text-center" ng-show="product.availableStock" ng-click="addToBasket(product)">
                 <i class="icon ion-plus-round balanced"></i>
               </div>
           </div>
