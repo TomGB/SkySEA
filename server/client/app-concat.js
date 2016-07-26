@@ -347,32 +347,95 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
         controller: 'productListCtrl'
       })
       .when('/login', {
-        templateUrl: 'app/auth/login',
-        contoller: 'loginCtrl'
+        templateUrl: 'app/auth/login.html',
+        controller: 'loginCtrl'
       })
+      .when('/productList/:productId', {
+        templateUrl: 'app/product/product.html',
+        controller: 'productCtrl'
+      })
+        .when('/dashboard', {
+          templateUrl: 'app/auth/dash.html',
+          controller: 'loginCtrl'
+        })
       .otherwise({redirectTo: '/productList'});
 
   }]);
 })();
 
 (function () {
-  angular.module('accessoriesStore').controller('loginCtrl',['$scope', '$http',function ($scope,$http) {
-    //Do something
-  }
-  ]);
+    angular.module('accessoriesStore').controller('loginCtrl',['$scope', '$http', '$location', '$window',function ($scope, $http, $location, $window) {
+        $scope.error = false;
+        var config = {headers: {
+            authorization: sessionStorage.getItem('token')
+        }};
+        $http.get('/api/users/dashboard', config).success(function(res, next){
+            if(res.access == false){
+                return $location.url('/login')
+            }else{
+                $scope.user = res.user;
+            }
+        });
+
+        $http.get('/api/users/login', config).success(function(res, next){
+            if(res.access == false){
+                return $location.url('/login');
+            }else{
+                return $location.url('/dashboard');
+            }
+        });
+
+        $scope.loginSubmit = function(email, password){
+            $http.post('/api/users/login', {
+                email: email,
+                password: password
+            }).then(function(response) {
+                $scope.user = response.data.user;
+                sessionStorage.setItem('token', response.data.token);
+                $location.url('/dashboard');
+            }, function(res){
+                console.log(res);
+            });
+        };
+
+        $scope.logout = function(){
+            sessionStorage.removeItem('token');
+            $location.url('/');
+        }
+
+
+    }
+    ]);
 })();
 
+/**
+ * Created by amu35 on 24/07/2016.
+ */
+
+(function() {
+    angular.module('accessoriesStore')
+        .controller('productCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+            $http.get('/api/cases/' + $routeParams.productId).then(function(res) {
+                $scope.product = res.data;
+            })
+        }])
+})();
 /**
  * Created by amu35 on 21/07/2016.
  */
 (function () {
-  angular.module('accessoriesStore').controller('productListCtrl',['$scope', '$http',function ($scope,$http) {
-
-    $scope.helloWorld = 'Hello World';
-
-    $http.get('http://localhost:3000/api/cases').then(function (response) {
-        $scope.cases = response.data.cases;
-    });
+  angular.module('accessoriesStore')
+      .controller('productListCtrl',['$scope', '$http',function ($scope,$http) {
+          $scope.helloWorld = 'Hello World';
+  
+          $http.get('http://localhost:3000/api/cases').then(
+              function (response) {
+                $scope.cases = response.data.cases;
+              },
+              function (response) {
+                  $scope.error = "could not load cases";
+              }
+          );
   }
   ]);
 })();

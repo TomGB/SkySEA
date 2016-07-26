@@ -11,9 +11,17 @@
         controller: 'productListCtrl'
       })
       .when('/login', {
-        templateUrl: 'app/auth/login',
-        contoller: 'loginCtrl'
+        templateUrl: 'app/auth/login.html',
+        controller: 'loginCtrl'
       })
+      .when('/productList/:productId', {
+        templateUrl: 'app/product/product.html',
+        controller: 'productCtrl'
+      })
+        .when('/dashboard', {
+          templateUrl: 'app/auth/dash.html',
+          controller: 'loginCtrl'
+        })
       .otherwise({redirectTo: '/productList'});
 
   }]);

@@ -35,6 +35,13 @@ module.exports = function (grunt) {
             cwd:'client/sass',
             src: ['*'],
             dest: 'public/css/'
+          },
+          {
+            expand: true,
+            flatten:true,
+            cwd:'client/',
+            src: ['app-concat.js'],
+            dest: 'public/js/'
           }]
       }
     },
