@@ -14,6 +14,7 @@ module.exports = function (grunt) {
           'bower_components/qrcode-generator/js/qrcode.js',
           'client/app/**/*.js',
           '!client/**/*Test.js',
+          '../IONIC/www/js/shopModule.js'
         ]}
       }
     },
@@ -49,7 +50,7 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['client/app/**/*','client/app/*','client/css/*'],
+        files: ['client/app/**/*','client/app/*','client/css/*','../IONIC/www/js/shopModule.js'],
         tasks: ['default'],
         options: {
           spawn: false

@@ -5,6 +5,6 @@ var express = require('express');
 var manager = express.Router();
 
 manager.use('/cases',require('./CasesAPIController'));
-manager.use('/products',require('./UsersAPIController'));
+manager.use('/users',require('./UsersAPIController'));
 
 module.exports = manager;
