@@ -3,7 +3,9 @@
 module.exports = function(sequelize, DataTypes) {
   var ProductInfo = sequelize.define("ProductInfo", {
     key: DataTypes.STRING,
-    value: DataTypes.STRING
+    value: DataTypes.STRING,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {

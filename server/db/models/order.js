@@ -5,6 +5,8 @@ module.exports = function(sequelize, DataTypes) {
     status: DataTypes.STRING,
     orderDate: DataTypes.DATE,
     dispatchDate: DataTypes.DATE,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {

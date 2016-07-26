@@ -2,7 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   var ProductOrder = sequelize.define("ProductOrder", {
-
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
