@@ -45,24 +45,24 @@ app.service("basketService", function(){
         return total;
     };
     return obj;
-})
+});
 
-  app.factory('productService', ['$http', function($http){
-      var obj = {};
+app.factory('productService', ['$http', function($http){
+    var obj = {};
 
-      obj.products = [];
+    obj.products = [];
 
-      obj.getCases = function(){
-          return $http({
-              method: 'GET',
-              url: 'http://localhost:3000/api/cases'
-          }).then(function (res) {
-              return res.data.cases;
-          }, function(res){
-              console.log('Error: ' + res);
-          });
-      };
+    obj.getCases = function(){
+        return $http({
+            method: 'GET',
+            url: 'http://localhost:3000/api/cases'
+        }).then(function (res) {
+            return res.data.cases;
+        }, function(res){
+            console.log('Error: ' + res);
+        });
+    };
 
-      return obj;
-  }]);
+    return obj;
+}]);
 })();

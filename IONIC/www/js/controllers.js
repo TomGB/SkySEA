@@ -73,13 +73,16 @@ angular.module('starter.controllers', [])
     $cordovaBarcodeScanner.scan().then(function(imageData){
       productService.products.forEach(function(elem, ind, arr){
         if(elem.id == imageData.text){
-          uiService.confirmAddToBasket(elem);
+          if (elem.availableStock)
+            uiService.confirmAddToBasket(elem);
+          else
+           uiService.displayMessage('Sorry, ' + elem.name + ' is currently out of stock');
         }
       })
 
     }), function(error) {
       console.log("Error: " + error);
-      alert("Error scanning QR code, please try again later");
+      uiService.displayMessage("Error scanning QR code, please try again later");
     }
   }
 }])
