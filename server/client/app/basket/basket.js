@@ -17,7 +17,7 @@
     };
 
     $scope.checkout = function () {
-      
+      basketService.checkout();
     }
 
   }])

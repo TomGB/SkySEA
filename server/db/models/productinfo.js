@@ -2,8 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   var ProductInfo = sequelize.define("ProductInfo", {
-    key: DataTypes.STRING,
-    value: DataTypes.STRING,
+    infoName: DataTypes.STRING,
+    infoValue: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
   }, {

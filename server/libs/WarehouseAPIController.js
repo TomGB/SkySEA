@@ -4,12 +4,12 @@
 var models = require('../db/models/index');
 var express = require('express');
 var app = express.Router();
+var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
 
 app.route('/checkout')
     .post(function (req,res) {
-        var name = req.body.name;
-        var token = req.body.token;
+        var token = req.token;
 
         models.Order.create({
           status : "ordered",
@@ -19,10 +19,10 @@ app.route('/checkout')
           workerID : null
         })
         .then(function(order) {
-          for (var i = 0; i < req.body.products.length; i++) {
+          for (var i = 0; i < req.products.length; i++) {
             models.ProductOrders.create({
               orderID : order.get('id'),
-              productID : req.body.products[i].id
+              productID : req.products[i].id
             });
           }
         },function(err) {
