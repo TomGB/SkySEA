@@ -52,35 +52,6 @@ angular.module('starter.controllers', [])
 .controller('CatalogueCtrl', ['$scope', 'uiService', 'productService', '$ionicPopup',
   function($scope, uiService, productService, $ionicPopup) {
 
-  $scope.initData = {};
-
-  init = function () {
-    var myPopup = $ionicPopup.show({
-      template: '<input type="text" ng-model="initData.ip">',
-      title: 'Enter host IP or select localhost',
-      scope: $scope,
-      buttons: [{
-        text: 'Localhost',
-        onTap: function (e) {
-          productService.apiIP = 'localhost';
-          $scope.getCases();
-        }
-      }, 
-      {
-        text: 'Enter IP',
-        onTap: function (e) {
-          if(!$scope.initData.ip){
-            e.preventDefault();
-          }else{
-            productService.apiIP = $scope.initData.ip;
-            $scope.getCases();
-          }
-        }
-      }]
-    })
-  };
-  init();
-
   $scope.getCases = function(){
     productService.getCases().then(function (data) {
       productService.products = data;
@@ -89,9 +60,6 @@ angular.module('starter.controllers', [])
     })
   };
 
-  // if (productService.products.length == 0)
-  //   $scope.getCases();
-
   $scope.addToBasket = function(item) {
     uiService.confirmAddToBasket(item);
   };
@@ -99,11 +67,11 @@ angular.module('starter.controllers', [])
   $scope.productService = productService;
 }])
 
-.controller('ScanCtrl', ['$scope', '$cordovaBarcodeScanner' ,'$ionicPopup' , 'uiService',
-  function ($scope, $cordovaBarcodeScanner, $ionicPopup, uiService) {
+.controller('ScanCtrl', ['$scope', '$cordovaBarcodeScanner' ,'$ionicPopup' , 'uiService', 'productService',
+  function ($scope, $cordovaBarcodeScanner, $ionicPopup, uiService, productService) {
   $scope.scan = function(){
     $cordovaBarcodeScanner.scan().then(function(imageData){
-      $rootScope.products.forEach(function(elem, ind, arr){
+      productService.products.forEach(function(elem, ind, arr){
         if(elem.id == imageData.text){
           uiService.confirmAddToBasket(elem);
         }

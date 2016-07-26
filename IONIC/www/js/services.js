@@ -94,12 +94,10 @@ angular.module('starter.services', [])
 
   obj.products = [];
 
-  obj.apiIP = '';
-
   obj.getCases = function(){
     return $http({
       method: 'GET',
-      url: 'http://' + obj.apiIP + ':3000/api/cases'
+      url: 'http://localhost:3000/api/cases'
     }).then(function (res) {
       return res.data.cases;
     }, function(res){
