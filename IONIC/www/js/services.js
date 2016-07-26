@@ -42,24 +42,16 @@ angular.module('starter.services', [])
       ]
     })
   };
-
-  return obj;
-}])
-
-.factory('productService', ['$http', function($http){
-  var obj = {};
-
-  obj.products = [];
-
-  obj.getCases = function(){
-    return $http({
-      method: 'GET',
-      url: 'http://localhost:3000/api/cases'
-    }).then(function (res) {
-      return res.data.cases;
-    }, function(res){
-      console.log('Error: ' + res);
-    });
+  
+  obj.displayMessage = function (msg) {
+    var myPopup = $ionicPopup.show({
+      title: msg,
+      buttons: [
+        {
+          text: 'OK'
+        }
+      ]
+    })
   };
 
   return obj;
