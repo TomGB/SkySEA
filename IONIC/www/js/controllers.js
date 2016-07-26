@@ -122,14 +122,9 @@ angular.module('starter.controllers', [])
     return basketService.getTotal();
   };
 
-  $scope.card = {
-    number: '',
-    expiryDate: '',
-    cvv: ''
-  };
-  $scope.po = {
-    number: ''
-  };
+  $scope.card = {};
+  $scope.po = {};
+
   $scope.submit = function(){
     basketService.basketProducts = [];
     var myPopup = $ionicPopup.show({
@@ -138,6 +133,8 @@ angular.module('starter.controllers', [])
         text: 'Return to Catalogue',
         type: 'button-assertive',
         onTap: function(e){
+          $scope.card = {};
+          $scope.po = {};
           $ionicHistory.nextViewOptions({disableBack: true});
           $state.go('app.catalogue');
         }
