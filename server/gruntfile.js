@@ -1,8 +1,6 @@
 /**
  * Created by amu35 on 21/07/2016.
  */
-
-
 module.exports = function (grunt) {
   grunt.initConfig({
     concat: {
@@ -14,8 +12,12 @@ module.exports = function (grunt) {
           'bower_components/qrcode-generator/js/qrcode.js',
           'client/app/**/*.js',
           '!client/**/*Test.js',
-          '../IONIC/www/js/shopModule.js'
+          '../IONIC/www/js/shopModule.js',
+
         ]}
+      },
+      css: {
+        files: {'public/css/global.css':['client/sass/**/*']}
       }
     },
     uglify : {
@@ -35,13 +37,6 @@ module.exports = function (grunt) {
           {
             expand: true,
             flatten:true,
-            cwd:'client/sass',
-            src: ['*'],
-            dest: 'public/css/'
-          },
-          {
-            expand: true,
-            flatten:true,
             cwd:'client/',
             src: ['app-concat.js'],
             dest: 'public/js/'
@@ -53,7 +48,7 @@ module.exports = function (grunt) {
         files: [
           'client/app/**/*',
           'client/app/*',
-          'client/css/*',
+          'client/sass/**/*',
           '../IONIC/www/js/shopModule.js'
         ],
         tasks: ['default'],
@@ -72,7 +67,7 @@ module.exports = function (grunt) {
 
 
   // Here is where we would define our task
-  grunt.registerTask('buildClient', ['concat:angular', 'uglify:angular','copy']);
+  grunt.registerTask('buildClient', ['concat', 'uglify:angular','copy']);
 
   grunt.registerTask('default', ['buildClient']);
 };
