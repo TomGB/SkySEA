@@ -1,0 +1,18 @@
+<div class="o-layout__item  u-width-1/2@medium" style="margin-left: 23%">
+    <article class="c-tile  c-tile--square  is-current">
+        <div class="c-tile__content">
+            <div class="c-tile__body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Sky_Logo_seit_Dezember_2015.png" width="50%" style="margin-left: 25%">
+                <h1 style="text-align: center">Register</h1>
+                <input type="text" class="c-form-input" placeholder="e.g. tony@stark-enterprises.com" name="email" ng-model="email"  id="f-email">
+                <input type="password" class="c-form-input" placeholder="password" ng-model="password" id="f-password">
+                <input type="text" class="c-form-input" placeholder="Type your postcode.." ng-model="postcode" ng-change="getAddress(postcode)">
+                <div class="c-dropdown  u-margin-bottom" ng-hide="!addresses">
+                    <select ng-model="address" ng-options="a as a.summaryline for a in addresses">
+                    </select>
+                </div>
+                <button class="c-btn  c-btn--secondary" ng-click="register(email, password)">Submit</button>
+            </div>
+        </div>
+    </article>
+</div>
