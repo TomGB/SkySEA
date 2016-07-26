@@ -2,7 +2,7 @@
  * Created by amu35 on 21/07/2016.
  */
 (function () {
-  var app = angular.module('accessoriesStore',['ngRoute']);
+  var app = angular.module('accessoriesStore',['ngRoute','shopModule']);
 
   app.config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider) {
     $routeProvider
@@ -10,15 +10,22 @@
         templateUrl: 'app/productList/productList.html',
         controller: 'productListCtrl'
       })
-      .when('/helpChat', {
-        templateUrl: 'app/helpChat/helpChat.html',
-        controller: 'helpChatController'
+      .when('/login', {
+        templateUrl: 'app/auth/login.html',
+        controller: 'loginCtrl'
       })
-      .when('/techAssistant', {
-        templateUrl: '/techAssistant/techAssistant.html',
-        controller: 'techAssistantController'
+      .when('/productList/:productId', {
+        templateUrl: 'app/product/product.html',
+        controller: 'productCtrl'
+      })
+        .when('/dashboard', {
+          templateUrl: 'app/auth/dash.html',
+          controller: 'loginCtrl'
+        })
+      .when('/basket',{
+        templateUrl: 'app/basket/basket.html',
+        controller: 'basketCtrl'
       })
       .otherwise({redirectTo: '/productList'});
-
   }]);
 })();

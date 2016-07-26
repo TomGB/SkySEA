@@ -11,7 +11,8 @@ module.exports = function (grunt) {
           'bower_components/angular/angular.min.js',
           'bower_components/angular-route/angular-route.min.js',
           'client/app/**/*.js',
-          '!client/**/*Test.js'
+          '!client/**/*Test.js',
+          '../IONIC/www/js/shopModule.js',
         ]}
       }
     },
@@ -35,12 +36,19 @@ module.exports = function (grunt) {
             cwd:'client/sass',
             src: ['*'],
             dest: 'public/css/'
+          },
+          {
+            expand: true,
+            flatten:true,
+            cwd:'client/',
+            src: ['app-concat.js'],
+            dest: 'public/js/'
           }]
       }
     },
     watch: {
       scripts: {
-        files: ['client/app/**/*.js'],
+        files: ['client/app/**/*','../IONIC/www/js/shopModule.js'],
         tasks: ['default'],
         options: {
           spawn: false

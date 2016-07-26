@@ -338,7 +338,7 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
  * Created by amu35 on 21/07/2016.
  */
 (function () {
-  var app = angular.module('accessoriesStore',['ngRoute']);
+  var app = angular.module('accessoriesStore',['ngRoute','shopModule']);
 
   app.config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider) {
     $routeProvider
@@ -346,6 +346,7 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
         templateUrl: 'app/productList/productList.html',
         controller: 'productListCtrl'
       })
+<<<<<<< HEAD
       .when('/helpChat', {
         templateUrl: 'app/helpChat/helpChat.html',
         controller: 'helpChatController'
@@ -353,10 +354,92 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
       .when('/techAssistant', {
         templateUrl: '/techAssistant/techAssistant.html',
         controller: 'techAssistantController'
+=======
+      .when('/login', {
+        templateUrl: 'app/auth/login.html',
+        controller: 'loginCtrl'
+      })
+      .when('/productList/:productId', {
+        templateUrl: 'app/product/product.html',
+        controller: 'productCtrl'
+      })
+        .when('/dashboard', {
+          templateUrl: 'app/auth/dash.html',
+          controller: 'loginCtrl'
+        })
+      .when('/basket',{
+        templateUrl: 'app/basket/basket.html',
+        controller: 'basketCtrl'
+>>>>>>> dev
       })
       .otherwise({redirectTo: '/productList'});
-
   }]);
+})();
+
+(function () {
+    angular.module('accessoriesStore').controller('loginCtrl',['$scope', '$http', '$location', '$window',function ($scope, $http, $location, $window) {
+        $scope.error = false;
+        var config = {headers: {
+            authorization: sessionStorage.getItem('token')
+        }};
+        $http.get('/api/users/dashboard', config).success(function(res, next){
+            if(res.access == false){
+                return $location.url('/login')
+            }else{
+                $scope.user = res.user;
+            }
+        });
+
+        $http.get('/api/users/login', config).success(function(res, next){
+            if(res.access == false){
+                return $location.url('/login');
+            }else{
+                return $location.url('/dashboard');
+            }
+        });
+
+        $scope.loginSubmit = function(email, password){
+            $http.post('/api/users/login', {
+                email: email,
+                password: password
+            }).then(function(response) {
+                $scope.user = response.data.user;
+                sessionStorage.setItem('token', response.data.token);
+                $location.url('/dashboard');
+            }, function(res){
+                $scope.error = true;
+            });
+        };
+
+        $scope.logout = function(){
+            sessionStorage.removeItem('token');
+            $location.url('/');
+        }
+
+
+    }
+    ]);
+})();
+
+(function(){
+  angular.module('accessoriesStore')
+  .controller('basketCtrl',['$scope','basketService',function($scope,basketService){
+    $scope.basket = basketService.basketProducts;
+    
+    $scope.removeIfZero = function (product) {
+      if(product.quantity == 0){
+        $scope.removeItem(product)
+      }
+    };
+
+    $scope.removeItem = function(product){
+
+      var r = window.confirm('Are you sure you want to remove '+product.item.name + ' from your basket?');
+      if(r)
+        basketService.removeItem(product);
+    }
+    
+  }])
 })();
 
 (function() {
@@ -405,19 +488,39 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
 })();
 
 /**
+ * Created by amu35 on 24/07/2016.
+ */
+
+(function() {
+    angular.module('accessoriesStore')
+        .controller('productCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+            $http.get('/api/cases/' + $routeParams.productId).then(function(res) {
+                $scope.product = res.data;
+            })
+        }])
+})();
+/**
  * Created by amu35 on 21/07/2016.
  */
 (function () {
-  angular.module('accessoriesStore').controller('productListCtrl',['$scope', '$http',function ($scope,$http) {
+  var app = angular.module('accessoriesStore');
+  app.controller('productListCtrl',['$scope', '$http','basketService',function ($scope,$http,basketService) {
 
-    $scope.helloWorld = 'Hello World';
-    $scope.cases = [
-      {name:'starwars'},
-      {name: 'frozen'},
-      {name: 'silicon valley'}
-    ]
-  }
-  ]);
+      $scope.basket = basketService.basketProducts;
+      
+      $http.get('/api/cases').then(
+          function (response) {
+            $scope.cases = response.data.cases;
+          },
+          function (response) {
+              $scope.error = "could not load cases";
+          }
+      );
+
+  
+      $scope.addToBasket = basketService.addToBasket;
+      
+  }]);
 })();
 
 (function() {
