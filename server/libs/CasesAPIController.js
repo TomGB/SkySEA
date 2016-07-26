@@ -14,14 +14,13 @@ app.route('/')
             .then(function (productArray) {
 
               for (var i = 0; i < productArray.length; i++) {
-                  var product = productArray[i];
+                  var product = productArray[i].dataValues;
                   for (var j = 0; j < productArray[i].ProductInfos.length; j++) {
-                    var name = product.ProductInfos[j].infoName;
-                    var value = product.ProductInfos[j].infoValue;
-                    console.log(name);
-                    console.log(value);
-                    product[name] = value;
+                      var name = product.ProductInfos[j].infoName;
+                      var value = product.ProductInfos[j].infoValue;
+                      product[name] = value;
                   }
+                  delete product.ProductInfos;
               }
 
               // console.log(productArray);
