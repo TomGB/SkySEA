@@ -346,15 +346,6 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
         templateUrl: 'app/productList/productList.html',
         controller: 'productListCtrl'
       })
-<<<<<<< HEAD
-      .when('/helpChat', {
-        templateUrl: 'app/helpChat/helpChat.html',
-        controller: 'helpChatController'
-      })
-      .when('/techAssistant', {
-        templateUrl: '/techAssistant/techAssistant.html',
-        controller: 'techAssistantController'
-=======
       .when('/login', {
         templateUrl: 'app/auth/login.html',
         controller: 'loginCtrl'
@@ -370,7 +361,6 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
       .when('/basket',{
         templateUrl: 'app/basket/basket.html',
         controller: 'basketCtrl'
->>>>>>> dev
       })
       .otherwise({redirectTo: '/productList'});
   }]);
@@ -527,4 +517,54 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
   angular.module('accessoriesStore').controller('techAssistantController', ['$scope', function($scope) {
     console.log('Eat a dick')
   }]);
+})();
+
+/**
+ * Created by amu35 on 25/07/2016.
+ */
+(function(){
+var app = angular.module('shopModule',[])
+
+app.service("basketService", function(){
+    var obj = {};
+
+    obj.basketProducts = [];
+
+    obj.addToBasket = function(item){
+        var found = false;
+        var index = 0;
+        obj.basketProducts.forEach(function(elem, ind, arr){
+            if (elem.item.id == item.id){
+                found = true;
+                index = ind;
+            }
+        });
+
+        if (!found){
+            // Item is not already in basket
+            obj.basketProducts.push({
+                item: item,
+                quantity: 1
+            });
+        } else {
+            // Item in basket already
+            var productObj = obj.basketProducts[index];
+            productObj.quantity += 1;
+        }
+    };
+
+    obj.removeItem = function(product) {
+        var index = obj.basketProducts.indexOf(product);
+        obj.basketProducts.splice(index, 1);
+    };
+
+    obj.getTotal = function(){
+        var total = 0;
+        obj.basketProducts.forEach(function(elem, ind, arr){
+            total += elem.item.price * elem.quantity;
+        });
+        return total;
+    };
+    return obj;
+})
 })();
