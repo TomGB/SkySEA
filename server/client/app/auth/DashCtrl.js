@@ -4,7 +4,7 @@
 (function () {
     angular.module('accessoriesStore').controller('DashCtrl',['$scope', '$http', '$location', 'AuthService' ,function ($scope, $http, $location, AuthService) {
         AuthService.getUser().then(function(user){
-            $scope.user = user.firstName;
+            $scope.user = user;
         });
 
         $scope.logout = function(){

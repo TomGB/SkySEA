@@ -10,24 +10,40 @@ var sig = "SuperReallySecret";
 app.route('/checkout')
     .post(function (req,res) {
         var token = req.token;
+        var workerID = null;
+        var status = "ordered";
 
-        models.Order.create({
-          status : "ordered",
-          orderDate : new Date().getHours(),
-          dispatchDate : null,
-          customerID : jwt.decode( token, sig),
-          workerID : null
-        })
-        .then(function(order) {
-          for (var i = 0; i < req.products.length; i++) {
-            models.ProductOrders.create({
-              orderID : order.get('id'),
-              productID : req.products[i].id
-            });
+        //find available workers
+        models.Worker.findAll({
+          where: {
+            active: true
           }
-        },function(err) {
-          console.log(err);
-        });
+        })
+        .then(function(workers) {
+          if(workers.length > 0){
+            workerID = workers[0].id;
+            status = "allocated, pending accpetance";
+          }
+          models.Order.create({
+            status : status,
+            orderDate : new Date().getHours(),
+            dispatchDate : null,
+            customerID : jwt.decode( token, sig),
+            workerID : workerID
+          })
+          .then(function(order) {
+            for (var i = 0; i < req.products.length; i++) {
+              for (var j = 0; j < req.products[i].quantity; j++) {
+                models.ProductOrders.create({
+                  orderID : order.get('id'),
+                  productID : req.products[i].id
+                });
+              }
+            }
+          },function(err) {
+            console.log(err);
+          });
+        })
     })
     .put(function (req,res) {
 
