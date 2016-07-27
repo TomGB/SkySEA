@@ -141,6 +141,9 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
             }, function(res){
                 console.log(res);
             })
+        },
+        isLoggedIn: function(){
+          return sessionStorage.getItem('token')
         }
     }
 }]);
