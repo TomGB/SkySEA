@@ -1,14 +1,29 @@
-<div class="o-container" ng-controller="productListCtrl">
-
+<div ng-controller="productListCtrl">
+  
   <h1 class="c-heading-alpha">Available phone cases</h1>
   <span class="is-error">{{error}}</span>
-  <label class="c-form-label u-width-1/6" for="f-username">
-    Search
-  </label>
-  <input type="text" class="c-form-input u-width-1/3" placeholder="Search" name="f-username" id="f-username" ng-model="search.name">
-  <a class="c-btn c-btn--primary o-layout--right" href="/#/basket">basket: {{basket.length}}</a>
-  <section class="o-layout">
 
+  <section class="o-layout">
+    <div class="o-layout__item u-width-1/5">
+      <input type="text" class="c-form-input " placeholder="Search" name="f-username" id="f-username" ng-model="search.name">
+    </div>
+
+    <div class="o-layout__item c-form-select u-width-2/5">
+      <select class="c-form-select__dropdown" ng-model="search.ShowName" ng-options="showName for showName in showNames">
+        <option value="">Filter by show</option>
+      </select>
+    </div>
+
+    <div class="o-layout__item c-form-select u-width-2/5">
+      <select class="c-form-select__dropdown" ng-model="search.PhoneType" ng-options="phoneType for phoneType in phoneModels">
+        <option value="">Filter by phone model</option>
+        <option value="HTC 10">HTC 10</option>
+
+      </select>
+    </div>
+  </section>
+
+  <section class="o-layout">
     <div class="o-layout__item u-width-1/2@medium u-width-1/3@large u-width-1/4@x-large"  ng-repeat="case in cases | filter: search">
       <article class="c-tile">
         <div class="c-tile__content">
@@ -25,6 +40,5 @@
         </div>
       </article>
     </div>
-
   </section>
 </div>

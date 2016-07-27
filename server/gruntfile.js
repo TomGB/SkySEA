@@ -1,8 +1,6 @@
 /**
  * Created by amu35 on 21/07/2016.
  */
-
-
 module.exports = function (grunt) {
   grunt.initConfig({
     concat: {
@@ -10,10 +8,16 @@ module.exports = function (grunt) {
         files: {'client/app-concat.js': [
           'bower_components/angular/angular.min.js',
           'bower_components/angular-route/angular-route.min.js',
+          'bower_components/angular-qrcode/angular-qrcode.js',
+          'bower_components/qrcode-generator/js/qrcode.js',
+          'bower_components/angular-jwt/dist/angular-jwt.js',
           'client/app/**/*.js',
           '!client/**/*Test.js',
-          '../IONIC/www/js/shopModule.js',
+          '../IONIC/www/js/shopModule.js'
         ]}
+      },
+      css: {
+        files: {'public/css/global.css':['client/sass/**/*']}
       }
     },
     uglify : {
@@ -33,13 +37,6 @@ module.exports = function (grunt) {
           {
             expand: true,
             flatten:true,
-            cwd:'client/sass',
-            src: ['*'],
-            dest: 'public/css/'
-          },
-          {
-            expand: true,
-            flatten:true,
             cwd:'client/',
             src: ['app-concat.js'],
             dest: 'public/js/'
@@ -48,7 +45,12 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['client/app/**/*','../IONIC/www/js/shopModule.js'],
+        files: [
+          'client/app/**/*',
+          'client/app/*',
+          'client/sass/**/*',
+          '../IONIC/www/js/shopModule.js'
+        ],
         tasks: ['default'],
         options: {
           spawn: false
@@ -65,7 +67,7 @@ module.exports = function (grunt) {
 
 
   // Here is where we would define our task
-  grunt.registerTask('buildClient', ['concat:angular', 'uglify:angular','copy']);
+  grunt.registerTask('buildClient', ['concat', 'uglify:angular','copy']);
 
   grunt.registerTask('default', ['buildClient']);
 };

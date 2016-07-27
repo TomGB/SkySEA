@@ -44,6 +44,52 @@ app.service("basketService", function(){
         });
         return total;
     };
+
+    obj.getTotalItems = function(){
+        var total = 0;
+        obj.basketProducts.forEach(function(elem, ind, arr){
+            total += elem.quantity;
+        });
+        return total;
+    };
     return obj;
-})
+});
+
+app.factory('productService', ['$http', function($http){
+    var obj = {};
+
+    obj.products = [];
+
+    obj.getCases = function(){
+        return $http({
+            method: 'GET',
+            url: 'http://localhost:3000/api/cases'
+        }).then(function (res) {
+            return res.data.cases;
+        }, function(res){
+            console.log('Error: ' + res);
+        });
+    };
+
+    obj.getStockMessage = function(product){
+      if (product.availableStock >= 10)
+        return "In Stock";
+      else if (product.availableStock < 10 && product.availableStock > 0)
+        return product.availableStock + " Left";
+      else
+        return "Out of Stock";
+    };
+
+    return obj;
+}]);
+
+app.factory('authService', ['$http', function($http){
+  var obj = {};
+
+  obj.userLoggedIn = function(){
+    return false;
+  };
+
+  return obj;
+}]);
 })();

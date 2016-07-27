@@ -8,7 +8,9 @@ module.exports = function(sequelize, DataTypes) {
     totalStock: DataTypes.INTEGER,
     productTypeID: DataTypes.STRING,
     availableStock: DataTypes.INTEGER,
-    description: DataTypes.TEXT
+    description: DataTypes.TEXT,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {

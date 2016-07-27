@@ -8,8 +8,17 @@ module.exports = {
           autoIncrement: true,
           primaryKey: true
         },
-        key: Sequelize.STRING,
-        value: Sequelize.STRING,
+        productID: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'products',
+            key: 'id'
+          }
+        },
+        infoName: Sequelize.STRING,
+        infoValue: Sequelize.STRING,
+        createdAt: Sequelize.DATE,
+        updatedAt: Sequelize.DATE
       });
   },
 

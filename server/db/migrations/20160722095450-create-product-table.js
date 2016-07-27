@@ -12,7 +12,7 @@ module.exports = {
           name: Sequelize.STRING,
           price:
           {
-            type: Sequelize.DECIMAL,
+            type: Sequelize.DECIMAL(10,2),
             allowNull: false,
             default: 0.0
           },
@@ -26,7 +26,9 @@ module.exports = {
               model: 'productTypes',
               key: 'id'
             }
-          }
+          },
+          createdAt: Sequelize.DATE,
+          updatedAt: Sequelize.DATE
         });
   },
 
