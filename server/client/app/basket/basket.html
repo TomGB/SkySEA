@@ -1,4 +1,5 @@
 <div ng-controller="basketCtrl">
+
     <h3 ng-hide="basket.length">Nothing in your basket</h3>
     <a class="c-btn c-btn--secondary" href="/#/productList">Back to products</a>
   <section class="o-layout">
@@ -20,7 +21,7 @@
       Total: &pound;{{getTotalPrice()}}
     </div>
     <div class="o-layout__item u-width-1/4">
-      <button class="c-btn c-btn--primary" ng-click="checkout()">Buy Now</button>
+      <button class="c-btn c-btn--primary" ng-show="basket.length" ng-click="checkout()">Buy Now</button>
     </div>
   </section>
 

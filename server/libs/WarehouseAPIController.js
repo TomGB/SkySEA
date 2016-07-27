@@ -62,33 +62,12 @@ app.route('/checkout').post(function(req, res){
             }
           },function(err) {
             console.log(err);
+              res.header = 404;
           });
         })
     })
     .put(function (req,res) {
 
     });
-
-// app.route('/testProd')
-//   .get(function (req,res) {
-//
-//     models.Product.create({
-//       name : ""
-//     })
-//     .then(function(productType) {
-//       console.log(productType.id, productType.name);
-//     },function(err){
-//       console.log(err);
-//     });
-//     //
-//     // models.Product.create({
-//     //   name : "test name",
-//     //   price : 45,
-//     //   productType: 1
-//     // })
-//     // .then(function(err, product) {
-//     //   console.log(product.get("id"));
-//     // });
-//   });
 
 module.exports = app;

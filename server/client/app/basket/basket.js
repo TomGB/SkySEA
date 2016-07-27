@@ -16,7 +16,9 @@
         basketService.removeItem(product);
     };
 
-    $scope.checkout = basketService.checkout;
+    $scope.checkout = function () {
+      window.location = '/#/checkout'
+    };
 
     $scope.getTotalPrice = basketService.getTotal;
 
