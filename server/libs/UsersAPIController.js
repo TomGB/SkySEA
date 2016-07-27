@@ -51,7 +51,9 @@ function middle(req, res){
     });
 }
 
-app.route('/login').get(middle).post(function(req, res){
+app.route('/login').get(middle).post(cors(), function(req, res){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     models.User.findAll({where: {email: req.body.email}}).then(function(user, err){
         if(user != undefined){
             try{
