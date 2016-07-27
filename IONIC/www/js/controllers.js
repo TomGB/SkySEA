@@ -14,17 +14,6 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.displayHelp = false;
-  $scope.helpDismissed = false;
-
-  $scope.dismissHelp = function(){
-    $scope.helpDismissed = true;
-  };
-
-  $timeout(function(){
-    $scope.displayHelp = true;
-  }, 30000);
-
   $scope.basketService = basketService;
   $scope.authService = AuthService;
 }])
