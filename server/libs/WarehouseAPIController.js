@@ -7,11 +7,15 @@ var app = express.Router();
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
+var cors = require('cors');
 app.use(bodyParser({urlencoded: true}));
-
+app.use(cors());
 
 app.route('/checkout')
-  .post(function(req, res){
+  .post(cors(), function(req, res){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     var token = req.body.token;
     var userID = jwt.decode(req.body.token, sig);
     var products = req.body.products;
@@ -199,5 +203,4 @@ app.route('/dispatchOrder')
         }
       });
     });
-
 module.exports = app;

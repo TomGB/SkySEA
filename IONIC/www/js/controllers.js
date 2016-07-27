@@ -14,17 +14,6 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.displayHelp = false;
-  $scope.helpDismissed = false;
-
-  $scope.dismissHelp = function(){
-    $scope.helpDismissed = true;
-  };
-
-  $timeout(function(){
-    $scope.displayHelp = true;
-  }, 30000);
-
   $scope.basketService = basketService;
   $scope.authService = AuthService;
 }])
@@ -131,6 +120,7 @@ angular.module('starter.controllers', [])
           onTap: function(e){
             $scope.card = {};
             $scope.po = {};
+            basketService.checkout();
             $ionicHistory.nextViewOptions({disableBack: true});
             $state.go('app.catalogue');
           }
@@ -152,7 +142,6 @@ angular.module('starter.controllers', [])
         $ionicHistory.nextViewOptions({disableBack: true});
         $state.go('app.checkout');
       },function(err){
-        console.log(err);
         uiService.displayMessage("Sorry, those credentials don't match our records");
       })
     };
@@ -165,12 +154,19 @@ angular.module('starter.controllers', [])
     $scope.registerData = {};
 
     $scope.doRegister = function() {
+      console.log($scope.registerData);
       if($scope.registerData.password == $scope.registerData.passwordConfirmation){
         AuthService.register(
           $scope.registerData.email,
           $scope.registerData.password,
           $scope.registerData.firstName,
-          $scope.registerData.lastName
+          $scope.registerData.lastName,
+          {
+            address1: $scope.registerData.address1,
+            address2: $scope.registerData.address2,
+            address3: $scope.registerData.address3,
+            postCode: $scope.registerData.postCode
+          }
         ).then(function(data){
           $scope.registerData = {};
           $ionicHistory.nextViewOptions({disableBack: true});
