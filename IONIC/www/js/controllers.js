@@ -21,11 +21,17 @@ angular.module('starter.controllers', [])
 .controller('CatalogueCtrl', ['$scope', 'uiService', 'productService', '$ionicPopup',
   function($scope, uiService, productService, $ionicPopup) {
 
-  $scope.filterOptions = ['HTC 10', 'iPhone 6'];
+  $scope.phoneModels = [];
 
   $scope.getCases = function(){
     productService.getCases().then(function (data) {
       productService.products = data;
+
+      angular.forEach(productService.products,function (phoneCase) {
+        if($scope.phoneModels.indexOf(phoneCase.PhoneType) < 0 && phoneCase.PhoneType){
+          $scope.phoneModels.push(phoneCase.PhoneType);
+        }
+      });
     }, function(error){
       console.log("Error: " + error);
     })
