@@ -39,14 +39,13 @@ app.route('/checkout')
       })
       .then(function(order) {
         for (var i = 0; i < products.length; i++) {
-          for (var j = 0; j < products[i].quantity; j++) {
-            console.log("order ID: ",order.get('id'));
-            console.log("product ID: ",products[i].item.id);
-            models.ProductOrder.create({
-              orderID : order.get('id'),
-              productID : products[i].item.id
-            });
-          }
+          console.log("order ID: ",order.get('id'));
+          console.log("product ID: ",products[i].item.id);
+          models.ProductOrder.create({
+            orderID : order.get('id'),
+            productID : products[i].item.id,
+            quantity: products[i].quantity
+          });
         }
         res.status(200).send();
 
@@ -169,5 +168,36 @@ app.route('/dispatchOrder')
       }
     });
   });
-  
+
+  app.route('/getWaitingOrders')
+    .post(function(req, res){
+      var token = req.body.token;
+      // var workerID = jwt.decode(req.body.token, sig);
+      var workerID = req.body.token;
+
+      models.Order.findAll({ attributes:['id','userID'], where: {workerID: null} })
+      .then(function(order){
+        if (order) { // if the record exists in the db
+          // console.log("order1",order[0].dataValues);
+          var userID = order[0].dataValues.userID;
+          models.User.find({attributes:['firstname','lastname', 'address1', 'address2', 'address3', 'postcode'], where: {id: userID}})
+          .then(function(user){
+            order[0].dataValues.address = user.dataValues
+            models.ProductOrder.findAll({where: {orderID: order[0].dataValues.id}, include: [models.Product]})
+            .then(function (productOrder) {
+              var products = new Array();
+              for (var i = 0; i < productOrder.length; i++) {
+                products[i] = productOrder[i].dataValues.Product.dataValues;
+                products[i].quantity = productOrder[i].dataValues.quantity;
+              }
+              order[0].dataValues.products = products;
+              delete order[0].dataValues.userID;
+              console.log(order[0].dataValues);
+            })
+              // console.log(order[0].dataValues);
+          });
+        }
+      });
+    });
+
 module.exports = app;

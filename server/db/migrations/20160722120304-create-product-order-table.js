@@ -8,6 +8,7 @@ module.exports = {
           autoIncrement: true,
           primaryKey: true
         },
+        quantity: Sequelize.INTEGER,
         orderID: {
           type: Sequelize.INTEGER,
           references: {
