@@ -3,7 +3,9 @@
 module.exports = function(sequelize, DataTypes) {
   var ProductOrder = sequelize.define("ProductOrder", {
     createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
+    updatedAt: DataTypes.DATE,
+    orderID: DataTypes.INTEGER,
+    productID: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
@@ -21,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         });
       }
     },
-    tableName: 'productorder'
+    tableName: 'productorders'
 
   });
 

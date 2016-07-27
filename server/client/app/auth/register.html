@@ -10,11 +10,11 @@
                 <input type="password" class="c-form-input" placeholder="password" ng-model="password" id="f-password" required>
                 <input type="text" class="c-form-input" placeholder="Type your postcode.." ng-model="postcode" ng-change="getAddress(postcode)" required>
                 <div class="c-form-select" ng-hide="!addresses">
-                    <select class="c-form-select__dropdown" ng-model="address" ng-options="a as a.summaryline for a in addresses">
+                    <select class="c-form-select__dropdown" ng-model="a" ng-options="a as a.summaryline for a in addresses">
                         <option disabled value="">Select your address</option>
                     </select>
                 </div>
-                <button class="c-btn  c-btn--secondary"  ng-click="register(email, password, firstName, lastName)">Submit</button>
+                <button class="c-btn  c-btn--secondary"  ng-click="register(email, password, firstName, lastName, a)">Submit</button>
             </div>
         </div>
     </article>

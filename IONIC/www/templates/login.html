@@ -1,17 +1,17 @@
 <ion-view view-title="Log in">
   <ion-content>
-    <form name="loginForm" ng-submit="doLogin()">
+    <form name="loginForm">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username" required>
+          <input type="email" ng-model="email" required>
         </label>
         <label class="item item-input">
           <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password" required>
+          <input type="password" ng-model="password" required>
         </label>
         <label class="item">
-          <button class="button button-block button-positive" type="submit" ng-disabled="loginForm.$invalid">Log in</button>
+          <button class="button button-block button-positive" type="submit" ng-click="doLogin(email, password)" ng-disabled="loginForm.$invalid">Log in</button>
         </label>
       </div>
     </form>

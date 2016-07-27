@@ -9,7 +9,9 @@ var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
 var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
+var cors = require('cors');
 app.use(bodyParser({urlencoded: true}));
+app.use(cors());
 
 app.route('/register').post(function(req, res){
     models.User.create({
@@ -47,7 +49,9 @@ function middle(req, res){
     });
 }
 
-app.route('/login').get(middle).post(function(req, res){
+app.route('/login').get(middle).post(cors(), function(req, res){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     models.User.findAll({where: {email: req.body.email}}).then(function(user, err){
         if(user != undefined){
             try{

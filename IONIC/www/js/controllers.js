@@ -21,11 +21,17 @@ angular.module('starter.controllers', [])
 .controller('CatalogueCtrl', ['$scope', 'uiService', 'productService', '$ionicPopup',
   function($scope, uiService, productService, $ionicPopup) {
 
-  $scope.filterOptions = ['HTC 10', 'iPhone 6'];
+  $scope.phoneModels = [];
 
   $scope.getCases = function(){
     productService.getCases().then(function (data) {
       productService.products = data;
+
+      angular.forEach(productService.products,function (phoneCase) {
+        if($scope.phoneModels.indexOf(phoneCase.PhoneType) < 0 && phoneCase.PhoneType){
+          $scope.phoneModels.push(phoneCase.PhoneType);
+        }
+      });
     }, function(error){
       console.log("Error: " + error);
     })
@@ -58,8 +64,8 @@ angular.module('starter.controllers', [])
   }
 }])
 
-.controller('BasketCtrl', ['$scope', '$ionicPopup', 'basketService', 'authService',
-  function ($scope, $ionicPopup, basketService, authService) {
+.controller('BasketCtrl', ['$scope', '$ionicPopup', 'basketService', 'AuthService',
+  function ($scope, $ionicPopup, basketService, AuthService) {
   $scope.removeItem = function(item) {
     var myPopup = $ionicPopup.show({
       title: 'Removing ' + item.item.name + ' from the basket',
@@ -87,7 +93,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.basketService = basketService;
-  $scope.authService = authService;
+  $scope.authService = AuthService;
 }])
 
 .controller('CheckoutCtrl', ['$scope', '$ionicPopup', '$state', '$ionicHistory', 'basketService',
@@ -125,17 +131,24 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('LoginController', ['$scope', 'authService',
-  function($scope, authService){
-    $scope.loginData = {};
+.controller('LoginController', ['$scope', 'AuthService', '$location', '$ionicHistory', '$state', 'uiService',
+  function($scope, AuthService, $location, $ionicHistory, $state, uiService){
 
-    $scope.doLogin = function() {
-      console.log('Doing login', $scope.loginData);
+    $scope.doLogin = function(email, password){
+      AuthService.login(email, password).then(function(user){
+        AuthService.user = user;
+        $ionicHistory.nextViewOptions({disableBack: true});
+        $state.go('app.checkout');
+      },function(err){
+        console.log(err);
+        uiService.displayMessage("Sorry, those credentials don't match our records");
+      })
     };
+
 }])
 
-.controller('SignupController', ['$scope', 'authService',
-  function($scope, authService){
+.controller('SignupController', ['$scope', 'AuthService',
+  function($scope, AuthService){
     $scope.signupData = {};
 
     $scope.doSignup = function() {

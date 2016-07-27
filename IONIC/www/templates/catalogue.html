@@ -5,7 +5,7 @@
         <div class="list">
           <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search">
+            <input type="text" placeholder="Search" ng-model="search.name">
           </label>
         </div>
       </div>
@@ -16,13 +16,15 @@
             <div class="input-label">
               Filter
             </div>
-            <select ng-options="item for item in filterOptions" ng-model="selectedFilter"></select>
+            <select ng-options="item for item in phoneModels" ng-model="search.PhoneType"></select>
           </label>
         </div>
       </div>
     </div>
 
-    <div class="list card" ng-repeat="product in productService.products">
+    <div class="list card"
+         ng-repeat="product in productService.products |
+         filter:{PhoneType: search.PhoneType||undefined, name: search.name}">
 
         <div class="item">
             {{product.name}}
