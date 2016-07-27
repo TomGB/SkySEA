@@ -2,9 +2,9 @@
  * Created by amu35 on 25/07/2016.
  */
 (function(){
-var app = angular.module('shopModule',[])
+var app = angular.module('shopModule',[]);
 
-app.service("basketService", function(){
+app.service("basketService", ['$http', function($http){
     var obj = {};
 
     obj.basketProducts = [];
@@ -52,18 +52,19 @@ app.service("basketService", function(){
         });
         return total;
     };
-    
-    obj.checkOut = function(){
-        $http.post('/api/warehouse/checkout',obj.basketProducts)
-            .then(function (response) {
-                console.log('order placed successfully')
-            },function () {
-                console.log("order could not be placed")
-            })
+    obj.checkout = function(){
+      return $http({
+          method: 'post',
+          url: 'http://localhost:3000/api/warehouse/checkout',
+          data: {products:obj.basketProducts, token: sessionStorage.getItem("token")}
+      }).then(function (res) {
+          return res;
+      }, function(res){
+        return res;
+      });
     };
-    
     return obj;
-});
+}]);
 
 app.factory('productService', ['$http', function($http){
     var obj = {};
@@ -92,14 +93,55 @@ app.factory('productService', ['$http', function($http){
 
     return obj;
 }]);
+app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $location){
+    var error = false;
+    var user = {};
 
-app.factory('authService', ['$http', function($http){
-  var obj = {};
-
-  obj.userLoggedIn = function(){
-    return false;
-  };
-
-  return obj;
+    return {
+        login: function(email, password){
+            var deferred = $q.defer();
+            $http.post('/api/users/login', {
+                email: email,
+                password: password,
+            }).then(function(response) {
+                user = response.data.user;
+                sessionStorage.setItem('token', response.data.token);
+                deferred.resolve(user);
+            }, function(res){
+                deferred.reject(error);
+            });
+            return deferred.promise;
+        },
+        getUser: function(){
+            var deferred = $q.defer();
+            $http.get('/api/users/login', {
+                headers: {
+                    authorization: sessionStorage.getItem('token')
+                }
+            }).then(function(response) {
+                user = response.data.user;
+                deferred.resolve(user);
+            }, function(res){
+                if(res.status == 401){
+                    $location.url('/login')
+                }
+            });
+            return deferred.promise;
+        },
+        register: function(email, password, firstName, lastName){
+            $http.post('/api/users/register', {
+                email: email,
+                password: password,
+                firstName: firstName,
+                lastName: lastName
+            }).then(function(response){
+                sessionStorage.setItem('token', response.data.token);
+                user = response.data.user;
+                $location.url('/dashboard');
+            }, function(res){
+                console.log(res);
+            })
+        }
+    }
 }]);
 })();

@@ -12,6 +12,9 @@ Insert INTO products (name,imageUrl,availableStock,price) Values ('Avengers iPho
 Insert INTO products (name,imageUrl,availableStock,price) Values ('Game of thrones iPhone','IPhone6-GOT.png',12,4.49);
 Insert INTO products (name,imageUrl,availableStock,price) Values ('Frozen iPhone','IPhone6-frozen.png',9,4.49);
 
+Insert INTO workers (firstname, lastname, email, password, active) Values ('tom','banister','tgbanister@gmail.com','password',false);
+Insert INTO workers (firstname, lastname, email, password, active) Values ('tim','miles','tmiles@gmail.com','password',false);
+
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (1, "PhoneType", "HTC 10");
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (2, "PhoneType", "HTC 10");
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (3, "PhoneType", "HTC 10");
@@ -33,6 +36,3 @@ INSERT INTO productInfo (productID, infoName, infoValue) VALUES (7, "ShowName", 
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (8, "ShowName", "Avengers");
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (9, "ShowName", "Game Of Thrones");
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (10, "ShowName", "Frozen");
-
-Insert INTO workers (firstname, lastname, email, password, active) Values ('tom','banister','tgbanister@gmail.com','password',false);
-Insert INTO workers (firstname, lastname, email, password, active) Values ('tim','miles','tmiles@gmail.com','password',false);
