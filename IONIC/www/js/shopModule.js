@@ -121,6 +121,7 @@ app.service('AuthService', ['$http', '$q', '$location','$rootScope', function($h
         }).then(function (response) {
           user = response.data.user;
           deferred.resolve(user);
+            $rootScope.signedIn = true;
         }, function (res) {
           if (res.status == 401) {
             $location.url('/login')
