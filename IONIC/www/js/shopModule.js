@@ -100,7 +100,7 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
     return {
         login: function(email, password){
             var deferred = $q.defer();
-            $http.post('/api/users/login', {
+            $http.post('http://localhost:3000/api/users/login', {
                 email: email,
                 password: password,
             }).then(function(response) {
@@ -114,7 +114,7 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
         },
         getUser: function(){
             var deferred = $q.defer();
-            $http.get('/api/users/login', {
+            $http.get('http://localhost:3000/api/users/login', {
                 headers: {
                     authorization: sessionStorage.getItem('token')
                 }
@@ -129,21 +129,27 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
             return deferred.promise;
         },
         register: function(email, password, firstName, lastName){
-            $http.post('/api/users/register', {
+            var deferred = $q.defer();
+            $http.post('http://localhost:3000/api/users/register', {
                 email: email,
                 password: password,
                 firstName: firstName,
                 lastName: lastName
             }).then(function(response){
-                sessionStorage.setItem('token', response.data.token);
                 user = response.data.user;
-                $location.url('/dashboard');
+                sessionStorage.setItem('token', response.data.token);
+                deferred.resolve(user);
             }, function(res){
-                console.log(res);
-            })
+                deferred.reject(res);
+            });
+            return deferred.promise;
         },
         isLoggedIn: function(){
-          return sessionStorage.getItem('token')
+          return !!sessionStorage.getItem('token');
+        },
+        logout: function(){
+          sessionStorage.setItem('token', '');
+          user = {};
         }
     }
 }]);

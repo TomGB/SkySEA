@@ -81,12 +81,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
 
-    .state('app.signup', {
-      url: '/signup',
+    .state('app.register', {
+      url: '/register',
       views: {
         'menuContent': {
-          templateUrl: 'templates/signup.html',
-          controller: 'SignupController'
+          templateUrl: 'templates/register.html',
+          controller: 'RegisterController'
         }
       }
     });
