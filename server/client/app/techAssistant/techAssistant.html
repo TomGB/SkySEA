@@ -1,0 +1,33 @@
+<section class="o-container center-container">
+  <div class="o-layout__item">
+    <h1 class="c-heading-alpha">Tech Assistant</h1>
+    <form>
+      <input type="button" ng-click="call()" value="Call Next Customer"/>
+      <input type="button" ng-click="end()" value="End Call"/>
+    </form>
+    <div class="o-layout  o-layout--spaced" id="video-container">
+      <div class="o-layout__item  u-width-1/2">
+        <p class="video-label">
+          You
+        </p>
+        <video id="local-video" muted="true" name="local-video" autoplay ng-src="{{path}}"></video>
+      </div>
+      <div ng-hide="hideRemote" class="o-layout__item  u-width-1/2">
+        <p class="remote-label">
+          {{customer.firstName}}
+        </p>
+        <video id="remote-video" name="remote-video" autoplay></video>
+      </div>
+    </div>
+  </div>
+  <div class="text-box" data-scroll-to-top='messages.length'>
+    <ul>
+      <li class="text-message" data-ng-repeat="msg in messages">
+        {{msg.sender}}: {{msg.msg}}
+      </li>
+    </ul>
+  </div>
+  <div class="text-box-input">
+    <input type="text" ng-model="msg" /><button ng-click="send(msg)">Send</button>
+  </div>
+</section>

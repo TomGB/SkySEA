@@ -8,6 +8,19 @@
     'shopModule',
     'angular-jwt'
   ]);
+  app.directive('scrollToTop', function(){
+    return {
+        restrict: 'A',
+        scope: {
+            trigger: '=scrollToTop'
+        },
+        link: function postLink(scope, elem) {
+            scope.$watch('trigger', function() {
+                elem[0].scrollTop = 0;
+            });
+        }
+    };
+});
   app.run(['$rootScope', '$location', function($rootScope, $location){
     $rootScope.$on('$routeChangeError', function(event, current, previous, eventObj){
       if(eventObj.access == false){
@@ -54,6 +67,14 @@
       .when('/register', {
         templateUrl: 'app/auth/register.html',
         controller: 'RegisterCtrl'
+      })
+      .when('/helpchat', {
+        templateUrl: '/app/helpchat/helpchat.html',
+        controller: 'helpchatCtrl'
+      })
+      .when('/techAssistant', {
+        templateUrl: '/app/techAssistant/techAssistant.html',
+        controller: 'techAssistantCtrl'
       })
       .otherwise({redirectTo: '/productList'});
   }]);

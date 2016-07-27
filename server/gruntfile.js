@@ -6,6 +6,7 @@ module.exports = function (grunt) {
     concat: {
       angular: {
         files: {'client/app-concat.js': [
+          'bower_components/peerjs/peer.js',
           'bower_components/angular/angular.min.js',
           'bower_components/angular-route/angular-route.min.js',
           'bower_components/angular-qrcode/angular-qrcode.js',

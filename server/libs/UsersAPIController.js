@@ -8,7 +8,8 @@ var bcrypt = require('bcrypt-nodejs');
 var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
 var jwt = require('jsonwebtoken');
-var sig = "SuperReallySecret";
+var sig = 'SuperReallySecret';
+
 app.use(bodyParser({urlencoded: true}));
 
 
