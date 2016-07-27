@@ -1,0 +1,30 @@
+<ion-view view-title="Orders">
+  <ion-content>
+    <ul>
+      <li class="list card" ng-repeat="order in orders" href="#/app/orders/{{order.id}}">
+
+        <h1 class="text-center">&#35;{{order.id}}</h1>
+
+        <div class="item avatar" ng-repeat="product in order.products" >
+            <div class="item item-avatar">
+              <img src="img/phonecases/{{product.imageurl}}">
+              <h2>{{product.name}}</h2>
+              <h2>Quantity: {{product.qty}}</h2>
+            </div>
+        </div>
+        <div class="padding">
+          <h3>Delivery Address</h3>
+          <p>
+            {{order.address.address1}},
+            <br>
+            {{order.address.address2}},
+            <br>
+            {{order.address.address3}},
+            <br>
+            {{order.address.postcode}}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </ion-content>
+</ion-view>

@@ -35,17 +35,8 @@
       })
       .when('/dashboard', {
         templateUrl: 'app/auth/dash.html',
-        controller: 'DashCtrl',
-        resolve: {
-           auth: ['$q', 'AuthService', function($q, AuthService){
-             var user = AuthService.getUser();
-             if(user){
-               return $q.when(user)
-             }else{
-               return $q.reject({access: false});
-             }
-           }]
-        }
+        controller: 'DashCtrl'
+
       })
       .when('/basket',{
         templateUrl: 'app/basket/basket.html',
@@ -55,6 +46,10 @@
         templateUrl: 'app/auth/register.html',
         controller: 'RegisterCtrl'
       })
-      .otherwise({redirectTo: '/productList'});
+      .when('/checkout', {
+        templateUrl: 'app/checkout/checkout.html',
+        controller: 'checkoutCtrl'
+      })
+      .otherwise({redirectTo: '/dashboard'});
   }]);
 })();
