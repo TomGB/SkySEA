@@ -47,6 +47,12 @@ module.exports = function (grunt) {
             cwd:'bower_components/Ionicons/fonts/',
             src: ['*'],
             dest: 'public/fonts/'
+          },
+          {
+            expand:true,
+            cwd:'../IONIC/www/js/',
+            src:['shopModule.js'],
+            dest:'../IONIC-worker/www/js/'
           }
         ]
       }

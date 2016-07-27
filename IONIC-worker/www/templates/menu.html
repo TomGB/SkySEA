@@ -18,8 +18,14 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
+        <ion-item menu-close href="#/app/login">
+          Log in
+        </ion-item>
         <ion-item menu-close href="#/app/orders">
           Orders
+        </ion-item>
+        <ion-item menu-close ng-click="authService.logout()" ng-if="authService.isLoggedIn()">
+          Log out
         </ion-item>
       </ion-list>
     </ion-content>
