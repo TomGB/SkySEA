@@ -7,7 +7,10 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-
+    plugins : [
+      'karma-chrome-launcher',
+      'karma-jasmine'
+    ],
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
@@ -15,10 +18,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-route/angular-route.js',
-      'client/app/**/*.js'
+      './bower_components/angular/angular.js',
+      './bower_components/angular-mocks/angular-mocks.js',
+      './bower_components/angular-route/angular-route.js',
+      './client/app/auth/*.js'
     ],
 
 

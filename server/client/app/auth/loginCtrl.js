@@ -12,6 +12,8 @@
             AuthService.login(email, password).then(function(user){
                 AuthService.user = user;
                 $location.url('/dashboard');
+            },function(err){
+                $scope.error = true;
             })
         };
 
