@@ -2,6 +2,7 @@
 # http://git-scm.com/docs/gitignore
 
 IONIC/node_modules/
+IONIC/bower_components/
 IONIC/platforms/
 IONIC/plugins/
 ArchitectureDiagram/

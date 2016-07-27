@@ -6,9 +6,9 @@
                 <h1 style="text-align: center">Register</h1>
                 <input class="c-form-input" type="text" style="width: 45%" ng-model="firstName" name="firstName" placeholder="First name" required/>
                 <input class="c-form-input" type="text" style="width: 45%; margin-left: 9%" ng-model="lastName" name="lastName" placeholder="Last name" required/>
-                <input type="text" class="c-form-input" placeholder="e.g. tony@stark-enterprises.com" name="email" ng-model="email"  id="f-email">
-                <input type="password" class="c-form-input" placeholder="password" ng-model="password" id="f-password">
-                <input type="text" class="c-form-input" placeholder="Type your postcode.." ng-model="postcode" ng-change="getAddress(postcode)">
+                <input type="text" class="c-form-input" placeholder="e.g. tony@stark-enterprises.com" name="email" ng-model="email"  id="f-email" required>
+                <input type="password" class="c-form-input" placeholder="password" ng-model="password" id="f-password" required>
+                <input type="text" class="c-form-input" placeholder="Type your postcode.." ng-model="postcode" ng-change="getAddress(postcode)" required>
                 <div class="c-form-select" ng-hide="!addresses">
                     <select class="c-form-select__dropdown" ng-model="address" ng-options="a as a.summaryline for a in addresses">
                         <option disabled value="">Select your address</option>
