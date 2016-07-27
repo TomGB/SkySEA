@@ -34,7 +34,7 @@
             <div class="">{{case.availableStock}} remaining.</div>
             <div class="">Price: &pound;{{case.price | number: 2}}</div>
             <a class="c-btn c-btn--secondary" ng-href="/#/productList/{{case.id}}">More Info</a>
-            <a class="c-btn  c-btn--primary" ng-click=addToBasket(case)>Order Now</a>
+            <a class="c-btn  c-btn--primary" ng-class="{'is-disabled':case.availableStock==0}" ng-disabled="case.availableStock==0" ng-click=addToBasket(case)>Order Now</a>
           </div>
         </div>
       </article>

@@ -1,9 +1,12 @@
 <div ng-controller="navCtrl">
     <section class="o-layout">
-        <div class="o-layout-item o-layout--right">
-            <a class="" style="font-size: 30px" href="/#/basket" ><i class="ion-ios-cart-outline" ></i></a>
-            <a style="font-size: 30px; padding-left: 25px" ng-click="logout()" ng-show="signedIn"><i class="ion-ios-contact" ></i></a>
-            <a class="" style="font-size: 30px; padding-left: 25px" ng-click="logout()" ng-show="signedIn"><i class="ion-log-out" ></i></a>
+        <a class="o-layout__item u-width-1/4" href="/">
+            <img style="width:100px;" src="images/Sky_Logo_seit_Dezember_2015.png">
+        </a>
+        <div class="o-layout__item o-layout--right o-layout__bottom u-width-3/4" style="margin-top: 15px;">
+            <a class="" style="font-size: 20px" href="/#/basket" ><i class="ion-ios-cart-outline" style="font-size: 30px;" ></i> {{getTotalItems()}}</a>
+            <a style=" font-size:20px; padding-left: 25px" href="/#/user-info" ng-show="signedIn"><i style="font-size: 30px;" class="ion-ios-contact" ></i> User Info</a>
+            <a class="" style="font-size: 20px; padding-left: 25px" ng-click="logout()" ng-show="signedIn"><i style="font-size: 30px;" class="ion-log-out" ></i> Logout</a>
         </div>
     </section>
 </div>

@@ -197,6 +197,14 @@ app.route('/dispatchOrder')
               order[0].dataValues.products = products;
               delete order[0].dataValues.userID;
               console.log(order[0].dataValues);
+
+              var orderArray = new Array();
+
+              orderArray[0] = order[0].dataValues;
+
+              res.setHeader('Access-Control-Allow-Origin', '*');
+              res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+              res.json({orders: orderArray});
             })
               // console.log(order[0].dataValues);
           });
