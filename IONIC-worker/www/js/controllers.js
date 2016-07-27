@@ -23,7 +23,8 @@ angular.module('starter.controllers', [])
     .then(function(res) {
       $scope.orders = res.data.orders;
       console.log(res.data.orders);
-    }, function(err) { console.log(JSON.stringify(err)); });
+    }, function(err) { console.log(JSON.stringify(err));
+  });
 
 
 /*

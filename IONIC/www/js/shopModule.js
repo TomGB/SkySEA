@@ -124,13 +124,17 @@ app.service('AuthService', ['$http', '$q', '$location','$rootScope', function($h
         }).then(function (response) {
           user = response.data.user;
           deferred.resolve(user);
-            $rootScope.signedIn = true;
+          $rootScope.signedIn = true;
+
         }, function (res) {
           if (res.status == 401) {
             $location.url('/login')
           }
         });
         return deferred.promise;
+      },
+      isAuthenticated: function(){
+        return true;
       },
       register: function (email, password, firstName, lastName, address) {
         if (address.number == undefined) {
