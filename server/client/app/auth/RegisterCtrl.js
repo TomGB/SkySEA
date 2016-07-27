@@ -7,8 +7,9 @@
             $location.url('/dashboard');
         }
         $scope.getAddress = function(postcode){
+
             if(postcode.length > 6){
-                $http.get('http://ws.postcoder.com/pcw/PCWXG-TXRP7-BX2PM-S54S2/address/UK/' + postcode + '?identifier=AddressExample' ).then(function(response){
+                $http.get('http://ws.postcoder.com/pcw/PCWBN-DTF76-6YQKT-N569Q/address/UK/' + postcode + '?identifier=AddressExample' ).then(function(response){
                     $scope.addresses = response.data;
                 });
             }

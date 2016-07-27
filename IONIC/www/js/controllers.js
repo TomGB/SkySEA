@@ -70,7 +70,7 @@ angular.module('starter.controllers', [])
 
     }), function(error) {
       console.log("Error: " + error);
-      uiService.displayMessage("Error scanning QR code, please try again later");
+      uiService.displayMessage("Error scanning QR code, please try again");
     }
   }
 }])
@@ -149,11 +149,14 @@ angular.module('starter.controllers', [])
     $scope.doLogin = function(email, password){
       AuthService.login(email, password).then(function(user){
         AuthService.user = user;
-        $location.url('/dashboard');
+        $ionicHistory.nextViewOptions({disableBack: true});
+        $state.go('app.checkout');
       },function(err){
-        $scope.error = true;
+        console.log(err);
+        uiService.displayMessage("Sorry, those credentials don't match our records");
       })
     };
+
 }])
 
 .controller('RegisterCtrl', ['$scope', 'AuthService', '$state', '$ionicHistory', 'uiService',
