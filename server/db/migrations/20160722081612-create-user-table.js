@@ -18,7 +18,7 @@ module.exports = {
           firstName: Sequelize.STRING,
           lastName: Sequelize.STRING,
           updatedAt: Sequelize.DATE,
-          createdAt: Sequelize.DATE, 
+          createdAt: Sequelize.DATE,
           userRole: {
             type: Sequelize.ENUM,
             values: ['customer', 'admin', 'tech_support', 'manager'],
@@ -27,6 +27,6 @@ module.exports = {
         });
   },
   down: function (queryInterface, Sequelize) {
-      return queryInterface.dropTable('user');
+      return queryInterface.dropTable('users');
   }
 };

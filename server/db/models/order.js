@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
         Order.belongsTo(models.Worker, {
           onDelete: "CASCADE",
           foreignKey: {
-            allowNull: false
+            allowNull: true
           }
         });
         Order.hasMany(models.ProductOrder);
