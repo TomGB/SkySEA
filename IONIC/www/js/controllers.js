@@ -58,8 +58,8 @@ angular.module('starter.controllers', [])
   }
 }])
 
-.controller('BasketCtrl', ['$scope', '$ionicPopup', 'basketService', 'authService',
-  function ($scope, $ionicPopup, basketService, authService) {
+.controller('BasketCtrl', ['$scope', '$ionicPopup', 'basketService', 'AuthService',
+  function ($scope, $ionicPopup, basketService, AuthService) {
   $scope.removeItem = function(item) {
     var myPopup = $ionicPopup.show({
       title: 'Removing ' + item.item.name + ' from the basket',
@@ -87,7 +87,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.basketService = basketService;
-  $scope.authService = authService;
+  $scope.authService = AuthService;
 }])
 
 .controller('CheckoutCtrl', ['$scope', '$ionicPopup', '$state', '$ionicHistory', 'basketService',
@@ -125,8 +125,8 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('LoginController', ['$scope', 'authService',
-  function($scope, authService){
+.controller('LoginController', ['$scope', 'AuthService',
+  function($scope, AuthService){
     $scope.loginData = {};
 
     $scope.doLogin = function() {
@@ -134,8 +134,8 @@ angular.module('starter.controllers', [])
     };
 }])
 
-.controller('SignupController', ['$scope', 'authService',
-  function($scope, authService){
+.controller('SignupController', ['$scope', 'AuthService',
+  function($scope, AuthService){
     $scope.signupData = {};
 
     $scope.doSignup = function() {
