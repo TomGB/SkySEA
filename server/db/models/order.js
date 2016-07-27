@@ -6,14 +6,16 @@ module.exports = function(sequelize, DataTypes) {
     orderDate: DataTypes.DATE,
     dispatchDate: DataTypes.DATE,
     createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
+    updatedAt: DataTypes.DATE,
+    userID: DataTypes.INTEGER,
+    workerID: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
         Order.belongsTo(models.User, {
           onDelete: "CASCADE",
           foreignKey: {
-            allowNull: false
+            allowNull: true
           }
         });
         Order.belongsTo(models.Worker, {
@@ -25,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
         Order.hasMany(models.ProductOrder);
       }
     },
-    tableName: 'order'
+    tableName: 'orders'
 
   });
 

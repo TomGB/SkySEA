@@ -53,15 +53,19 @@ app.service("basketService", ['$http', function($http){
         return total;
     };
     obj.checkout = function(){
-      return $http({
-          method: 'post',
-          url: 'http://localhost:3000/api/warehouse/checkout',
-          data: {products:obj.basketProducts, token: sessionStorage.getItem("token")}
-      }).then(function (res) {
-          return res;
-      }, function(res){
-        return res;
-      });
+
+      console.log(sessionStorage.getItem('token'));
+
+      var data = {
+        products:obj.basketProducts,
+        token: sessionStorage.getItem('token')
+      };
+
+      console.log(data);
+      return $http.post('/api/warehouse/checkout', data)
+        .then(function(res){
+          console.log("RES: " + res.body.token);
+        });
     };
     return obj;
 }]);
