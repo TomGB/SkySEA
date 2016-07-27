@@ -100,7 +100,7 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
     return {
         login: function(email, password){
             var deferred = $q.defer();
-            $http.post('/api/users/login', {
+            $http.post('http://localhost:3000/api/users/login', {
                 email: email,
                 password: password,
             }).then(function(response) {
@@ -114,7 +114,7 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
         },
         getUser: function(){
             var deferred = $q.defer();
-            $http.get('/api/users/login', {
+            $http.get('http://localhost:3000/api/users/login', {
                 headers: {
                     authorization: sessionStorage.getItem('token')
                 }

@@ -135,8 +135,13 @@ angular.module('starter.controllers', [])
   function($scope, AuthService){
     $scope.loginData = {};
 
-    $scope.doLogin = function() {
-      console.log('Doing login', $scope.loginData);
+    $scope.doLogin = function(email, password){
+      AuthService.login(email, password).then(function(user){
+        AuthService.user = user;
+        $location.url('/dashboard');
+      },function(err){
+        $scope.error = true;
+      })
     };
 }])
 
