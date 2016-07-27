@@ -15,6 +15,7 @@ echo "==========================================================================
 echo "                               NPM INSTALL"
 echo "============================================================================="
 
+echo ""
 npm install
 echo ""
 
@@ -26,6 +27,7 @@ echo "==========================================================================
 echo "                               BOWER INSTALL"
 echo "============================================================================="
 
+echo ""
 bower install
 echo ""
 
@@ -37,6 +39,7 @@ echo "==========================================================================
 echo "                                   GULP"
 echo "============================================================================="
 
+echo ""
 gulp
 echo ""
 
@@ -48,10 +51,11 @@ echo "==========================================================================
 echo "                            START NODE SERVER"
 echo "============================================================================="
 
+echo ""
 killall ionic
 
 echo ""
 echo "Shutting down existing node servers..."
 echo ""
 
-sleep 2 && open /Applications/Google\ Chrome.app http://localhost:8100/ & ionic serve -lab
+sleep 6 && open /Applications/Google\ Chrome.app http://localhost:8100/ & ionic serve -lab
