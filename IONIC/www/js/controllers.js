@@ -4,8 +4,8 @@ angular.module('starter.controllers', [])
   basketService.basketProducts = [];
 })
 
-.controller('AppCtrl', ['$scope', 'basketService', 'AuthService',
-  function($scope, basketService, AuthService) {
+.controller('AppCtrl', ['$scope', 'basketService', 'AuthService', '$timeout',
+  function($scope, basketService, AuthService, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -13,6 +13,17 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+
+  $scope.displayHelp = false;
+  $scope.helpDismissed = false;
+
+  $scope.dismissHelp = function(){
+    $scope.helpDismissed = true;
+  };
+
+  $timeout(function(){
+    $scope.displayHelp = true;
+  }, 30000);
 
   $scope.basketService = basketService;
   $scope.authService = AuthService;
@@ -131,7 +142,7 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('LoginController', ['$scope', 'AuthService', '$state', '$ionicHistory', 'uiService',
+.controller('LoginCtrl', ['$scope', 'AuthService', '$state', '$ionicHistory', 'uiService',
   function($scope, AuthService, $state, $ionicHistory, uiService){
     $scope.loginData = {};
 
@@ -145,7 +156,7 @@ angular.module('starter.controllers', [])
     };
 }])
 
-.controller('RegisterController', ['$scope', 'AuthService', '$state', '$ionicHistory', 'uiService',
+.controller('RegisterCtrl', ['$scope', 'AuthService', '$state', '$ionicHistory', 'uiService',
   function($scope, AuthService, $state, $ionicHistory, uiService){
     $scope.errors = '';
     $scope.registerData = {};
@@ -169,4 +180,8 @@ angular.module('starter.controllers', [])
         $scope.errors = 'Password mismatch';
       }
     };
+}])
+
+.controller('HelpCtrl', ['$scope', function($scope){
+
 }]);
