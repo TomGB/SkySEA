@@ -13,7 +13,9 @@ var cors = require('cors');
 app.use(bodyParser({urlencoded: true}));
 app.use(cors());
 
-app.route('/register').post(function(req, res){
+app.route('/register').post(cors(), function(req, res){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     models.User.create({
         email: req.body.email,
         password: models.User.generateHash(req.body.password),

@@ -1,7 +1,9 @@
 <ion-view view-title="Shopping Basket">
   <ion-content>
-    <div ng-show="basketService.basketProducts.length == 0" class="item-text-wrap">
-      Your shopping basket is empty
+    <div ng-show="basketService.basketProducts.length == 0" class="card">
+      <div class="item item-text-wrap">
+        Your shopping basket is empty
+      </div>
     </div>
 
     <div ng-show="basketService.basketProducts.length > 0">
@@ -30,8 +32,8 @@
         <a class="button button-full button-stable" href="#/app/login">
           Log in
         </a>
-        <a class="button button-full button-stable" href="#/app/signup">
-          Sign up
+        <a class="button button-full button-stable" href="#/app/register">
+          Register
         </a>
       </div>
       <div ng-show="authService.isLoggedIn()">

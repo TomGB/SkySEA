@@ -16,7 +16,12 @@
         };
 
         $scope.register = function(email, password, firstName, lastName, address){
-            AuthService.register(email, password, firstName, lastName, address);
+            AuthService.register(email, password, firstName, lastName, address)
+              .then(function(data){
+                $location.url('/dashboard');
+              }, function(error){
+                console.log(error);
+              });
         }
     }
     ]);

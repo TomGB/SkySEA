@@ -4,8 +4,8 @@ angular.module('starter.controllers', [])
   basketService.basketProducts = [];
 })
 
-.controller('AppCtrl', ['$scope', 'basketService',
-  function($scope, basketService) {
+.controller('AppCtrl', ['$scope', 'basketService', 'AuthService', '$timeout',
+  function($scope, basketService, AuthService, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -14,8 +14,19 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.basketService = basketService;
+  $scope.displayHelp = false;
+  $scope.helpDismissed = false;
 
+  $scope.dismissHelp = function(){
+    $scope.helpDismissed = true;
+  };
+
+  $timeout(function(){
+    $scope.displayHelp = true;
+  }, 30000);
+
+  $scope.basketService = basketService;
+  $scope.authService = AuthService;
 }])
 
 .controller('CatalogueCtrl', ['$scope', 'uiService', 'productService', '$ionicPopup',
@@ -59,7 +70,7 @@ angular.module('starter.controllers', [])
 
     }), function(error) {
       console.log("Error: " + error);
-      uiService.displayMessage("Error scanning QR code, please try again later");
+      uiService.displayMessage("Error scanning QR code, please try again");
     }
   }
 }])
@@ -131,8 +142,9 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('LoginController', ['$scope', 'AuthService', '$location', '$ionicHistory', '$state', 'uiService',
-  function($scope, AuthService, $location, $ionicHistory, $state, uiService){
+.controller('LoginCtrl', ['$scope', 'AuthService', '$state', '$ionicHistory', 'uiService',
+  function($scope, AuthService, $state, $ionicHistory, uiService){
+    $scope.loginData = {};
 
     $scope.doLogin = function(email, password){
       AuthService.login(email, password).then(function(user){
@@ -147,11 +159,32 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('SignupController', ['$scope', 'AuthService',
-  function($scope, AuthService){
-    $scope.signupData = {};
+.controller('RegisterCtrl', ['$scope', 'AuthService', '$state', '$ionicHistory', 'uiService',
+  function($scope, AuthService, $state, $ionicHistory, uiService){
+    $scope.errors = '';
+    $scope.registerData = {};
 
-    $scope.doSignup = function() {
-      console.log('Doing login', $scope.signupData);
+    $scope.doRegister = function() {
+      if($scope.registerData.password == $scope.registerData.passwordConfirmation){
+        AuthService.register(
+          $scope.registerData.email,
+          $scope.registerData.password,
+          $scope.registerData.firstName,
+          $scope.registerData.lastName
+        ).then(function(data){
+          $scope.registerData = {};
+          $ionicHistory.nextViewOptions({disableBack: true});
+          $state.go('app.checkout');
+        }, function(){
+          uiService.displayMessage("Registration unsuccessful, please try again");
+        })
+
+      }else{
+        $scope.errors = 'Password mismatch';
+      }
     };
+}])
+
+.controller('HelpCtrl', ['$scope', function($scope){
+
 }]);
