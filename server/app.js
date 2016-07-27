@@ -11,13 +11,4 @@ app.listen(port, function() {
   console.log('App listening on port: ' + port);
 });
 
-sequelize
-    .authenticate()
-    .then(function(err) {
-      console.log('Connection has been established successfully.');
-    })
-    .catch(function (err) {
-      console.log('Unable to connect to the database:', err);
-    });
-
 app.use('/api',require('./libs/APIrouter'));
