@@ -41,16 +41,61 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
+.controller('OrdersCtrl', function($scope) {
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+  $scope.orders = [
+    {
+      id: 1,
+      products: [
+          { id: 1, qty: 3, name: 'Frozen HTC10', imageurl: 'frozen.jpg' },
+          { id: 7, qty: 1, name: 'Sillicon Valley iPhone', imageurl: 'sillicon.jpg' }
+      ],
+      address: {
+        address1: '8 Fail Rd',
+        address2: 'Failsworth',
+        address3: 'Oldham',
+        postcode: 'OL4 5JT'
+      }
+    },
+    {
+      id: 2,
+      products: [
+          { id: 10, qty: 1, name: 'Frozen iPhone', imageurl: 'frozen.jpg' }
+      ],
+      address: {
+        address1: '146 Greentown Ln',
+        address2: 'Mabletown',
+        address3: 'County Durham',
+        postcode: 'DH2 6RT'
+      }
+    },
+    {
+      id: 3,
+      products: [
+        { id: 2, qty: 1, name: 'Star Wars HTC10', imageurl: 'starwars.jpg' },
+        { id: 4, qty: 1, name: 'Avengers HTC10', imageurl: 'avengers.jpg' },
+        { id: 9, qty: 1, name: 'Game of Thrones iPhone', imageurl: 'GOT.jpg' }
+      ],
+      address: {
+        address1: 'Sky3',
+        address2: 'Clarence Dock',
+        address3: 'Leeds',
+        postcode: 'L12 3RT'
+      }
+    },
+    {
+      id: 4,
+      products: [
+          { id: 3, qty: 1, name: 'Sillicon Valley HTC10', imageurl: 'sillicon.jpg' },
+          { id: 4, qty: 2, name: 'Avengers HTC10', imageurl: 'avengers.jpg'}
+      ],
+      address: {
+        address1: 'C409, MSV North',
+        address2: 'Oxford Road',
+        address3: 'Manchester',
+        postcode: 'M1 5SX'
+      }
+    }
+  ];
+
 });
