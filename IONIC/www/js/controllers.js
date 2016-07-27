@@ -162,7 +162,7 @@ angular.module('starter.controllers', [])
           $ionicHistory.nextViewOptions({disableBack: true});
           $state.go('app.checkout');
         }, function(){
-          uiService.displayMessage("Registration unsuccessful, please try again later");
+          uiService.displayMessage("Registration unsuccessful, please try again");
         })
 
       }else{
