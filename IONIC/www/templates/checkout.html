@@ -14,29 +14,38 @@
       </label>
 
     </div>
-    <div ng-show="selectedPayment == options[0]"> <!-- Card -->
-      <div class="list">
-        <label class="item item-input">
-          <input type="text" placeholder="Card Number" ng-model="card.number"/>
-        </label>
-        <label class="item item-input">
-          <input type="month" placeholder="Expiry Date" ng-model="card.expiryDate"/>
-        </label>
-        <label class="item item-input">
-          <input type="text" placeholder="Security Code" ng-model="card.cvv"/>
-        </label>
-        <button class="button button-positive button-full" ng-click="submit()">Submit Payment</button>
-      </div>
-    </div>
 
-    <div ng-show="selectedPayment == options[1]"> <!-- Product Owner -->
-      <div class="list">
-        <label class="item item-input">
-          <input type="text" placeholder="Product Order Number" ng-model="po.number"/>
-        </label>
-        <button class="button button-positive button-full" ng-click="submit()">Submit Payment</button>
+    <form name="checkout" ng-submit="submit(checkout.$valid)" novalidate>
+      <div ng-if="selectedPayment == options[0]"> <!-- Card -->
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">Card Number</span>
+            <input type="text" ng-model="card.number" required pattern="^\d{12,}"/>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Expiry Date</span>
+            <input type="month" ng-model="card.expiryDate" required min="2016-07"/>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Security Code</span>
+            <input type="text" ng-model="card.cvv" required pattern="^\d{3}$"/>
+          </label>
+        </div>
       </div>
-    </div>
+
+      <div ng-if="selectedPayment == options[1]"> <!-- Product Owner -->
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">Product Order Number</span>
+            <input type="text" ng-model="po.number" ng-required="true" pattern="\d+"/>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="button button-positive button-full" ng-click="submit()" ng-disabled="checkout.$invalid">
+        Submit Payment
+      </button>
+    </form>
 
   </ion-content>
 </ion-view>

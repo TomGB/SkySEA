@@ -15,16 +15,17 @@ app.use(bodyParser({urlencoded: true}));
 function middle(req, res){
     jwt.verify(req.headers.authorization, sig, function(err, token){
         if(err){
-            res.json({access: false});
+            console.log(err);
+            res.status(401).send({
+                message: "Unauthorized"
+            })
         }else{
             models.User.findAll({where: {id: parseInt(token)}}).then(function(user){
-                res.json({user: user[0].firstName, access: true});
+                res.json({user: user[0], access: true});
             });
         }
     });
 }
-
-app.route('/dashboard').get(middle);
 
 app.route('/login').get(middle).post(function(req, res){
     models.User.findAll({where: {email: req.body.email}}).then(function(user, err){
@@ -32,7 +33,7 @@ app.route('/login').get(middle).post(function(req, res){
             try{
                 if(bcrypt.compareSync(req.body.password, user[0].password)){
                     var token = jwt.sign(user[0].id, sig);
-                    res.json({user: user[0], token: token, headers:{authorization: token } });
+                    res.json({token: token, headers:{authorization: token } });
                 }
             }catch(user){
                 res.status(401).send({
