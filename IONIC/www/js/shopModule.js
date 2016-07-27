@@ -58,7 +58,7 @@ app.service("basketService", ['$http', function($http){
         token: sessionStorage.getItem('token')
       };
 
-      return $http.post('/api/warehouse/checkout', data)
+      return $http.post('http://localhost:3000/api/warehouse/checkout', data)
         .then(function(res){
           console.log(res);
         });
