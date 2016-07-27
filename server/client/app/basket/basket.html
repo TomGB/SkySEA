@@ -1,7 +1,8 @@
-<div ng-controller="basketCtrl">
+<div ng-controller="basketCtrl" >
 
     <h3 ng-hide="basket.length">Nothing in your basket</h3>
     <a class="c-btn c-btn--secondary" href="/#/productList">Back to products</a>
+    <a ng-show="basket.length" class="c-btn c-btn--secondary" ng-show="basket.length" ng-click="checkout()">Checkout</a>
   <section class="o-layout">
     <div class="o-layout__item">
       <article class="c-tile" ng-repeat="product in basket">
@@ -9,19 +10,19 @@
           <img ng-src="/images/phonecases/{{product.item.imageUrl}}">
         </div>
 
-        <div class="o-layout__item u-width-3/5@small">
+        <div class="o-layout__item u-width-2/5@small">
           <h1 class="c-heading-delta">{{product.item.name}}</h1>
           <div class="">Price: &pound;{{product.item.price | number: 2}}</div>
           <span>Quantity:<input type="number" ng-model="product.quantity" ng-blur="removeIfZero(product)"></span>
-          <button class="c-btn c-btn--secondary" ng-click="removeItem(product)">Remove from basket</button>
+          <label class="c-select" ng-click="removeItem(product)" style="margin-top: 5px;">
+            <input type="checkbox" class="c-select__input is-selected">
+            <span class="c-btn  c-btn--select  c-select__btn">Remove from basket</span>
+          </label>
         </div>
       </article>
     </div>
     <div class="o-layout__item u-width-1/4">
       Total: &pound;{{getTotalPrice()}}
-    </div>
-    <div class="o-layout__item u-width-1/4">
-      <button class="c-btn c-btn--primary" ng-show="basket.length" ng-click="checkout()">Buy Now</button>
     </div>
   </section>
 

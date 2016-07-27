@@ -6,6 +6,8 @@
             AuthService.getUser().then(function (user) {
                 $scope.user = user;
             });
+            
+            
             $scope.logout = function(){
                 $rootScope.signedIn = false;
                 sessionStorage.removeItem('token');

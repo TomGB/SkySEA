@@ -17,7 +17,7 @@
                     <div>{{product.availableStock}} remaining.</div>
                     <div>Price:</div>
                     <div>&pound;{{product.price | number:2}}</div>
-                    <a class="c-btn c-btn--primary" ng-click=addToBasket(product)>Add to basket</a>
+                    <a class="c-btn c-btn--primary" ng-class="{'is-disabled':product.availableStock==0}" ng-disabled="product.availableStock==0" ng-click=addToBasket(product)>Add to basket</a>
                 </div>
             </div>
         </article>

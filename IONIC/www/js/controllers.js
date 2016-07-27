@@ -162,10 +162,10 @@ angular.module('starter.controllers', [])
           $scope.registerData.firstName,
           $scope.registerData.lastName,
           {
-            address1: $scope.registerData.address1,
-            address2: $scope.registerData.address2,
-            address3: $scope.registerData.address3,
-            postCode: $scope.registerData.postCode
+            number: $scope.registerData.number,
+            street: $scope.registerData.street,
+            posttown: $scope.registerData.posttown,
+            postcode: $scope.registerData.postcode
           }
         ).then(function(data){
           $scope.registerData = {};

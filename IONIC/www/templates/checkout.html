@@ -42,7 +42,8 @@
         </div>
       </div>
 
-      <button type="submit" class="button button-positive button-full" ng-click="submit()" ng-disabled="checkout.$invalid">
+      <button type="submit" class="button button-positive button-full" ng-click="submit()"
+              ng-disabled="(checkout.$invalid || !authService.isLoggedIn())">
         Submit Payment
       </button>
     </form>
