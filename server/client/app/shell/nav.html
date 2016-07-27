@@ -1,3 +1,9 @@
 <div ng-controller="navCtrl">
-  <a class="c-btn c-btn--primary o-layout--right" href="/#/basket">basket: {{getTotalItems()}}</a>
+    <section class="o-layout">
+        <div class="o-layout-item o-layout--right">
+            <a class="" style="font-size: 30px" href="/#/basket" ><i class="ion-ios-cart-outline" ></i></a>
+            <a style="font-size: 30px; padding-left: 25px" ng-click="logout()" ng-show="signedIn"><i class="ion-ios-contact" ></i></a>
+            <a class="" style="font-size: 30px; padding-left: 25px" ng-click="logout()" ng-show="signedIn"><i class="ion-log-out" ></i></a>
+        </div>
+    </section>
 </div>

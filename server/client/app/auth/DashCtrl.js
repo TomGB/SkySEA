@@ -8,11 +8,6 @@
             AuthService.getUser().then(function(user){
                 $scope.user = user;
             });
-
-            $scope.logout = function(){
-                sessionStorage.removeItem('token');
-                $location.url('/');
-            };
         }
     }
     ]);

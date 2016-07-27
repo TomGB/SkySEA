@@ -17,7 +17,7 @@ module.exports = function (grunt) {
         ]}
       },
       css: {
-        files: {'public/css/global.css':['client/sass/**/*']}
+        files: {'public/css/global.css':['client/sass/**/*', 'bower_components/Ionicons/css/ionicons.min.css']}
       }
     },
     uglify : {
@@ -40,7 +40,15 @@ module.exports = function (grunt) {
             cwd:'client/',
             src: ['app-concat.js'],
             dest: 'public/js/'
-          }]
+          },
+          {
+            expand: true,
+            flatten:true,
+            cwd:'bower_components/Ionicons/fonts/',
+            src: ['*'],
+            dest: 'public/fonts/'
+          }
+        ]
       }
     },
     watch: {

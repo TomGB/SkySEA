@@ -1,5 +1,5 @@
 (function () {
-    angular.module('accessoriesStore').controller('loginCtrl',['$scope', '$http', '$location', 'AuthService', function ($scope, $http, $location, AuthService) {
+    angular.module('accessoriesStore').controller('loginCtrl',['$scope', '$http', '$location', 'AuthService', '$rootScope', function ($scope, $http, $location, AuthService, $rootScope) {
         if(sessionStorage.getItem('token')){
             $location.url('/dashboard');
         }
@@ -10,6 +10,7 @@
 
         $scope.loginSubmit = function(email, password){
             AuthService.login(email, password).then(function(user){
+                 console.log($rootScope.signedIn);
                 AuthService.user = user;
                 $location.url('/dashboard');
             },function(err){

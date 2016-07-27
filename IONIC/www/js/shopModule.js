@@ -97,7 +97,7 @@ app.factory('productService', ['$http', function($http){
 
     return obj;
 }]);
-app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $location){
+app.service('AuthService', ['$http', '$q', '$location','$rootScope', function($http, $q, $location,$rootScope){
     var error = false;
     var user = {};
 
@@ -111,6 +111,7 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
                 user = response.data.user;
                 sessionStorage.setItem('token', response.data.token);
                 deferred.resolve(user);
+                $rootScope.signedIn = true;
             }, function(res){
                 deferred.reject(error);
             });
