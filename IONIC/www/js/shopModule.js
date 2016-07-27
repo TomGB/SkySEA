@@ -138,7 +138,6 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
             return deferred.promise;
         },
         register: function(email, password, firstName, lastName){
-            console.log(email, password);
             $http.post('/api/users/register', {
                 email: email,
                 password: password,
