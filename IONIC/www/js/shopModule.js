@@ -53,18 +53,14 @@ app.service("basketService", ['$http', function($http){
         return total;
     };
     obj.checkout = function(){
-
-      console.log(sessionStorage.getItem('token'));
-
       var data = {
         products:obj.basketProducts,
         token: sessionStorage.getItem('token')
       };
 
-      console.log(data);
       return $http.post('/api/warehouse/checkout', data)
         .then(function(res){
-          console.log("RES: " + res.body.token);
+          console.log(res);
         });
     };
     return obj;
