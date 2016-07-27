@@ -4,27 +4,26 @@
   <span class="is-error">{{error}}</span>
 
   <section class="o-layout">
-    <div class="o-layout__item u-width-1/5">
+    <div class="o-layout__item u-width-1/3">
       <input type="text" class="c-form-input " placeholder="Search" name="f-username" id="f-username" ng-model="search.name">
     </div>
 
-    <div class="o-layout__item c-form-select u-width-2/5">
+    <div class="o-layout__item c-form-select u-width-1/3">
       <select class="c-form-select__dropdown" ng-model="search.ShowName" ng-options="showName for showName in showNames">
         <option value="">Filter by show</option>
       </select>
     </div>
 
-    <div class="o-layout__item c-form-select u-width-2/5">
-      <select class="c-form-select__dropdown" ng-model="search.PhoneType" ng-options="phoneType for phoneType in phoneModels">
+    <div class="o-layout__item c-form-select u-width-1/3">
+      <select class="c-form-select__dropdown" ng-model="search.PhoneType" ng-options="phoneModel for phoneModel in phoneModels">
         <option value="">Filter by phone model</option>
-        <option value="HTC 10">HTC 10</option>
-
       </select>
     </div>
   </section>
 
   <section class="o-layout">
-    <div class="o-layout__item u-width-1/2@medium u-width-1/3@large u-width-1/4@x-large"  ng-repeat="case in cases | filter: search">
+    <div class="o-layout__item u-width-1/2@medium u-width-1/3@large u-width-1/4@x-large"
+         ng-repeat="case in cases | filter:{PhoneType: search.PhoneType||undefined, ShowName: search.ShowName||undefined, name: search.name}">
       <article class="c-tile">
         <div class="c-tile__content">
           <div class="c-tile__media">

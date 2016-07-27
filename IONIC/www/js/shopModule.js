@@ -52,6 +52,16 @@ app.service("basketService", function(){
         });
         return total;
     };
+    
+    obj.checkOut = function(){
+        $http.post('/api/warehouse/checkout',obj.basketProducts)
+            .then(function (response) {
+                console.log('order placed successfully')
+            },function () {
+                console.log("order could not be placed")
+            })
+    };
+    
     return obj;
 });
 

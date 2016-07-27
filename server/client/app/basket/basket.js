@@ -16,9 +16,9 @@
         basketService.removeItem(product);
     };
 
-    $scope.checkout = function () {
-      basketService.checkout();
-    }
+    $scope.checkout = basketService.checkout;
+
+    $scope.getTotalPrice = basketService.getTotal;
 
   }])
 })();
