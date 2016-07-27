@@ -6,6 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     lastName: DataTypes.STRING,
     email:  DataTypes.STRING,
     password:  DataTypes.STRING,
+    active: DataTypes.BOOLEAN,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
 

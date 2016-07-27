@@ -1,15 +1,4 @@
 
-INSERT INTO products (name,imageUrl,price) VALUES ('Frozen HTC10','HTC10-frozen.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Star Wars HTC10','HTC10-StarWars.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Silicon Valley HTC10','HTC10-SiliconV.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Avengers HTC10','HTC10-Avengers.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Game of thrones HTC10','HTC10-GOT.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Star Wars iPhone','IPhone6-StarWars.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Silicon Valley iPhone','IPhone6-SiliconeV.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Avengers iPhone','IPhone6-Avengers.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Game of thrones iPhone','IPhone6-GOT.png',0);
-INSERT INTO products (name,imageUrl,price) VALUES ('Frozen iPhone','IPhone6-frozen.png',0);
-
 INSERT INTO productTypes (name) VALUES ('Phone Case');
 
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (1, "PhoneType", "HTC 10");
@@ -44,3 +33,6 @@ Insert INTO products (name,imageUrl,availableStock,price) Values ('Sillicon Vall
 Insert INTO products (name,imageUrl,availableStock,price) Values ('Avengers iPhone','IPhone6-Avengers.png',23,4.99);
 Insert INTO products (name,imageUrl,availableStock,price) Values ('Game of thrones iPhone','IPhone6-GOT.png',12,4.49);
 Insert INTO products (name,imageUrl,availableStock,price) Values ('Frozen iPhone','IPhone6-frozen.png',9,4.49);
+
+Insert INTO workers (firstname, lastname, email, password, active) Values ('tom','banister','tgbanister@gmail.com','password',false);
+Insert INTO workers (firstname, lastname, email, password, active) Values ('tim','miles','tmiles@gmail.com','password',false);
