@@ -129,21 +129,27 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
             return deferred.promise;
         },
         register: function(email, password, firstName, lastName){
-            $http.post('/api/users/register', {
+            var deferred = $q.defer();
+            $http.post('http://localhost:3000/api/users/register', {
                 email: email,
                 password: password,
                 firstName: firstName,
                 lastName: lastName
             }).then(function(response){
-                sessionStorage.setItem('token', response.data.token);
                 user = response.data.user;
-                $location.url('/dashboard');
+                sessionStorage.setItem('token', response.data.token);
+                deferred.resolve(user);
             }, function(res){
-                console.log(res);
-            })
+                deferred.reject(res);
+            });
+            return deferred.promise;
         },
         isLoggedIn: function(){
-          return sessionStorage.getItem('token')
+          return !!sessionStorage.getItem('token');
+        },
+        logout: function(){
+          sessionStorage.setItem('token', '');
+          user = {};
         }
     }
 }]);
