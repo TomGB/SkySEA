@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
         return bcrypt.compareSync(password, this.password);
       }
     },
-    tableName: 'worker'
+    tableName: 'workers'
 
   });
   return Worker;

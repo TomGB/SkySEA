@@ -2,7 +2,7 @@
  * Created by amu35 on 25/07/2016.
  */
 (function(){
-var app = angular.module('shopModule',[])
+var app = angular.module('shopModule',[]);
 
 app.service("basketService", ['$http', function($http){
     var obj = {};
@@ -92,16 +92,6 @@ app.factory('productService', ['$http', function($http){
     };
 
     return obj;
-}]);
-
-app.factory('authService', ['$http', function($http){
-  var obj = {};
-
-  obj.userLoggedIn = function(){
-    return false;
-  };
-
-  return obj;
 }]);
 app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $location){
     var error = false;
