@@ -36,3 +36,31 @@ INSERT INTO productInfo (productID, infoName, infoValue) VALUES (7, "ShowName", 
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (8, "ShowName", "Avengers");
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (9, "ShowName", "Game Of Thrones");
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (10, "ShowName", "Frozen");
+
+INSERT INTO `orders` (`id`, `status`, `orderDate`, `dispatchDate`, `userID`, `workerID`, `createdAt`, `updatedAt`)
+VALUES
+	(12, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 1, NULL, '2016-07-27 14:11:57', '2016-07-27 14:11:57'),
+	(13, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 1, NULL, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(14, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 1, NULL, '2016-07-27 15:06:09', '2016-07-27 15:06:09');
+
+INSERT INTO `users` (`id`, `email`, `password`, `address1`, `address2`, `address3`, `postcode`, `firstName`, `lastName`, `updatedAt`, `createdAt`, `userRole`)
+VALUES
+	(1, 'tgbanister@gmail.com', '$2a$08$yDQxZGAVVqFJ.vrSR1XVCeHiV8yfvgxVUXpbzM70zRmeq3qR42NcS', '9 Test Drive', 'Super Town', NULL, 'OL3 6KD', 'tom', 'banister', '2016-07-27 13:33:50', '2016-07-27 13:33:50', 'customer');
+
+INSERT INTO `productOrders` (`id`, `orderID`, `productID`, `createdAt`, `updatedAt`)
+VALUES
+	(31, 12, 1, '2016-07-27 14:11:57', '2016-07-27 14:11:57'),
+	(32, 12, 1, '2016-07-27 14:11:57', '2016-07-27 14:11:57'),
+	(33, 12, 2, '2016-07-27 14:11:57', '2016-07-27 14:11:57'),
+	(34, 13, 2, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(35, 13, 2, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(36, 13, 2, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(37, 13, 1, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(38, 13, 1, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(39, 13, 1, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(40, 13, 1, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(41, 14, 1, '2016-07-27 15:06:09', '2016-07-27 15:06:09'),
+	(42, 14, 1, '2016-07-27 15:06:09', '2016-07-27 15:06:09'),
+	(43, 14, 1, '2016-07-27 15:06:09', '2016-07-27 15:06:09'),
+	(44, 14, 2, '2016-07-27 15:06:09', '2016-07-27 15:06:09'),
+	(45, 14, 2, '2016-07-27 15:06:09', '2016-07-27 15:06:09');

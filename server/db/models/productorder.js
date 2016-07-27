@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
   var ProductOrder = sequelize.define("ProductOrder", {
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
+    quantity: DataTypes.INTEGER,
     orderID: DataTypes.INTEGER,
     productID: DataTypes.INTEGER
   }, {
