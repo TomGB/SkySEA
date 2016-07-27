@@ -129,10 +129,8 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
             return deferred.promise;
         },
         register: function(email, password, firstName, lastName, address){
-            console.log(address);
             if(address.number == undefined){
                 address.number = address.premise
-
             }
             console.log(address);
             $http.post('/api/users/register', {

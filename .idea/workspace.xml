@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="140a97f8-e291-447c-bd00-8c3620112a2f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IONIC/www/js/controllers.js" afterPath="$PROJECT_DIR$/IONIC/www/js/controllers.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IONIC/www/js/shopModule.js" afterPath="$PROJECT_DIR$/IONIC/www/js/shopModule.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IONIC/www/templates/login.html" afterPath="$PROJECT_DIR$/IONIC/www/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/client/app/auth/RegisterCtrl.js" afterPath="$PROJECT_DIR$/server/client/app/auth/RegisterCtrl.js" />
     </list>
     <list id="f064f047-31f8-48dc-9186-76d19b0a3ae4" name="IgnoreMe" comment="IgnoreMe" />
     <ignored path="SkySEA.iws" />
@@ -75,8 +71,8 @@
       <file leaf-file-name="shopModule.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IONIC/www/js/shopModule.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="715">
-              <caret line="145" column="24" selection-start-line="145" selection-start-column="24" selection-end-line="145" selection-end-column="24" />
+            <state relative-caret-position="565">
+              <caret line="132" column="48" selection-start-line="132" selection-start-column="48" selection-end-line="132" selection-end-column="48" />
               <folding>
                 <element signature="e#0#42#0" expanded="false" />
               </folding>
@@ -1014,7 +1010,7 @@
       <workItem from="1469465756701" duration="5935000" />
       <workItem from="1469481275008" duration="478000" />
       <workItem from="1469541611649" duration="24381000" />
-      <workItem from="1469618555088" duration="4755000" />
+      <workItem from="1469618555088" duration="4839000" />
     </task>
     <task id="LOCAL-00002" summary="config and json refilled">
       <created>1469457440433</created>
@@ -1080,7 +1076,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41785000" />
+    <option name="totallyTimeSpent" value="41869000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1539,8 +1535,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/IONIC/www/js/shopModule.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="715">
-          <caret line="145" column="24" selection-start-line="145" selection-start-column="24" selection-end-line="145" selection-end-column="24" />
+        <state relative-caret-position="565">
+          <caret line="132" column="48" selection-start-line="132" selection-start-column="48" selection-end-line="132" selection-end-column="48" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
           </folding>
