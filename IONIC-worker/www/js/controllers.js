@@ -41,7 +41,20 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('OrdersCtrl', function($scope) {
+.controller('OrdersCtrl', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
+
+  var data = { token: '1' };
+
+  $scope.orders = [];
+
+  $http.post('http://localhost:3000/api/warehouse/getWaitingOrders', data)
+    .then(function(res) {
+      $scope.orders = res.data.orders;
+      console.log(res.data.orders);
+    }, function(err) { console.log(JSON.stringify(err)); });
+
+
+/*
 
   $scope.orders = [
     {
@@ -90,6 +103,8 @@ angular.module('starter.controllers', [])
           { id: 4, qty: 2, name: 'Avengers HTC10', imageurl: 'avengers.jpg'}
       ],
       address: {
+        firstname: '',
+        lastname: '',
         address1: 'C409, MSV North',
         address2: 'Oxford Road',
         address3: 'Manchester',
@@ -97,5 +112,6 @@ angular.module('starter.controllers', [])
       }
     }
   ];
-
-});
+//*/
+}]
+);

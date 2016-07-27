@@ -7,9 +7,9 @@
 
         <div class="item avatar" ng-repeat="product in order.products" >
             <div class="item item-avatar">
-              <img src="img/phonecases/{{product.imageurl}}">
+              <img ng-src="http://localhost:3000/images/phonecases/{{product.imageUrl}}">
               <h2>{{product.name}}</h2>
-              <h2>Quantity: {{product.qty}}</h2>
+              <h2>Quantity: {{product.quantity}}</h2>
             </div>
         </div>
         <div class="padding">
