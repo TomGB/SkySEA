@@ -52,7 +52,7 @@
         controller: 'basketCtrl'
       })
       .when('/register', {
-        templateUrl: 'app/auth/register.html',
+        templateUrl: 'app/auth/regis ter.html',
         controller: 'RegisterCtrl'
       })
       .otherwise({redirectTo: '/productList'});
