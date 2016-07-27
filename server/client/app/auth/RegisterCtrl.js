@@ -10,13 +10,12 @@
             if(postcode.length > 6){
                 $http.get('http://ws.postcoder.com/pcw/PCWXG-TXRP7-BX2PM-S54S2/address/UK/' + postcode + '?identifier=AddressExample' ).then(function(response){
                     $scope.addresses = response.data;
-                    console.log("Response:" + response.data);
                 });
             }
         };
 
-        $scope.register = function(email, password, firstName, lastName){
-            AuthService.register(email, password, firstName, lastName);
+        $scope.register = function(email, password, firstName, lastName, address){
+            AuthService.register(email, password, firstName, lastName, address);
         }
     }
     ]);
