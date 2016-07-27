@@ -1,9 +1,10 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
-IONIC/node_modules/
-IONIC/platforms/
-IONIC/plugins/
+IONIC*/node_modules/
+IONIC*/platforms/
+IONIC*/plugins/
+IONIC*/bower_components/
 ArchitectureDiagram/
 SkyAccessoriesPageEdit/
 .idea/
