@@ -36,13 +36,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       url: '/help',
       views: {
         'menuContent': {
-          templateUrl: 'templates/help.html'
+          templateUrl: 'templates/help.html',
+          controller: 'HelpCtrl'
         }
       }
     })
 
     .state('app.catalogue', {
-      url: '/playlists', // Tried to change to catalogue but gives error
+      url: '/catalogue', // Tried to change to catalogue but gives error
       views: {
         'menuContent': {
           templateUrl: 'templates/catalogue.html',
@@ -76,20 +77,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       views: {
         'menuContent': {
           templateUrl: 'templates/login.html',
-          controller: 'LoginController'
+          controller: 'LoginCtrl'
         }
       }
     })
 
-    .state('app.signup', {
-      url: '/signup',
+    .state('app.register', {
+      url: '/register',
       views: {
         'menuContent': {
-          templateUrl: 'templates/signup.html',
-          controller: 'SignupController'
+          templateUrl: 'templates/register.html',
+          controller: 'RegisterCtrl'
         }
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists'); // Tried to change to catalogue but gives error
+  $urlRouterProvider.otherwise('/app/catalogue'); // Tried to change to catalogue but gives error
 });
