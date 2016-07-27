@@ -15,7 +15,7 @@
       }
     });
   }]);
-  app.config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider) {
+  app.config(['$routeProvider','$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/productList', {
         templateUrl: 'app/productList/productList.html',
@@ -38,15 +38,15 @@
         controller: 'DashCtrl',
         resolve: {
            auth: ['$q', 'AuthService', function($q, AuthService){
-           var user = AuthService.getUser();
-           if(user){
-             return $q.when(user)
-              }else{
-                return $q.reject({access: false});
-              }
-            }]
-          }
-        })
+             var user = AuthService.getUser();
+             if(user){
+               return $q.when(user)
+             }else{
+               return $q.reject({access: false});
+             }
+           }]
+        }
+      })
       .when('/basket',{
         templateUrl: 'app/basket/basket.html',
         controller: 'basketCtrl'

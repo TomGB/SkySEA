@@ -11,11 +11,31 @@ var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
 app.use(bodyParser({urlencoded: true}));
 
+app.route('/register').post(function(req, res){
+    models.User.create({
+        email: req.body.email,
+        password: models.User.generateHash(req.body.password),
+        address1: req.body.address1,
+        address2: req.body.address2,
+        address3: req.body.address3,
+        postcode: req.body.postcode,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+    }).then(function(user){
+        var token = jwt.sign(user.id, sig);
+        return res.json({user: user, token: token, headers:{authorization: token } });
+    }).catch(Sequelize.ValidationError, function(err){
+        return res.status(422).send(err.errors);
+    }).catch(function(err){
+        return res.status(400).send({
+            message: err.message
+        });
+    });
+});
 
 function middle(req, res){
     jwt.verify(req.headers.authorization, sig, function(err, token){
         if(err){
-            console.log(err);
             res.status(401).send({
                 message: "Unauthorized"
             })
@@ -43,28 +63,6 @@ app.route('/login').get(middle).post(function(req, res){
         }
     });
 });
-
-app.route('/sign-up').get().post(function(req, res, next){
-    models.User.create({
-        email: req.body.email,
-        password: models.User.generateHash(req.body.password),
-        address1: req.body.address1,
-        address2: req.body.address2,
-        address3: req.body.address3,
-        postcode: req.body.postcode,
-        firstName: req.body.first,
-        lastName: req.body.last
-    }).then(function(user){
-        return res.json(user);
-    }).catch(Sequelize.ValidationError, function(err){
-        return res.status(422).send(err.errors);
-    }).catch(function(err){
-        return res.status(400).send({
-            message: err.message
-        });
-    });
-});
-
 
 
 module.exports = app;
