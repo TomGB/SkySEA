@@ -131,18 +131,20 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('LoginController', ['$scope', 'AuthService',
-  function($scope, AuthService){
-    $scope.loginData = {};
+.controller('LoginController', ['$scope', 'AuthService', '$location', '$ionicHistory', '$state', 'uiService',
+  function($scope, AuthService, $location, $ionicHistory, $state, uiService){
 
     $scope.doLogin = function(email, password){
       AuthService.login(email, password).then(function(user){
         AuthService.user = user;
-        $location.url('/dashboard');
+        $ionicHistory.nextViewOptions({disableBack: true});
+        $state.go('app.checkout');
       },function(err){
-        $scope.error = true;
+        console.log(err);
+        uiService.displayMessage("Sorry, those credentials don't match our records");
       })
     };
+
 }])
 
 .controller('SignupController', ['$scope', 'AuthService',

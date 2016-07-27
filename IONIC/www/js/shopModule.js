@@ -102,7 +102,7 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
             var deferred = $q.defer();
             $http.post('http://localhost:3000/api/users/login', {
                 email: email,
-                password: password,
+                password: password
             }).then(function(response) {
                 user = response.data.user;
                 sessionStorage.setItem('token', response.data.token);
@@ -128,12 +128,22 @@ app.service('AuthService', ['$http', '$q', '$location', function($http, $q, $loc
             });
             return deferred.promise;
         },
-        register: function(email, password, firstName, lastName){
+        register: function(email, password, firstName, lastName, address){
+            console.log(address);
+            if(address.number == undefined){
+                address.number = address.premise
+
+            }
+            console.log(address);
             $http.post('/api/users/register', {
                 email: email,
                 password: password,
                 firstName: firstName,
-                lastName: lastName
+                lastName: lastName,
+                address1: address.number,
+                address2: address.street,
+                address3: address.posttown,
+                postcode: address.postcode
             }).then(function(response){
                 sessionStorage.setItem('token', response.data.token);
                 user = response.data.user;
