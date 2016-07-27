@@ -13,12 +13,18 @@
 
         <div class="o-layout__item u-width-3/5@small">
           <h1 class="c-heading-delta">{{product.item.name}}</h1>
+          <div class="">Price: &pound;{{product.item.price | number: 2}}</div>
           <span>Quantity:<input type="number" ng-model="product.quantity" ng-blur="removeIfZero(product)"></span>
           <button class="c-btn c-btn--secondary" ng-click="removeItem(product)">Remove from basket</button>
         </div>
       </article>
     </div>
-    <button class="c-btn c-btn--primary" ng-click="checkout()">Buy Now</button>
+    <div class="o-layout__item u-width-1/4">
+      Total: &pound;{{getTotalPrice()}}
+    </div>
+    <div class="o-layout__item u-width-1/4">
+      <button class="c-btn c-btn--primary" ng-click="checkout()">Buy Now</button>
+    </div>
   </section>
 
 </div>
