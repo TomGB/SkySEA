@@ -17,6 +17,7 @@
 
 export PATH=$PATH:/usr/local/mysql/bin/
 
+echo ""
 echo "Directory:"
 pwd
 echo ""
@@ -25,6 +26,7 @@ echo "==========================================================================
 echo "                               NPM INSTALL"
 echo "============================================================================="
 
+echo ""
 npm install
 echo ""
 
@@ -36,7 +38,21 @@ echo "==========================================================================
 echo "                               BOWER INSTALL"
 echo "============================================================================="
 
+echo ""
 bower install
+echo ""
+
+echo "----------------------------"
+echo "                   complete."
+echo ""
+
+echo "============================================================================="
+echo "                                DROP TABLES"
+echo "============================================================================="
+
+echo ""
+eval "mysql --host='localhost' --user='root' --password='' -e 'DROP DATABASE seandb;'"
+eval "mysql --host='localhost' --user='root' --password='' -e 'CREATE DATABASE seandb'"
 echo ""
 
 echo "----------------------------"
@@ -45,6 +61,8 @@ echo ""
 
 cd db
 echo "============================================================================="
+
+echo ""
 echo "Directory:"
 pwd
 echo ""
@@ -53,6 +71,7 @@ echo "==========================================================================
 echo "                                 SEQUELIZE"
 echo "============================================================================="
 
+echo ""
 sequelize db:migrate
 echo ""
 cd ..
@@ -63,6 +82,7 @@ echo ""
 
 echo "============================================================================="
 
+echo ""
 echo "Directory:"
 pwd
 echo ""
@@ -71,6 +91,7 @@ echo "==========================================================================
 echo "                             INSERT DEMO DATA"
 echo "============================================================================="
 
+echo ""
 eval "mysql --host='localhost' --user='root' --password='' -D seandb -e 'USE seandb; DELETE FROM products; Source ./db/casesPopulate.sql;'"
 echo ""
 
@@ -82,8 +103,10 @@ echo "==========================================================================
 echo "                                  GRUNT"
 echo "============================================================================="
 
+echo ""
 killall grunt
 
+echo ""
 grunt
 echo ""
 
@@ -103,12 +126,12 @@ echo "----------------------------"
 echo "                   complete."
 echo ""
 
-
 echo "============================================================================="
 echo "                            START NODE SERVER"
 echo "============================================================================="
 
-sudo killall node
+echo ""
+killall node
 
 echo ""
 echo "Killing existing node servers..."
