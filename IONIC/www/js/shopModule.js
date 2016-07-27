@@ -4,7 +4,7 @@
 (function(){
 var app = angular.module('shopModule',[])
 
-app.service("basketService", function(){
+app.service("basketService", ['$http', function($http){
     var obj = {};
 
     obj.basketProducts = [];
@@ -52,8 +52,19 @@ app.service("basketService", function(){
         });
         return total;
     };
+    obj.checkout = function(){
+      return $http({
+          method: 'post',
+          url: 'http://localhost:3000/api/warehouse/checkout',
+          data: {products:obj.basketProducts, token: sessionStorage.getItem("token")}
+      }).then(function (res) {
+          return res;
+      }, function(res){
+        return res;
+      });
+    };
     return obj;
-});
+}]);
 
 app.factory('productService', ['$http', function($http){
     var obj = {};
