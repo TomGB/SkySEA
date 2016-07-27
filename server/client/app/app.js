@@ -50,6 +50,10 @@
         templateUrl: 'app/checkout/checkout.html',
         controller: 'checkoutCtrl'
       })
+      .when('/user-info', {
+        templateUrl: 'app/user/userInfo.html',
+        controller: 'userInfoCtrl'
+      })
       .otherwise({redirectTo: '/dashboard'});
   }]);
 })();

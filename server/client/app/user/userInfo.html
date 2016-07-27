@@ -1,0 +1,36 @@
+<article id="ui-hero-overlap" class="u-margin-bottom-large">
+    <div class="c-hero  c-hero--overlap" style="background-image: url('https://www.sky.com/assets2/shades-of-blue-tile-95f30185.jpg?downsize=1000:*&output-format=jpg')">
+        <div class="c-hero__caption">
+            <div class="o-container">
+                    <h2 class="c-heading-alpha  u-margin-bottom-none" style="text-align: center;cursor: default;">Your Details</h2>
+            </div>
+        </div>
+    </div>
+    <div class="o-container">
+        <div class="o-layout" ng-show="signedIn">
+            <div class="o-layout__item  u-width-1/3@medium"></div>
+            <div class="o-layout__item  u-width-1/3@medium">
+                <article class="c-tile">
+                        <div class="c-tile__content">
+                            <div class="c-tile__body">
+                                <ul class="o-list-bare">
+                                    <li>{{user.firstName}} {{user.lastName}}</li>
+                                    <li>{{user.address1}} {{user.address2}}</li>
+                                    <li>{{user.address3}}</li>
+                                    <li>{{user.postcode}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="c-shine c-tile__shine  c-tile__shine--top">
+                            <div class="c-shine__rail"></div>
+                        </div>
+                        <div class="c-shine c-shine--rev  c-tile__shine c-tile__shine--bottom">
+                            <div class="c-shine__rail"></div>
+                        </div>
+
+                </article>
+            </div>
+        </div>
+    </div>
+</article>
+</div>

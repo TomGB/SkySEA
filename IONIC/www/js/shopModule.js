@@ -12,23 +12,26 @@ app.service("basketService", ['$http', function($http){
     obj.addToBasket = function(item){
         var found = false;
         var index = 0;
-        obj.basketProducts.forEach(function(elem, ind, arr){
-            if (elem.item.id == item.id){
-                found = true;
-                index = ind;
-            }
-        });
-
-        if (!found){
-            // Item is not already in basket
-            obj.basketProducts.push({
-                item: item,
-                quantity: 1
+        if(item.availableStock>0) {
+            obj.basketProducts.forEach(function (elem, ind, arr) {
+                if (elem.item.id == item.id) {
+                    found = true;
+                    index = ind;
+                }
             });
-        } else {
-            // Item in basket already
-            var productObj = obj.basketProducts[index];
-            productObj.quantity += 1;
+
+            if (!found) {
+                // Item is not already in basket
+                obj.basketProducts.push({
+                    item: item,
+                    quantity: 1
+                });
+            } else {
+                // Item in basket already
+                var productObj = obj.basketProducts[index];
+                productObj.quantity += 1;
+            }
+            item.availableStock --;
         }
     };
 
