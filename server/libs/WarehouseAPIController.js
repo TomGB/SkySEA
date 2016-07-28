@@ -5,19 +5,11 @@ var models = require('../db/models/index');
 var express = require('express');
 var app = express.Router();
 var bodyParser = require('body-parser');
-var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
 var cors = require('cors');
 app.use(bodyParser({urlencoded: true}));
 app.use(cors());
-
-var orderPlaced = '<b>Your order with Sky has been placed successfully and is now being processed</b>';
-var orderDispatched = '<b>Your order with Sky has been dispatched and is on its way!</b>' ;
-
-
-var mailTransporter = nodemailer.createTransport();
-
 
 app.route('/checkout')
   .post(cors(), function(req, res){
@@ -59,17 +51,9 @@ app.route('/checkout')
             quantity: products[i].quantity
           });
         }
-
-          sendEmail(userID,status);
-
-
-          res.status(200).send();
+        res.status(200).send();
 
           //notify worker of new items for acceptance
-
-
-          //notify user that order has been placed
-
 
       },function(err) {
         res.status(500).send({
@@ -183,21 +167,20 @@ app.route('/dispatchOrder')
         }).then(function() {
           var status = "dispatched";
 
-          for (var i = 0; i < orderArray.length; i++) {
-            models.Order.find({ where: {id: orderArray[i]} })
+
+          for (var i = 0; i < orderIDArray.length; i++) {
+            models.Order.find({ where: {id: orderIDArray[i]} })
             .then(function(order){
               if (order) { // if the record exists in the db
                 order.updateAttributes({
                   status : status
                 }).then(function() {
 
-                 // notify user that order has been dispatched
-                 sendEmail(order.userID,status);
-
                   // notify user that order has been dispatched
                   res.setHeader('Access-Control-Allow-Origin', '*');
                   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
                   res.status(200).send();
+
                 });
               }
             });
