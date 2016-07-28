@@ -1,0 +1,47 @@
+<section class="o-container center-container">
+  <div class="o-layout__item">
+    <h1 class="c-heading-alpha">Help Chat</h1>
+    <div class="pure-u-2-3" id="video-container">
+      <form>
+        <input type="text" placeholder="First Name" ng-model="firstName" />
+        <label class="c-form-checkbox no-inline">
+              <input type="checkbox" class="c-form-checkbox__input" name="audio" ng-model="audio" value="audio">
+              <span class="c-form-checkbox__faux"></span>
+              Audio
+        </label>
+        <label class="c-form-checkbox no-inline">
+              <input type="checkbox" class="c-form-checkbox__input" name="video" ng-model="video" value="video">
+              <span class="c-form-checkbox__faux"></span>
+              Video
+        </label>
+        <input type="button" ng-click="requestSupport(firstName, audio, video)" value="Request Support"/>
+        <input type="button" ng-click="end()" value="End Call"/>
+      </form>
+      <strong ng-hide="!requested" class="c-spinner c-spinner--large sg-test-spinner spinner-center" role="progressbar">Loading…</strong>
+      <div class="o-layout  o-layout--spaced" id="video-container">
+        <div class="o-layout__item  u-width-1/2">
+          <p class="video-label" ng-hide="hideRemote">
+            You
+          </p>
+          <video id="local-video" muted="true" name="local-video" autoplay ng-src="{{path}}"></video>
+        </div>
+        <div ng-hide="hideRemote" class="o-layout__item  u-width-1/2">
+          <p class="remote-label">
+            Tech Assistant
+          </p>
+          <video id="remote-video" name="remote-video" autoplay></video>
+        </div>
+      </div>
+    </div>
+    <div class="text-box">
+      <ul>
+        <li class="text-message" ng-repeat="msg in messages">
+          {{msg.sender}}: {{msg.msg}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-box-input">
+    <input type="text" ng-model="msg" /><button ng-click="send(msg)">Send</button>
+  </div>
+</section>
