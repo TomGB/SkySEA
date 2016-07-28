@@ -51,6 +51,8 @@ app.route('/checkout')
             quantity: products[i].quantity
           });
         }
+
+        sendEmail(userID,'ordered');
         res.status(200).send();
 
           //notify worker of new items for acceptance
@@ -176,6 +178,8 @@ app.route('/dispatchOrder')
                   status : status
                 }).then(function() {
 
+
+                  sendEmail(userID,'dispatched');
                   // notify user that order has been dispatched
                   res.setHeader('Access-Control-Allow-Origin', '*');
                   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -258,9 +262,12 @@ function sendEmail(userID, reason) {
 
         var user = res[0].dataValues;
 
+        var orderPlaced = 'Your order with Sky has been placed successfully and is now being processed.';
+        var orderDispatched = 'Your order with Sky has been dispatched successfully and is now being delivered.';
+
         var mailOptions = {
             from: '"Sky Accessories Store" <alasdair@sky.uk>', // sender address
-            html: reason == 'ordered'? orderPlaced: orderDispatched// html body
+            html: reason == 'ordered'? orderPlaced : orderDispatched// html body
         };
 
         mailOptions.to = user.email;
