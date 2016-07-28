@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
 var cors = require('cors');
+var nodemailer = require('nodemailer');
+var mailTransporter = nodemailer.createTransport();
 app.use(bodyParser({urlencoded: true}));
 app.use(cors());
 
@@ -157,9 +159,11 @@ app.route('/rejectOrder')
 app.route('/dispatchOrder')
   .post(function(req, res){
     var token = req.body.token;
-    var workerID = jwt.decode(token, sig);
-    // var workerID = req.body.token;
+    // var workerID = jwt.decode(token, sig);
+    var workerID = req.body.token;
     var orderIDArray = req.body.orderArray;
+
+    console.log(orderIDArray);
 
     models.Worker.find({ where: {id: workerID} })
     .then(function(worker){
@@ -170,10 +174,12 @@ app.route('/dispatchOrder')
           var status = "dispatched";
 
 
-          for (var i = 0; i < orderIDArray.length; i++) {
-            models.Order.find({ where: {id: orderIDArray[i]} })
+          // for (var i = 0; i < orderIDArray.length; i++) {
+            models.Order.find({ where: {id: orderIDArray} })
             .then(function(order){
+              console.log(order);
               if (order) { // if the record exists in the db
+                var userID = order.userID;
                 order.updateAttributes({
                   status : status
                 }).then(function() {
@@ -188,7 +194,7 @@ app.route('/dispatchOrder')
                 });
               }
             });
-          }
+          // }
         });
       }
     });
