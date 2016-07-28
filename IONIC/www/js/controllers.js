@@ -49,7 +49,9 @@ angular.module('starter.controllers', [])
   $scope.scan = function(){
     $cordovaBarcodeScanner.scan().then(function(imageData){
       productService.products.forEach(function(elem, ind, arr){
-        if(elem.id == imageData.text){
+        var barcodeArray = imageData.text.split('/');
+        var barcodeID = barcodeArray[barcodeArray.length - 1];
+        if(elem.id == barcodeID){
           if (elem.availableStock)
             uiService.confirmAddToBasket(elem);
           else
