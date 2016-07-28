@@ -251,3 +251,30 @@ app.route('/dispatchOrder')
         });
       });
 module.exports = app;
+
+
+function sendEmail(userID, reason) {
+    models.User.findAll({where: {id: userID}}).then(function (res) {
+
+        var user = res[0].dataValues;
+
+        var mailOptions = {
+            from: '"Sky Accessories Store" <alasdair@sky.uk>', // sender address
+            html: reason == 'ordered'? orderPlaced: orderDispatched// html body
+        };
+
+        mailOptions.to = user.email;
+        mailOptions.subject = user.firstName + ', your order has been ' + user.reason ;
+
+
+        // send mail with defined transport object
+        mailTransporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                return console.log(error);
+            }else {
+                console.log('Message sent: ' + info);
+            }
+        });
+
+    })
+}
