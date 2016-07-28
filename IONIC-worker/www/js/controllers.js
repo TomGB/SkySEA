@@ -57,9 +57,10 @@ angular.module('starter.controllers', [])
     $scope.awaitingOrders = true;
     $scope.ordersToProcess = false;
 
-    data.token = sessionStorage.getItem('token');
-    data.orderArray = $scope.orderIDs;
-    $http.post('http://localhost:3000/api/warehouse/dispatchOrder')
+    $http.post('http://localhost:3000/api/warehouse/dispatchOrder', {
+      token: sessionStorage.getItem('token'),
+      orderArray: $scope.orderIDs
+    })
       .then(function(res) {
           console.log("response " + res);
         }, function(err) {
