@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="sass/global.css">
   </head>
   <body ng-app="accessoriesStore">
-    <ng-view></ng-view>
-    <script src="app.min.js"></script>
+    <div class="o-container">
+        <div ng-include="'app/shell/nav.html'"></div>
+        <ng-view></ng-view>
+        <script src="app.min.js"></script>
+    </div>
   </body>
 </html>
