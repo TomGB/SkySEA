@@ -2,6 +2,8 @@
  * Created by amu35 on 24/07/2016.
  */
 var client = require('twilio')('ACddbb2fa5534a75f1f06eae816381e42e', '847d60b350ffb04f698a2c41f2d6cc76');
+var nodemailer = require('nodemailer');
+var mailTransporter = nodemailer.createTransport();
 var models = require('../db/models/index');
 var express = require('express');
 var app = express.Router();
