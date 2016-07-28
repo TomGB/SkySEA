@@ -21,8 +21,10 @@ angular.module('starter.controllers', [])
 
 .controller('OrdersCtrl', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
 
-  var data = { token: '1' };
+  var data = { };
+
   $scope.orders = [];
+  $scope.orderIDs = [];
   $scope.ordersToProcess = false;
   $scope.awaitingOrders = true;
 
@@ -30,22 +32,41 @@ angular.module('starter.controllers', [])
   $interval(getOrders, 5000);
 
   function getOrders() {
+    data = null;
+    data = { };
+    data.token = sessionStorage.getItem('token');
     $http.post('http://localhost:3000/api/warehouse/getWaitingOrders', data)
       .then(
         function(res) {
           $scope.orders = res.data.orders;
           $scope.ordersToProcess = true;
           $scope.awaitingOrders = false;
+          for (var i = 0; i < $scope.orders.length; i++) {
+            var id = $scope.orders[i].id;
+            $scope.orderIDs.push(id);
+          }
         }, function(err) {
-          console.log(JSON.stringify(err));
+          console.log("Error: " + err);
         }
       );
+    data = {};
   }
 
   $scope.setDelivered = function() {
     $scope.orders = [];
     $scope.awaitingOrders = true;
     $scope.ordersToProcess = false;
+
+    data.token = sessionStorage.getItem('token');
+    data.orderArray = $scope.orderIDs;
+    $http.post('http://localhost:3000/api/warehouse/dispatchOrder')
+      .then(function(res) {
+          console.log("response " + res);
+        }, function(err) {
+          console.log(err);
+        }
+      );
+    $scope.orderIDs = [];
   }
 
 }])
