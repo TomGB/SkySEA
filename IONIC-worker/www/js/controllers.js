@@ -22,15 +22,32 @@ angular.module('starter.controllers', [])
 .controller('OrdersCtrl', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
 
   var data = { token: '1' };
-
   $scope.orders = [];
+  $scope.ordersToProcess = false;
+  $scope.awaitingOrders = true;
 
-  $http.post('http://localhost:3000/api/warehouse/getWaitingOrders', data)
-    .then(function(res) {
-      $scope.orders = res.data.orders;
-      console.log(res.data.orders);
-    }, function(err) { console.log(JSON.stringify(err));
-  });
+  getOrders();
+  $interval(getOrders, 5000);
+
+  function getOrders() {
+    $http.post('http://localhost:3000/api/warehouse/getWaitingOrders', data)
+      .then(
+        function(res) {
+          $scope.orders = res.data.orders;
+          $scope.ordersToProcess = true;
+          $scope.awaitingOrders = false;
+        }, function(err) {
+          console.log(JSON.stringify(err));
+        }
+      );
+  }
+
+  $scope.setDelivered = function() {
+    $scope.orders = [];
+    $scope.awaitingOrders = true;
+    $scope.ordersToProcess = false;
+  }
+
 }])
 
 .controller('StatusCtrl', ['$scope', '$http', function($scope, $http){
