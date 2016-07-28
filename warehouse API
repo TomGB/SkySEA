@@ -1,0 +1,32 @@
+// set worker as active or in active
+http://localhost:3000/api/warehouse/setActive
+data = {
+  token: eyJhbGciOiJIUzI1NiJ9.Mw.UG8lllxskpdv_FqzVfA-vZnl740DdCbAOJ_fHJaw1ys,
+  status: true
+}
+
+// checkout basket and update database with new orders
+http://localhost:3000/api/warehouse/checkout
+data = {
+  token: eyJhbGciOiJIUzI1NiJ9.Mw.UG8lllxskpdv_FqzVfA-vZnl740DdCbAOJ_fHJaw1ys,
+  products: {
+    item = {
+      id
+      // ... other product info
+    }
+    quantity
+  }
+}
+
+// accept the order preposed from the worker
+http://localhost:3000/api/warehouse/acceptOrder
+data = {
+  token: eyJhbGciOiJIUzI1NiJ9.Mw.UG8lllxskpdv_FqzVfA-vZnl740DdCbAOJ_fHJaw1ys,
+  products: {
+    item = {
+      id
+      // ... other product info
+    }
+    quantity
+  }
+}

@@ -10,6 +10,7 @@ var Sequelize = require('sequelize');
 var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
 var cors = require('cors');
+
 app.use(bodyParser({urlencoded: true}));
 app.use(cors());
 
@@ -108,5 +109,4 @@ app.route('/worker-register').post(cors(), function(req, res){
         });
     });
 });
-
 module.exports = app;

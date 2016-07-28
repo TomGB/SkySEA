@@ -1,0 +1,56 @@
+.no-inline {
+  display: initial;
+}
+
+.center-container {
+  margin: auto;
+  text-align: center;
+}
+
+.center-container > input {
+  padding-left: 3px;
+}
+
+.spinner-center {
+  margin-left: 38%;
+  margin-right: 38%;
+  margin-top: 10%;
+}
+
+video {
+  padding: 5px;
+  width: 75%;
+  height: auto;
+}
+
+.text-box {
+  max-height: 110px;
+  overflow:auto
+}
+
+.text-box-input {
+  padding: 5px;
+}
+
+.text-message {
+  list-style-type: none;
+}
+
+.video-label {
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.remote-label {
+  text-align: left;
+  margin-bottom: 0;
+  margin-left: 25%;
+}
+
+#local-video {
+  float: left;
+}
+
+#remote-video {
+  float: right;
+}

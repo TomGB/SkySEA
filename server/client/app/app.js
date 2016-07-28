@@ -54,6 +54,14 @@
         templateUrl: 'app/user/userInfo.html',
         controller: 'userInfoCtrl'
       })
+      .when('/helpchat', {
+        templateUrl: '/app/helpchat/helpchat.html',
+        controller: 'helpchatCtrl'
+      })
+      .when('/techAssistant', {
+        templateUrl: '/app/techAssistant/techAssistant.html',
+        controller: 'techAssistantCtrl'
+      })
       .otherwise({redirectTo: '/dashboard'});
   }]);
 })();
