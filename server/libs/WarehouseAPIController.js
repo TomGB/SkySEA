@@ -158,8 +158,8 @@ app.route('/rejectOrder')
   });
 app.route('/dispatchOrder')
   .post(function(req, res){
-    var token = req.body.token;
-    // var workerID = jwt.decode(token, sig);
+    // var token = req.body.token;
+    var workerID = jwt.decode(token, sig);
     var workerID = req.body.token;
     var orderIDArray = req.body.orderArray;
 
