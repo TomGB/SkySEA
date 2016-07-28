@@ -27,7 +27,7 @@ Insert INTO products (name,imageUrl,availableStock,price) Values ('Millennium Fa
 Insert INTO products (name,imageUrl,availableStock,price) Values ('Jakku HTC 10','HTC10-Jakku.png',34,4.99);
 Insert INTO products (name,imageUrl,availableStock,price) Values ('BB8 HTC 10','HTC10-BB8.png',53,4.99);
 
-Insert INTO workers (firstname, lastname, email, password, active) Values ('tom','banister','tgbanister@gmail.com','password',true);
+Insert INTO workers (firstname, lastname, email, password, active) Values ('tom','banister','tgbanister@gmail.com','password',false);
 Insert INTO workers (firstname, lastname, email, password, active) Values ('tim','miles','tmiles@gmail.com','password',false);
 
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (1, "PhoneType", "HTC 10");
