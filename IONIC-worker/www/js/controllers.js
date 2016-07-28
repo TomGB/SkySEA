@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', ['$scope', 'AuthService',
-  function($scope, AuthService) {
+.controller('AppCtrl', ['$scope', 'AuthService', '$ionicHistory', '$state',
+  function($scope, AuthService, $ionicHistory, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -10,6 +10,12 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
   $scope.authService = AuthService;
+
+  $scope.logout = function(){
+    AuthService.logout();
+    $ionicHistory.nextViewOptions({disableBack: true});
+    $state.go('app.login');
+  }
 
 }])
 
@@ -92,7 +98,7 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
 
   $scope.doLogin = function(email, password) {
-    AuthService.login(email, password).then(function(user){
+    AuthService.workerLogin(email, password).then(function(user){
       AuthService.user = user;
       $ionicHistory.nextViewOptions({disableBack: true});
       $state.go('app.orders');
