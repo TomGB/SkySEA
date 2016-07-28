@@ -271,7 +271,7 @@ function sendEmail(userID, reason) {
         };
 
         mailOptions.to = user.email;
-        mailOptions.subject = user.firstName + ', your order has been ' + user.reason ;
+        mailOptions.subject = user.firstName + ', your order has been ' + reason == 'ordered'? "received" : "dispatched" ;
 
 
         // send mail with defined transport object
