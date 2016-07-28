@@ -18,11 +18,14 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/login" ng-if="!authService.isLoggedIn()">
+        <ion-item menu-close href="#/app/login" ng-if="authService.isLoggedIn()">
           Log in
         </ion-item>
         <ion-item menu-close href="#/app/orders" ng-if="authService.isLoggedIn()">
           Orders
+        </ion-item>
+        <ion-item menu-close href="#/app/setStatus" ng-if="authService.isLoggedIn()">
+          Set Status
         </ion-item>
         <ion-item menu-close ng-click="authService.logout()" ng-if="authService.isLoggedIn()">
           Log out
