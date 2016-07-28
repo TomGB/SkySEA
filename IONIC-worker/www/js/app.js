@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'shopModule'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $state, AuthService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,6 +19,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'shopModule'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+      console.log('s: ' + toState.authRequired);
+      console.log('a: ' + AuthService.isLoggedIn());
+      if(toState.authRequired && !AuthService.isLoggedIn()){
+        $state.go('app.login');
+        event.preventDefault();
+      }
+    })
   });
 })
 
@@ -31,8 +40,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'shopModule'])
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
+
   .state('app.orders', {
     url: '/orders',
+    authRequired: true,
     views: {
       'menuContent': {
         templateUrl: 'templates/orders.html',
@@ -41,8 +52,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'shopModule'])
     }
   })
 
+  .state('app.status', {
+    url: '/status',
+    authRequired: true,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/status.html',
+        controller: 'StatusCtrl'
+      }
+    }
+  })
+
   .state('app.login', {
     url: '/login',
+    authRequired: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/login.html',
@@ -52,5 +75,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'shopModule'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/orders');
+  $urlRouterProvider.otherwise('/app/login');
 });

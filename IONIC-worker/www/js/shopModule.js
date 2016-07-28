@@ -115,6 +115,20 @@ app.service('AuthService', ['$http', '$q', '$location','$rootScope', function($h
         });
         return deferred.promise;
       },
+      workerLogin: function(email, password){
+         var deferred = $q.defer();
+            $http.post('http://localhost:3000/api/users/worker-login', {
+                email: email,
+                password: password
+            }).then(function (response) {
+                user = response.data.user;
+                sessionStorage.setItem('token', response.data.token);
+                deferred.resolve(user);
+            }, function (res) {
+                deferred.reject(error);
+            });
+            return deferred.promise;
+      },
       getUser: function () {
         var deferred = $q.defer();
         $http.get('http://localhost:3000/api/users/login', {
@@ -124,13 +138,17 @@ app.service('AuthService', ['$http', '$q', '$location','$rootScope', function($h
         }).then(function (response) {
           user = response.data.user;
           deferred.resolve(user);
-            $rootScope.signedIn = true;
+          $rootScope.signedIn = true;
+
         }, function (res) {
           if (res.status == 401) {
             $location.url('/login')
           }
         });
         return deferred.promise;
+      },
+      isAuthenticated: function(){
+        return true;
       },
       register: function (email, password, firstName, lastName, address) {
         if (address.number == undefined) {
