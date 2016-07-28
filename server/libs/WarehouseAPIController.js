@@ -5,11 +5,19 @@ var models = require('../db/models/index');
 var express = require('express');
 var app = express.Router();
 var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
 var cors = require('cors');
 app.use(bodyParser({urlencoded: true}));
 app.use(cors());
+
+var orderPlaced = '<b>Your order with Sky has been placed successfully and is now being processed</b>';
+var orderDispatched = '<b>Your order with Sky has been dispatched and is on its way!</b>' ;
+
+
+var mailTransporter = nodemailer.createTransport();
+
 
 app.route('/checkout')
   .post(cors(), function(req, res){
@@ -51,9 +59,17 @@ app.route('/checkout')
             quantity: products[i].quantity
           });
         }
-        res.status(200).send();
+
+          sendEmail(userID,status);
+
+
+          res.status(200).send();
 
           //notify worker of new items for acceptance
+
+
+          //notify user that order has been placed
+
 
       },function(err) {
         res.status(500).send({
@@ -167,7 +183,6 @@ app.route('/dispatchOrder')
         }).then(function() {
           var status = "dispatched";
 
-
           for (var i = 0; i < orderArray.length; i++) {
             models.Order.find({ where: {id: orderArray[i]} })
             .then(function(order){
@@ -176,11 +191,13 @@ app.route('/dispatchOrder')
                   status : status
                 }).then(function() {
 
+                 // notify user that order has been dispatched
+                 sendEmail(order.userID,status);
+
                   // notify user that order has been dispatched
                   res.setHeader('Access-Control-Allow-Origin', '*');
                   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
                   res.status(200).send();
-
                 });
               }
             });
@@ -222,7 +239,7 @@ app.route('/dispatchOrder')
               res.setHeader('Access-Control-Allow-Origin', '*');
               res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
               res.json({orders: orderArray});
-            })
+            });
               // console.log(order[0].dataValues);
           });
         }
@@ -251,3 +268,30 @@ app.route('/dispatchOrder')
         });
       });
 module.exports = app;
+
+
+function sendEmail(userID, reason) {
+    models.User.findAll({where: {id: userID}}).then(function (res) {
+
+        var user = res[0].dataValues;
+
+        var mailOptions = {
+            from: '"Sky Accessories Store" <alasdair@sky.uk>', // sender address
+            html: reason == 'ordered'? orderPlaced: orderDispatched// html body
+        };
+
+        mailOptions.to = user.email;
+        mailOptions.subject = user.firstName + ', your order has been ' + user.reason == 'ordered'? 'placed': 'dispatched' ;
+
+
+        // send mail with defined transport object
+        mailTransporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                return console.log(error);
+            }else {
+                console.log('Message sent: ' + info);
+            }
+        });
+
+    })
+}
