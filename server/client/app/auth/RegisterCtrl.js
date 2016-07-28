@@ -6,6 +6,7 @@
         if(sessionStorage.getItem('token')){
             $location.url('/dashboard');
         }
+        $scope.error = false;
         $scope.getAddress = function(postcode){
 
             if(postcode.length > 6){
@@ -20,7 +21,7 @@
               .then(function(data){
                 $location.url('/dashboard');
               }, function(error){
-                console.log(error);
+                $scope.error = true;
               });
         }
     }
