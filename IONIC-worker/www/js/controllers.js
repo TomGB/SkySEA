@@ -92,7 +92,7 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
 
   $scope.doLogin = function(email, password) {
-    AuthService.login(email, password).then(function(user){
+    AuthService.workerLogin(email, password).then(function(user){
       AuthService.user = user;
       $ionicHistory.nextViewOptions({disableBack: true});
       $state.go('app.orders');

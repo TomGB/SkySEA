@@ -18,7 +18,7 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/login" ng-if="authService.isLoggedIn()">
+        <ion-item menu-close href="#/app/login" ng-if="!authService.isLoggedIn()">
           Log in
         </ion-item>
         <ion-item menu-close href="#/app/orders" ng-if="authService.isLoggedIn()">
