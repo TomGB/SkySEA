@@ -115,20 +115,6 @@
                 });
                 return deferred.promise;
             },
-            workerLogin: function(email, password){
-                var deferred = $q.defer();
-                $http.post('http://localhost:3000/api/users/worker-login', {
-                    email: email,
-                    password: password
-                }).then(function (response) {
-                    user = response.data.user;
-                    sessionStorage.setItem('token', response.data.token);
-                    deferred.resolve(user);
-                }, function (res) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            },
             getUser: function () {
                 var deferred = $q.defer();
                 $http.get('http://localhost:3000/api/users/login', {
