@@ -5,19 +5,13 @@ var models = require('../db/models/index');
 var express = require('express');
 var app = express.Router();
 var bodyParser = require('body-parser');
-var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 var sig = "SuperReallySecret";
 var cors = require('cors');
+var nodemailer = require('nodemailer');
+var mailTransporter = nodemailer.createTransport();
 app.use(bodyParser({urlencoded: true}));
 app.use(cors());
-
-var orderPlaced = '<b>Your order with Sky has been placed successfully and is now being processed</b>';
-var orderDispatched = '<b>Your order with Sky has been dispatched and is on its way!</b>' ;
-
-
-var mailTransporter = nodemailer.createTransport();
-
 
 app.route('/checkout')
   .post(cors(), function(req, res){
@@ -60,16 +54,10 @@ app.route('/checkout')
           });
         }
 
-          sendEmail(userID,status);
-
-
-          res.status(200).send();
+        sendEmail(userID,'ordered');
+        res.status(200).send();
 
           //notify worker of new items for acceptance
-
-
-          //notify user that order has been placed
-
 
       },function(err) {
         res.status(500).send({
@@ -170,10 +158,12 @@ app.route('/rejectOrder')
   });
 app.route('/dispatchOrder')
   .post(function(req, res){
-    var token = req.body.token;
+    // var token = req.body.token;
     var workerID = jwt.decode(token, sig);
-    // var workerID = req.body.token;
+    var workerID = req.body.token;
     var orderIDArray = req.body.orderArray;
+
+    console.log(orderIDArray);
 
     models.Worker.find({ where: {id: workerID} })
     .then(function(worker){
@@ -183,25 +173,28 @@ app.route('/dispatchOrder')
         }).then(function() {
           var status = "dispatched";
 
-          for (var i = 0; i < orderArray.length; i++) {
-            models.Order.find({ where: {id: orderArray[i]} })
+
+          // for (var i = 0; i < orderIDArray.length; i++) {
+            models.Order.find({ where: {id: orderIDArray} })
             .then(function(order){
+              console.log(order);
               if (order) { // if the record exists in the db
+                var userID = order.userID;
                 order.updateAttributes({
                   status : status
                 }).then(function() {
 
-                 // notify user that order has been dispatched
-                 sendEmail(order.userID,status);
 
+                  sendEmail(userID,'dispatched');
                   // notify user that order has been dispatched
                   res.setHeader('Access-Control-Allow-Origin', '*');
                   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
                   res.status(200).send();
+
                 });
               }
             });
-          }
+          // }
         });
       }
     });
@@ -275,13 +268,16 @@ function sendEmail(userID, reason) {
 
         var user = res[0].dataValues;
 
+        var orderPlaced = 'Your order with Sky has been placed successfully and is now being processed.';
+        var orderDispatched = 'Your order with Sky has been dispatched successfully and is now being delivered.';
+
         var mailOptions = {
             from: '"Sky Accessories Store" <alasdair@sky.uk>', // sender address
-            html: reason == 'ordered'? orderPlaced: orderDispatched// html body
+            html: reason == 'ordered'? orderPlaced : orderDispatched// html body
         };
 
         mailOptions.to = user.email;
-        mailOptions.subject = user.firstName + ', your order has been ' + user.reason ;
+        mailOptions.subject = user.firstName + ', your order has been ' + reason == 'ordered'? "received" : "dispatched" ;
 
 
         // send mail with defined transport object

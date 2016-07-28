@@ -3,7 +3,8 @@
         <div class="c-tile__content">
             <div class="c-tile__body">
                 <img src="images/Sky_Logo_seit_Dezember_2015.png" width="50%" style="margin-left: 25%">
-                <h1 style="text-align: center">Register</h1>
+                <h1 style="text-align: center" ng-show="!error">Register</h1>
+                <h1 style="text-align: center" ng-show="error">These details already exist</h1>
                 <input class="c-form-input" type="text" style="width: 45%" ng-model="firstName" name="firstName" placeholder="First name" required/>
                 <input class="c-form-input" type="text" style="width: 45%; margin-left: 9%" ng-model="lastName" name="lastName" placeholder="Last name" required/>
                 <input type="text" class="c-form-input" placeholder="e.g. tony@stark-enterprises.com" name="email" ng-model="email"  id="f-email" required>

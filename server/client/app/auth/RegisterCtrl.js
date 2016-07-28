@@ -6,10 +6,11 @@
         if(sessionStorage.getItem('token')){
             $location.url('/dashboard');
         }
+        $scope.error = false;
         $scope.getAddress = function(postcode){
 
             if(postcode.length > 6){
-                $http.get('http://ws.postcoder.com/pcw/PCWBN-DTF76-6YQKT-N569Q/address/UK/' + postcode + '?identifier=AddressExample' ).then(function(response){
+                $http.get('http://ws.postcoder.com/pcw/PCWTX-JJD3H-99Y5P-3YL37/address/UK/' + postcode + '?identifier=AddressExample' ).then(function(response){
                     $scope.addresses = response.data;
                 });
             }
@@ -20,7 +21,7 @@
               .then(function(data){
                 $location.url('/dashboard');
               }, function(error){
-                console.log(error);
+                $scope.error = true;
               });
         }
     }
