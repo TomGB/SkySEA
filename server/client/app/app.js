@@ -74,7 +74,18 @@
       })
       .when('/techAssistant', {
         templateUrl: '/app/techAssistant/techAssistant.html',
-        controller: 'techAssistantCtrl'
+        controller: 'techAssistantCtrl',
+        resolve: {
+           auth: ['$q', 'AuthService', function($q, AuthService){
+           var user = AuthService.getUser();
+           if(user){
+             return $q.when(user)
+              }else{
+                return $q.reject({access: false});
+              }
+            }]
+          }
+        }
       })
       .otherwise({redirectTo: '/productList'});
   }]);
