@@ -52,6 +52,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'shopModule'])
     }
   })
 
+  .state('app.status', {
+    url: '/status',
+    authRequired: true,
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/status.html',
+        controller: 'StatusCtrl'
+      }
+    }
+  })
+
   .state('app.login', {
     url: '/login',
     authRequired: false,
