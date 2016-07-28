@@ -17,7 +17,7 @@ app.route('/checkout')
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     var token = req.body.token;
-    var userID = jwt.decode(req.body.token, sig);
+    var userID = jwt.decode(token, sig);
     var products = req.body.products;
     var workerID = null;
     var status = "ordered";
@@ -68,8 +68,8 @@ app.route('/checkout')
 app.route('/acceptOrder')
   .post(function(req, res){
     var token = req.body.token;
-    // var workerID = jwt.decode(req.body.token, sig);
-    var workerID = req.body.token;
+    var workerID = jwt.decode(token, sig);
+    // var workerID = req.body.token;
     var orderIDArray = req.body.orderArray;
     for (var i = 0; i < orderArray.length; i++) {
       models.Order.find({ where: {id: orderArray[i].id, workerID: workerID} }).on('success',function(order){
@@ -97,8 +97,8 @@ app.route('/acceptOrder')
 app.route('/rejectOrder')
   .post(function(req, res){
     var token = req.body.token;
-    // var workerID = jwt.decode(req.body.token, sig);
-    var workerID = req.body.token;
+    var workerID = jwt.decode(token, sig);
+    // var workerID = req.body.token;
     var orderIDArray = req.body.orderArray;
 
     models.Worker.find({ where: {id: workerID} })
@@ -141,8 +141,8 @@ app.route('/rejectOrder')
 app.route('/dispatchOrder')
   .post(function(req, res){
     var token = req.body.token;
-    // var workerID = jwt.decode(req.body.token, sig);
-    var workerID = req.body.token;
+    var workerID = jwt.decode(token, sig);
+    // var workerID = req.body.token;
     var orderIDArray = req.body.orderArray;
 
     models.Worker.find({ where: {id: workerID} })
@@ -176,8 +176,8 @@ app.route('/dispatchOrder')
   app.route('/getWaitingOrders')
     .post(function(req, res){
       var token = req.body.token;
-      // var workerID = jwt.decode(req.body.token, sig);
-      var workerID = req.body.token;
+      var workerID = jwt.decode(token, sig);
+      // var workerID = req.body.token;
 
       models.Order.findAll({ attributes:['id','userID'], where: {workerID: null} })
       .then(function(order){
@@ -211,4 +211,22 @@ app.route('/dispatchOrder')
         }
       });
     });
+
+    app.route('/setActive')
+      .post(function(req, res){
+
+        var status = req.body.status;
+        var token = req.body.token;
+        var workerID = jwt.decode(token, sig);
+        // var workerID = req.body.token;
+
+        models.Worker.find({ where: {id: workerID} })
+        .then(function(worker){
+          if (worker) { // if the record exists in the db
+            worker.updateAttributes({
+              active : status
+            }).success(function() {});
+          }
+        });
+      });
 module.exports = app;
