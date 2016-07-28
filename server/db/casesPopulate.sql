@@ -12,11 +12,11 @@ Insert INTO products (name,imageUrl,availableStock,price,description) Values ('A
 Insert INTO products (name,imageUrl,availableStock,price,description) Values ('Game of thrones iPhone','IPhone6-GOT.png',12,4.49,'You know nothing Jon Snow!');
 Insert INTO products (name,imageUrl,availableStock,price,description) Values ('Frozen iPhone','IPhone6-frozen.png',9,4.49,'Let it go! Let it go! feel the magic every day with this case featuring our favourite Disney ice princess');
 
-Insert INTO products (name,imageUrl,availableStock,price,description) Values ('Tie Fighter iPhone 6','IPhone6-TFighter.png',40,5.99);
-Insert INTO products (name,imageUrl,availableStock,price,description) Values ('Beach Fight iPhone 6','IPhone6-StarWarsBeach.png',21,5.99);
-Insert INTO products (name,imageUrl,availableStock,price,description) Values ('Rey iPhone 6','IPhone6-Rey.png',14,5.49);
-Insert INTO products (name,imageUrl,availableStock,price,description) Values ('PoeiPhone 6','IPhone6-Poe.png',34,5.49);
-Insert INTO products (name,imageUrl,availableStock,price,description) Values ('Millennium Falcon iPhone 6','IPhone6-MF.png',24,5.99);
+Insert INTO products (name,imageUrl,availableStock,price) Values ('Tie Fighter iPhone 6','IPhone6-TFighter.png',40,5.99);
+Insert INTO products (name,imageUrl,availableStock,price) Values ('Beach Fight iPhone 6','IPhone6-StarWarsBeach.png',21,5.99);
+Insert INTO products (name,imageUrl,availableStock,price) Values ('Rey iPhone 6','IPhone6-Rey.png',14,5.49);
+Insert INTO products (name,imageUrl,availableStock,price) Values ('PoeiPhone 6','IPhone6-Poe.png',34,5.49);
+Insert INTO products (name,imageUrl,availableStock,price) Values ('Millennium Falcon iPhone 6','IPhone6-MF.png',24,5.99);
 Insert INTO products (name,imageUrl,availableStock,price) Values ('Jakku iPhone 6','IPhone6-Jakku.png',34,4.99);
 Insert INTO products (name,imageUrl,availableStock,price) Values ('BB8 iPhone 6','IPhone6-BB8.png',53,4.99);
 
