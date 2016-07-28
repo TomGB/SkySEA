@@ -76,7 +76,11 @@ app.route('/acceptOrder')
         if (order) { // if the record exists in the db
           order.updateAttributes({
             status : "processing"
-          }).success(function() {});
+          }).then(function() {
+            res.status(200).send();
+          }.function(err) {
+            res.status(500).send();
+          });
         }
       });
     }
@@ -86,6 +90,13 @@ app.route('/acceptOrder')
         worker.updateAttributes({
           active : false
         }).then(function(worker) {
+
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+          res.status(200).send();
+
+        }.function(err) {
+          res.status(500).send();
         });
       }
     });
@@ -128,6 +139,9 @@ app.route('/rejectOrder')
                   }).then(function() {
 
                     // notify worker of new order ready
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                    res.status(200).send();
 
                   });
                 }
@@ -163,6 +177,9 @@ app.route('/dispatchOrder')
                 }).then(function() {
 
                   // notify user that order has been dispatched
+                  res.setHeader('Access-Control-Allow-Origin', '*');
+                  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                  res.status(200).send();
 
                 });
               }
@@ -179,7 +196,7 @@ app.route('/dispatchOrder')
       var workerID = jwt.decode(token, sig);
       // var workerID = req.body.token;
 
-      models.Order.findAll({ attributes:['id','userID'], where: {workerID: null} })
+      models.Order.findAll({ attributes:['id','userID'], where: {$or: [{workerID: null}, {workerID: workerID}]} })
       .then(function(order){
         if (order) { // if the record exists in the db
           // console.log("order1",order[0].dataValues);
@@ -225,7 +242,11 @@ app.route('/dispatchOrder')
           if (worker) { // if the record exists in the db
             worker.updateAttributes({
               active : status
-            }).success(function() {});
+            }).then(function() {
+              res.setHeader('Access-Control-Allow-Origin', '*');
+              res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+              res.status(200).send();
+            });
           }
         });
       });
