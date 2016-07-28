@@ -78,7 +78,7 @@ app.route('/acceptOrder')
             status : "processing"
           }).then(function() {
             res.status(200).send();
-          }.function(err) {
+          },function(err) {
             res.status(500).send();
           });
         }
@@ -95,7 +95,7 @@ app.route('/acceptOrder')
           res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
           res.status(200).send();
 
-        }.function(err) {
+        },function(err) {
           res.status(500).send();
         });
       }
