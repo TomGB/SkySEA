@@ -8,7 +8,6 @@
     'shopModule',
     'angular-jwt'
   ]);
-});
   app.run(['$rootScope', '$location', function($rootScope, $location){
     $rootScope.$on('$routeChangeError', function(event, current, previous, eventObj){
       if(eventObj.access == false){
