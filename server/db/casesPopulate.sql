@@ -27,8 +27,11 @@ Insert INTO products (name,imageUrl,availableStock,price) Values ('Millennium Fa
 Insert INTO products (name,imageUrl,availableStock,price) Values ('Jakku HTC 10','HTC10-Jakku.png',34,4.99);
 Insert INTO products (name,imageUrl,availableStock,price,description) Values ('BB8 HTC 10','HTC10-BB8.png',53,4.99,'BB8!!! Everyones favourite ball shaped droid');
 
-Insert INTO workers (firstname, lastname, email, password, active) Values ('tom','banister','tgbanister@gmail.com','password',false);
-Insert INTO workers (firstname, lastname, email, password, active) Values ('tim','miles','tmiles@gmail.com','password',false);
+INSERT INTO `workers` (`id`, `firstname`, `lastname`, `email`, `password`, `active`, `createdAt`, `updatedAt`)
+VALUES
+	(3, 'Worker', 'Person', 'worker@sky.uk', '$2a$08$zgzNy4j36Lr6uCNd7nHvTOd/4spkz1LpjVMV662eAm.KgFE77WNnm', 0, '2016-07-29 09:39:55', '2016-07-29 09:39:55'),
+	(4, 'Worker2', 'Person', 'worker2@sky.uk', '$2a$08$z7YSfBuN14OPf3CkOkaTB.af71ebyqqP0UlqqHlc9DqnwYgRZX1we', 0, '2016-07-29 09:40:18', '2016-07-29 09:40:18');
+
 
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (1, "PhoneType", "HTC 10");
 INSERT INTO productInfo (productID, infoName, infoValue) VALUES (2, "PhoneType", "HTC 10");
@@ -86,14 +89,16 @@ INSERT INTO productInfo (productID, infoName, infoValue) VALUES (23, "ShowName",
 
 INSERT INTO `users` (`id`, `email`, `password`, `address1`, `address2`, `address3`, `postcode`, `firstName`, `lastName`, `updatedAt`, `createdAt`, `userRole`)
 VALUES
-	(1, 'tgbanister@gmail.com', '$2a$08$yDQxZGAVVqFJ.vrSR1XVCeHiV8yfvgxVUXpbzM70zRmeq3qR42NcS', '9 Test Drive', 'Super Town', NULL, 'OL3 6KD', 'tom', 'banister', '2016-07-27 13:33:50', '2016-07-27 13:33:50', 'customer');
+	(2, 'tgbanister@gmail.com', '$2a$08$EvbEiyUVQF2/EN1vhxwhO.9TytgboEXWvETmIMfRak/WLBM35Y9l2', '10', 'Grove Rd', 'Uppermill', 'OL3 6ED', 'Tom', 'Banister', '2016-07-29 09:33:26', '2016-07-29 09:33:26', 'customer'),
+	(3, 'gsangha494@gmail.com', '$2a$08$nxmwT9YVwJNKbNNZvAm1R.RSx8B2/vt6QmhKlQ5sLFl2Uq1DCxDNi', '312', 'New St', 'Old Town', 'OL29RD', 'Gary', 'Sangha', '2016-07-29 09:36:33', '2016-07-29 09:36:33', 'customer'),
+	(4, 'tech@sky.uk', '$2a$08$36HELCJA1cr55bBDSn4crOaoC4zLZdU1WAHfZHDaLcpj5Jp8j3KBu', '312', 'New St', 'Old Town', 'OL29RD', 'Mark', 'Griffiths', '2016-07-29 09:37:54', '2016-07-29 09:37:54', 'tech_support');
 
 
 INSERT INTO `orders` (`id`, `status`, `orderDate`, `dispatchDate`, `userID`, `workerID`, `createdAt`, `updatedAt`)
 VALUES
-	(12, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 1, NULL, '2016-07-27 14:11:57', '2016-07-27 14:11:57'),
-	(13, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 1, NULL, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
-	(14, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 1, NULL, '2016-07-27 15:06:09', '2016-07-27 15:06:09');
+	(12, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 2, NULL, '2016-07-27 14:11:57', '2016-07-27 14:11:57'),
+	(13, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 2, NULL, '2016-07-27 15:04:42', '2016-07-27 15:04:42'),
+	(14, 'allocated, pending accpetance', '1970-01-01 00:00:00', NULL, 2, NULL, '2016-07-27 15:06:09', '2016-07-27 15:06:09');
 
 INSERT INTO `productOrders` (`id`, `orderID`, `productID`, `createdAt`, `updatedAt`)
 VALUES
