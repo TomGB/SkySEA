@@ -22,7 +22,7 @@
     }
 
     $scope.requestSupport = function(name, audio, video) {
-      peer = new Peer({key: 'lwjd5qra8257b9'});
+      peer = new Peer({host: 'localhost', path: '/', port: 9000});
       $scope.requested = true;
       peer.on('open', function(id) {
           $http.post('/api/helpchat/clientid', {
@@ -31,9 +31,9 @@
             audio: audio,
             video: video
           }).then(function(response) {
-
+            console.log(response)
           }, function(error) {
-
+            console.log(error);
           })
       });
 
