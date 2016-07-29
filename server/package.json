@@ -36,6 +36,8 @@
     "jsonwebtoken": "^7.1.6",
     "lodash": "^4.14.0",
     "mysql": "^2.11.1",
+    "node-mailer": "^0.1.1",
+    "nodemailer": "^2.5.0",
     "passport": "^0.3.2",
     "sequelize": "^3.23.6",
     "sequelize-cli": "^2.4.0",

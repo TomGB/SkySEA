@@ -6,7 +6,7 @@
                    navigator.msGetUserMedia);
 
 
-    var peer = new Peer({host: 'localhost', port: 9000, path: '/'});
+    var peer = new Peer({host: 'localhost', path: '/', port: 9000});
     var conn;
     var call;
     $scope.customer = {};

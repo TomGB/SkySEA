@@ -1,6 +1,9 @@
 /**
  * Created by amu35 on 24/07/2016.
  */
+var client = require('twilio')('ACddbb2fa5534a75f1f06eae816381e42e', '847d60b350ffb04f698a2c41f2d6cc76');
+var nodemailer = require('nodemailer');
+var mailTransporter = nodemailer.createTransport();
 var models = require('../db/models/index');
 var express = require('express');
 var app = express.Router();
@@ -51,6 +54,24 @@ app.route('/checkout')
             quantity: products[i].quantity
           });
         }
+
+        client.sendMessage({
+          to:'+447850572348',
+          from: '+441722580073',
+          body: 'Your order is currently being processed.'
+        }, function(err, responseData) {
+          if (!err) { // "err" is an error received during the request, if any
+
+             // "responseData" is a JavaScript object containing data received from Twilio.
+             // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
+             // http://www.twilio.com/docs/api/rest/sending-sms#example-1
+
+             console.log(responseData.from); // outputs "+14506667788"
+             console.log(responseData.body); // outputs "word to your mother."
+
+           }
+        });
+
 
         sendEmail(userID,'ordered');
         res.status(200).send();
@@ -271,7 +292,7 @@ function sendEmail(userID, reason) {
         };
 
         mailOptions.to = user.email;
-        mailOptions.subject = user.firstName + ', your order has been ' + user.reason ;
+        mailOptions.subject = user.firstName + ', your order has been ' + reason == 'ordered'? "received" : "dispatched" ;
 
 
         // send mail with defined transport object
