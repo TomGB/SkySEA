@@ -8,34 +8,31 @@
         <h3 ng-hide="basket.length">Basket empty</h3>
     </div>
     <div ng-show="basket.length">
-
-
-    <!--Basket review-->
+        <!--Basket review-->
         <div class="o-layout__item u-width-2/3">
             <h3 class="c-heading-delta">Your Order</h3>
             <table class="c-table-simple" ng-show="basket.length">
                 <tbody>
-                    <tr>
-                        <th class="c-table-simple__cell">Product name</th>
-                        <th class="c-table-simple__cell u-text-right">Quantity</th>
-                        <th class="c-table-simple__cell u-text-right">Price per item</th>
-                        <th class="c-table-simple__cell u-text-right">Subtotal</th>
-                    </tr>
-                    <tr class="c-table-simple__row" ng-repeat="item in basket">
-                        <td class="c-table-simple__cell ">{{item.item.name}}</td>
-                        <td class="c-table-simple__cell u-text-right">{{item.quantity}}</td>
-                        <td class="c-table-simple__cell u-text-right">&pound;{{item.item.price | number:2}}</td>
-                        <td class="c-table-simple__cell u-text-right">&pound;{{item.item.price*item.quantity | number:2}}</td>
-                    </tr>
-                    <tr>
-                        <td class="c-table-simple__cell u-text-right">&nbsp;</td>
-                        <td class="c-table-simple__cell u-text-right">&nbsp;</td>
-                        <td class="c-table-simple__cell u-text-right">&nbsp;</td>
-                        <td class="c-table-simple__cell u-text-right">Total:&pound;{{totalPrice|number:2}}</td>
-                    </tr>
+                <tr>
+                    <th class="c-table-simple__cell">Product name</th>
+                    <th class="c-table-simple__cell u-text-right">Quantity</th>
+                    <th class="c-table-simple__cell u-text-right">Price per item</th>
+                    <th class="c-table-simple__cell u-text-right">Subtotal</th>
+                </tr>
+                <tr class="c-table-simple__row" ng-repeat="item in basket">
+                    <td class="c-table-simple__cell ">{{item.item.name}}</td>
+                    <td class="c-table-simple__cell u-text-right">{{item.quantity}}</td>
+                    <td class="c-table-simple__cell u-text-right">&pound;{{item.item.price | number:2}}</td>
+                    <td class="c-table-simple__cell u-text-right">&pound;{{item.item.price*item.quantity | number:2}}</td>
+                </tr>
+                <tr>
+                    <td class="c-table-simple__cell u-text-right">&nbsp;</td>
+                    <td class="c-table-simple__cell u-text-right">&nbsp;</td>
+                    <td class="c-table-simple__cell u-text-right">&nbsp;</td>
+                    <td class="c-table-simple__cell u-text-right">Total:&pound;{{totalPrice|number:2}}</td>
+                </tr>
                 </tbody>
             </table>
-
         </div>
 
         <!--Confirm Address-->
@@ -51,8 +48,25 @@
                 </ul>
             </div>
         </div>
-
-        <div class="o-layout__item o-layout--right u-width1/1" >
+        <!--Card Details-->
+        <div class="o-layout__item u-width1/6" style="width: 50%; margin-bottom: 50px">
+            <h3 class="c-heading-delta">Your Card Details</h3>
+            <div class="u-width1/3">
+                <div class="u-width1/3">
+                    <input class="c-form-input" placeholder="Card number" type="text" name="number">
+                </div>
+                <div class="u-width1/3">
+                    <input class="c-form-input" placeholder="Full name" type="text" name="name">
+                </div>
+            </div>
+            <div class="u-width1/3">
+                <div class="u-width1/3">
+                    <input class="c-form-input" placeholder="MM/YY" type="text" name="expiry" ng-pattern="regex">
+                </div>
+                <div class="u-width1/3">
+                    <input class="c-form-input" placeholder="CVC" type="text" name="cvc">
+                </div>
+            </div>
             <span class="is-error">{{error}}</span>
             <a class="c-btn c-btn--primary " ng-click="checkout()">Submit Order</a>
         </div>

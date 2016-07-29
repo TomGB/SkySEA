@@ -25,6 +25,7 @@ angular.module('accessoriesStore')
             $scope.user = user;
         });
 
+        $scope.regex = "^[0-9]{2}/[0-9]{2}"
 
         $scope.nextPage = function () {
             $scope.stageIndex++;
